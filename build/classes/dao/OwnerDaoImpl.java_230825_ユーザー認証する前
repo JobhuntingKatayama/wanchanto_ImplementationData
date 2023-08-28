@@ -1,0 +1,86 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import domain.Owner;
+
+public class OwnerDaoImpl implements OwnerDao {
+
+	private DataSource ds;
+
+	public OwnerDaoImpl(DataSource ds) {
+		this.ds = ds;
+	}
+
+	@Override
+	public List<Owner> findAll() throws Exception {
+		List<Owner> ownerList = new ArrayList<>();
+
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT"
+					+ " owners.loginId, owners.loginPassword"
+//					+ " owners.statusId,"
+//					+ " ownerstatuses.ownerstatus"
+					+ " FROM owners";
+//					+ " JOIN ownerstatuses"
+//					+ " ON owners.statusId = ownerstatuses.statusId";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				ownerList.add(mapToOwner(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return ownerList;
+	}
+
+	@Override
+	public void insert(Owner owner) throws Exception {
+
+		try (Connection con = ds.getConnection()){
+			String sql = "INSERT INTO owners"
+					+ " (loginId,loginPassword,registrationDate)"
+					+ "VALUES (?,?,NOW())";
+				PreparedStatement stmt = con.prepareStatement(sql);
+//				stmt.setString(1, owner.getOwnerId());
+				stmt.setString(1, owner.getLoginId());
+				stmt.setString(2, owner.getLoginPassword());
+//				stmt.setObject(4, owner.getStatusId(), Types.INTEGER);
+				stmt.executeUpdate();
+		}catch(Exception e) {
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void update(Owner owner) throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	@Override
+	public void delete(Owner owner) throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+	
+	private Owner mapToOwner(ResultSet rs)throws Exception{
+//		String ownerId = rs.getString("ownerId");
+		String loginId = rs.getString("loginId");
+		String loginPassword = rs.getString("loginPassword");
+//		Integer statusId = (Integer) rs.getObject("statusId");
+//		String ownerstatus = rs.getString("ownerstatus");
+
+		
+		return new Owner(/*ownerId, */loginId, loginPassword/*, statusId, ownerstatus*/);
+
+	}
+}

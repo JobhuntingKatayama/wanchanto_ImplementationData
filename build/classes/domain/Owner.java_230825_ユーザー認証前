@@ -1,0 +1,62 @@
+package domain;
+
+public class Owner {
+//	private String ownerId;
+	private String loginId;
+	private String loginPassword;
+//	private Integer statusId;
+//	private String ownerstatus;
+
+	public Owner() {
+
+	}
+
+	public Owner(/*String ownerId, */String loginId, String loginPassword/*, Integer statusId, String ownerstatus*/) {
+//		this.ownerId = ownerId;
+		this.loginId = loginId;
+		this.loginPassword = loginPassword;
+//		this.statusId = statusId;
+//		this.ownerstatus = ownerstatus;
+	}
+
+//	public String getOwnerId() {
+//		return ownerId;
+//	}
+//
+//	public void setOwnerId(String ownerId) {
+//		this.ownerId = ownerId;
+//	}
+
+	public String getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
+	}
+
+	public String getLoginPassword() {
+		return loginPassword;
+	}
+
+	public void setLoginPassword(String loginPassword) {
+		this.loginPassword = loginPassword;
+	}
+
+//	public Integer getStatusId() {
+//		return statusId;
+//	}
+//
+//	public void setStatusId(Integer statusId) {
+//		this.statusId = statusId;
+//	}
+//
+//	public String getOwnerstatus() {
+//		return ownerstatus;
+//	}
+//
+//	public void setOwnerstatus(String ownerstatus) {
+//		this.ownerstatus = ownerstatus;
+//	}
+	
+}
