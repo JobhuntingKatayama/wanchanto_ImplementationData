@@ -10,7 +10,17 @@
 <body>
 <h1>愛犬家登録完了</h1>
 <p>登録が完了しました。</p>
-
-<p><a href="ownerRegistration">愛犬家登録画面に戻る</a></p>
+<h2>ご自身の情報</h2>
+<table>
+<tr>
+    <th>ログインID<span class="small">※半角英数字5～15文字</span><span class="required">*</span></th>
+    <td><c:out value="${owner.loginId }" /></td>
+</tr>
+<tr>
+    <th>パスワード<span class="small">※半角英数字5～15文字</span><span class="required">*</span></th>
+    <td>セキュリティのため表示されません。</td>
+</tr>
+</table>
+<p><a href="ownerMypage">マイページへ進む</a></p>
 </body>
 </html>

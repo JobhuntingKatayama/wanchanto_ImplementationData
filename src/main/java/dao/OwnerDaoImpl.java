@@ -21,19 +21,27 @@ public class OwnerDaoImpl implements OwnerDao {
 
 	@Override
 	public List<Owner> findAll() throws Exception {
-		 // TODO 自動生成されたメソッド・スタブ
+		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
-	public Owner findById(Integer id)throws Exception {
-		 // TODO 自動生成されたメソッド・スタブ
+	public Owner findById(Integer id) throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
 	public void insert(Owner owner) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "INSERT INTO owners" + " (loginId, loginPassword, registrationDate)" + " VALUES (?,?,NOW())";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, owner.getLoginId());
+			stmt.setString(2, owner.getLoginPassword());
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 
@@ -74,7 +82,7 @@ public class OwnerDaoImpl implements OwnerDao {
 		Owner owner = new Owner();
 		owner.setLoginId(rs.getString("loginId"));
 		owner.setLoginPassword(rs.getString("loginPassword"));
-		
+
 		return owner;
 
 	}

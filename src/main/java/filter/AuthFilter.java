@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthFilter
  */
-@WebFilter("/*")
+@WebFilter("/ownerMypage")
 public class AuthFilter extends HttpFilter implements Filter {
 
 	 /**

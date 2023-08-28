@@ -23,18 +23,20 @@
 			<tr>
 				<th>ログインID<span class="small">※半角英数字5～15文字</span><span
 					class="required">*</span></th>
-				<td><input required type="text" pattern="^[1-9A-Za-z]*$"
+				<td><input required type="text" pattern="^[0-9A-Za-z]*$"
 					minlength="5" maxlength="15" name="loginId"></td>
 			</tr>
 			<tr>
 				<th>パスワード<span class="small">※半角英数字5～15文字</span><span
 					class="required">*</span></th>
 				<td><input required type="password" minlength="5"
-					pattern="^[1-9A-Za-z]*$" minlength="5" maxlength="15"
+					pattern="^[0-9A-Za-z]*$" minlength="5" maxlength="15"
 					name="loginPassword"></td>
 			</tr>
 		</table>
 		<input type="submit" value="ログイン">
 	</form>
+	
+	<p><a href="ownerRegistration">新規で愛犬家登録をされる場合はこちら</a></p>
 </body>
 </html>

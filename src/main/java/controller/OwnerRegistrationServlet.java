@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import dao.DaoFactory;
 import dao.OwnerDao;
 import domain.Owner;
@@ -33,9 +35,11 @@ public class OwnerRegistrationServlet extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		String loginPassword = request.getParameter("loginPassword");
 		
+		String hashedPassword = BCrypt.hashpw(loginPassword, BCrypt.gensalt());
+		
 		Owner owner = new Owner();
 		owner.setLoginId(loginId);
-		owner.setLoginPassword(loginPassword);
+		owner.setLoginPassword(hashedPassword);
 		
 		try {
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
