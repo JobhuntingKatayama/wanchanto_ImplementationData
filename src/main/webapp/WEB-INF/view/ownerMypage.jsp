@@ -99,7 +99,7 @@
     </dl>
 </div>
         
-<input type="button" onclick="location.href='ownerLogout.html',confirm()" value="ログアウトする">
+<input type="button" onclick="location.href='ownerLogout'" value="ログアウトする">
     
 </body>
 </html>
