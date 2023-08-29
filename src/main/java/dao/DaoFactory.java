@@ -10,6 +10,10 @@ public class DaoFactory {
 		return new OwnerDaoImpl(getDataSource());
 	}
 
+	public static DestinationDao createDestinationDao() {
+		return new DestinationDaoImpl(getDataSource());
+	}
+
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;
 		DataSource ds = null;
