@@ -1,8 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.DestinationDao;
+import domain.Destination;
 
 /**
  * Servlet implementation class ListDestinationServlet
@@ -28,25 +28,15 @@ public class OwnerMypageServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			DestinationDao destinationDao = DaoFactory.creatDestinationDao();
+			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			List<Destination> destinationList = destinationDao.findAll();
 
 			
 				request.setAttribute("destinationList", destinationList);
 				request.getRequestDispatcher("/WEB-INF/view/ownerMypage.jsp").forward(request, response);
-			}
-
-		} catch (Exception e) {
+			} catch (Exception e) {
 			throw new ServletException(e);
-		} finally {
-			try {
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				throw new ServletException(e);
 			}
 		}
-	}
-
 }
+

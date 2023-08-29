@@ -40,7 +40,7 @@
 					<dt>
 						<h2>お出掛け先情報一覧</h2>
 						<input type="button"
-							onclick="location.href='destinationInformationRegistration.html'"
+							onclick="location.href='destinationInformationRegistration'"
 							value="お出掛け先情報の新規追加">
 					</dt>
 					<dd>

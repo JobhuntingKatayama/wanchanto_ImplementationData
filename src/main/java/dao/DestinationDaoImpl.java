@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class DestinationDaoImpl implements DestinationDao {
 		List<Destination> destinationList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT" + " destinations.genreId, destinations.name, destinations.evaluation"
+			String sql = "SELECT" + " destinations.genreId,"
+					+ " destinations.name, destinations.evaluation"
 					+ " FROM destinations";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -44,8 +46,19 @@ public class DestinationDaoImpl implements DestinationDao {
 
 	@Override
 	public void insert(Destination destination) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
+		try(Connection con = ds.getConnection()){
+			String sql = "INSERT INTO destinations"
+					+ " (genreId,name,evaluation,addedDate)"
+					+ " VALUES(?,?,?,NOW())";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, destination.getGenreId(),Types.INTEGER);
+			stmt.setString(2, destination.getName());
+			stmt.setObject(3, destination.getEvaluation(),Types.INTEGER);
+			stmt.executeUpdate();
+		} catch(Exception e) {
+			throw e;
+		}
+		
 	}
 
 	@Override
