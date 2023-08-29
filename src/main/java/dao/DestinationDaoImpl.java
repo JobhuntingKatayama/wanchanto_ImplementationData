@@ -23,11 +23,15 @@ public class DestinationDaoImpl implements DestinationDao {
 	public List<Destination> findAll() throws Exception {
 		List<Destination> destinationList = new ArrayList<>();
 
+
 		try (Connection con = ds.getConnection()) {
+	        int ownerId = 0; // 変数 owner の値を設定
 			String sql = "SELECT" + " destinations.genreId,"
 					+ " destinations.name, destinations.evaluation"
-					+ " FROM destinations";
+					+ " FROM destinations"
+					+ " WHERE ownerId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, ownerId); // プレースホルダーに変数の値を設定
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				destinationList.add(mapToDestination(rs));
@@ -47,9 +51,8 @@ public class DestinationDaoImpl implements DestinationDao {
 	@Override
 	public void insert(Destination destination) throws Exception {
 		try(Connection con = ds.getConnection()){
-			String sql = "INSERT INTO destinations"
-					+ " (genreId,name,evaluation,addedDate)"
-					+ " VALUES(?,?,?,NOW())";
+			String sql = "INSERT INTO destinations" +
+			" (genreId,name,evaluation,addedDate)" + " VALUES(?,?,?,NOW())";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destination.getGenreId(),Types.INTEGER);
 			stmt.setString(2, destination.getName());

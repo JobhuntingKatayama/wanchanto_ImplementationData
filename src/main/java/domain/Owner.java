@@ -1,16 +1,25 @@
 package domain;
 
 public class Owner {
+	private Integer ownerId;
 	private String loginId;
 	private String loginPassword;
 
-	public Owner(/*String ownerId, */String loginId, String loginPassword/*, Integer statusId, String ownerstatus*/) {
+	public Owner(Integer ownerId, String loginId, String loginPassword/*, Integer statusId, String ownerstatus*/) {
 		this.loginId = loginId;
 		this.loginPassword = loginPassword;
 	}
 
 	public Owner() {
 		// TODO 自動生成されたコンストラクター・スタブ
+	}
+	
+	public Integer getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(Integer ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	public String getLoginId() {

@@ -37,7 +37,7 @@ public class OwnerLoginServlet extends HttpServlet {
 			Owner owner = ownerDao.findByLoginIdAndLoginPass(loginId, loginPassword);
 			if (owner != null) {
 				request.getSession().setAttribute("loginId", owner.getLoginId());
-				response.sendRedirect("ownerMypage");
+				response.sendRedirect("ownerMypage");		
 			} else {
 				request.setAttribute("error", true);
 				request.getRequestDispatcher("/WEB-INF/view/ownerLogin.jsp").forward(request, response);

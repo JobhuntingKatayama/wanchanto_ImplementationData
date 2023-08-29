@@ -17,7 +17,8 @@
 
 </head>
 <body>
-	<h1>マイページ</h1>
+	<h1>${handleName}さんのマイページ</h1>
+	<p>${handleName}さん、こんにちは！</p>
 	<div id="ownerMypageContents">
 		<dl>
 			<dt id="ownerInfomation">
