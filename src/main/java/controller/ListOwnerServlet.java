@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,18 +27,16 @@ public class ListOwnerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		Connection con = null;
 		try {
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
-			List<Owner> ownerList = ownerDao.findAll();
-
+			List<Owner>ownerList = ownerDao.findAll();
+			
 			request.setAttribute("ownerList", ownerList);
 			request.getRequestDispatcher("/WEB-INF/view/listOwner.jsp").forward(request, response);
-
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
-
-	}
+				}
 
 }

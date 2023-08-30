@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -16,13 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import domain.Owners;
+import domain.Member;
 
 /**
- * Servlet implementation class ListOwnerServlet
+ * Servlet implementation class ListMemberServlet
  */
-@WebServlet("/listOwner")
-public class ListOwnerServlet extends HttpServlet {
+@WebServlet("/listMember")
+public class ListMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -34,27 +35,29 @@ public class ListOwnerServlet extends HttpServlet {
 		Connection con = null;
 		try {
 			InitialContext ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/wanchanto");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mydb");
 			con = ds.getConnection();
-			System.out.println("接続成功");
+			System.out.println("接続完了");
 
-			String sql = "SELECT * FROM owners";
+			String sql = "SELECT * FROM members";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 
-			List<Owners> ownerList = new ArrayList<>();
+			List<Member> memberList = new ArrayList<>();
 			while (rs.next()) {
-				Integer ownerId = (Integer) rs.getObject("ownerId");
-				String loginId = rs.getString("ownerId");
-				String loginPassword = rs.getString("ownerPassword");
-				String ownerInfromationDeleteReason = rs.getString("ownerInfromationDeleteReason");
+				Integer id = (Integer) rs.getObject("id");
+				String name = rs.getString("name");
+				Integer age = (Integer) rs.getObject("age");
+				String address = rs.getString("address");
+				Integer typeId = (Integer) rs.getObject("type_id");
+				Date created = rs.getTimestamp("created");
 
-				Owners owner = new Owners(ownerId, loginId, loginPassword, ownerInfromationDeleteReason);
-				ownerList.add(owner);
+				Member member = new Member(id, name, age, address, typeId, created);
+				memberList.add(member);
 			}
 
-			request.setAttribute("ownerList", ownerList);
-			request.getRequestDispatcher("/WEB-INF/view/listOwner.jsp").forward(request, response);
+			request.setAttribute("memberList", memberList);
+			request.getRequestDispatcher("/WEB-INF/view/listMember.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			throw new ServletException(e);
@@ -66,9 +69,7 @@ public class ListOwnerServlet extends HttpServlet {
 			} catch (SQLException e) {
 				throw new ServletException(e);
 			}
-
 		}
-
 	}
 
 }

@@ -28,7 +28,10 @@
 					</dt>
 					<dd>
 						<h2>
-							ニックネーム<span>さん</span>
+							<c:out value="${ownerId }" /><span>さん</span>
+							<form action="" method="">
+							<input type="text" value="<c:out value="${ownerId }" />" >
+							</form>
 						</h2>
 						<input type="button"
 							onclick="location.href='ownerInformationEdit.html'"

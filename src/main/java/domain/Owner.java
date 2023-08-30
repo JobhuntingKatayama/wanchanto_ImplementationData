@@ -1,19 +1,28 @@
 package domain;
 
+import java.util.Date;
+
 public class Owner {
 	private Integer ownerId;
+	private String thumbnail;
 	private String loginId;
 	private String loginPassword;
-
-	public Owner(Integer ownerId, String loginId, String loginPassword/*, Integer statusId, String ownerstatus*/) {
-		this.loginId = loginId;
-		this.loginPassword = loginPassword;
-	}
+	private Integer statusId;
+	private Date registrationDate;
 
 	public Owner() {
-		// TODO 自動生成されたコンストラクター・スタブ
+	
 	}
 	
+	public Owner(Integer ownerId, String thumbnail, String loginId, String loginPassword, Integer statusId, Date registrationDate) {
+		this.ownerId = ownerId;
+		this.loginId = loginId;
+		this.thumbnail = thumbnail;
+		this.loginPassword = loginPassword;
+		this.statusId = statusId;
+		this.registrationDate = registrationDate;
+	}
+
 	public Integer getOwnerId() {
 		return ownerId;
 	}
@@ -37,5 +46,30 @@ public class Owner {
 	public void setLoginPassword(String loginPassword) {
 		this.loginPassword = loginPassword;
 	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
+	public Integer getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(Integer statusId) {
+		this.statusId = statusId;
+	}
+
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+	
 	
 }

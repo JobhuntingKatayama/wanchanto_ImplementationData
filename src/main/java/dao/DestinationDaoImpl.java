@@ -25,7 +25,7 @@ public class DestinationDaoImpl implements DestinationDao {
 
 
 		try (Connection con = ds.getConnection()) {
-	        int ownerId = 0; // 変数 owner の値を設定
+	        int ownerId = 7; // どの愛犬家のリストを出すか「ownerId」で抽出
 			String sql = "SELECT" + " destinations.genreId,"
 					+ " destinations.name, destinations.evaluation"
 					+ " FROM destinations"
