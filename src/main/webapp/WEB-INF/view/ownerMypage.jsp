@@ -19,6 +19,7 @@
 <body>
 	<h1>${handleName}さんのマイページ</h1>
 	<p>${handleName}さん、こんにちは！</p>
+	<p>${loginId }</p>
 	<div id="ownerMypageContents">
 		<dl>
 			<dt id="ownerInfomation">
@@ -28,14 +29,10 @@
 					</dt>
 					<dd>
 						<h2>
-							<c:out value="${ownerId }" /><span>さん</span>
-							<form action="" method="">
-							<input type="text" value="<c:out value="${ownerId }" />" >
-							</form>
+							<c:out value="${ownerId }" /><span>さん</span>							
 						</h2>
-						<input type="button"
-							onclick="location.href='ownerInformationEdit.html'"
-							value="愛犬家情報の編集">
+						<p><a href="ownerInformationEdit?loginId=<c:out value="${loginId}"/>">情報の更新</a></p>
+						<p><a href="ownerInformationDelete?loginId=<c:out value="${loginId}"/>">登録情報の削除</a></p>
 					</dd>
 				</dl>
 			</dt>

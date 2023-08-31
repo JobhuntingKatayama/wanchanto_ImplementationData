@@ -35,33 +35,35 @@ public class OwnerMypageServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
+
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			List<Destination> destinationList = destinationDao.findAll();
 
 			request.setAttribute("destinationList", destinationList);
 
 			HttpSession session = request.getSession();
-			String owner = (String) session.getAttribute("loginId");
-			request.setAttribute("handleName", owner);
+			String loginId = (String) session.getAttribute("loginId");
+			session.setAttribute("loginId", loginId);
+
+			int odid = 0;
 
 			InitialContext ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/wanchanto");
 			Connection con = ds.getConnection();
 
-			int odid = 0;
 			String sql = "SELECT ownerId FROM owners WHERE loginId = ?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, owner); // プレースホルダーに変数の値を設定
+			stmt.setString(1, loginId); // プレースホルダーに変数の値を設定
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				odid = rs.getInt("ownerId");
 			}
 			request.setAttribute("ownerId", odid);
-			
+
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
-		
+
 		request.getRequestDispatcher("/WEB-INF/view/ownerMypage.jsp").forward(request, response);
 	}
 }

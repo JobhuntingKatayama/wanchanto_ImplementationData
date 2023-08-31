@@ -23,9 +23,14 @@ public class DestinationDaoImpl implements DestinationDao {
 	public List<Destination> findAll() throws Exception {
 		List<Destination> destinationList = new ArrayList<>();
 
-
 		try (Connection con = ds.getConnection()) {
-	        int ownerId = 7; // どの愛犬家のリストを出すか「ownerId」で抽出
+			
+
+
+			
+			
+	        int ownerId = 0; // どの愛犬家のリストを出すか「ownerId」で抽出
+	        
 			String sql = "SELECT" + " destinations.genreId,"
 					+ " destinations.name, destinations.evaluation"
 					+ " FROM destinations"
@@ -51,6 +56,11 @@ public class DestinationDaoImpl implements DestinationDao {
 	@Override
 	public void insert(Destination destination) throws Exception {
 		try(Connection con = ds.getConnection()){
+			
+			
+			
+			
+			
 			String sql = "INSERT INTO destinations" +
 			" (genreId,name,evaluation,addedDate)" + " VALUES(?,?,?,NOW())";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -81,7 +91,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		String name = rs.getString("name");
 		Integer evaluation = (Integer) rs.getObject("evaluation");
 
-		return new Destination(genreId, name, evaluation);
+		return new Destination(genreId, evaluation, name, name, evaluation, evaluation, null);
 
 	}
 

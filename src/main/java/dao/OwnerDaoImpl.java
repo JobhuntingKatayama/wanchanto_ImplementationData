@@ -24,8 +24,9 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public List<Owner> findAll() throws Exception {
 		List<Owner> ownerList = new ArrayList<>();
+
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM owners";
+			String sql = "SELECT owners.loginId, owners.loginPassword, owners.registrationDate FROM owners";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -38,37 +39,21 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public Owner findById(Integer id) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+	public Owner findById(String loginId) throws Exception {
+		Owner owner = new Owner();
 
-	@Override
-	public void insert(Owner owner) throws Exception {
-		try (Connection con = ds.getConnection()) {			
-			
-			String sql = "INSERT INTO owners" + " (loginId, loginPassword, registrationDate)" + " VALUES (?,?,NOW())";
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT owners.loginId, owners.loginPassword, owners.registrationDate FROM owners WHERE owners.loginId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, owner.getLoginId());
-			stmt.setString(2, owner.getLoginPassword());
-			stmt.executeUpdate();
-				
+			stmt.setString(1, loginId);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next() == true) {
+				owner = mapToOwner(rs);
+			}
 		} catch (Exception e) {
 			throw e;
 		}
-
-	}
-
-	@Override
-	public void update(Owner owner) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
-	@Override
-	public void delete(Owner owner) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
+		return owner;
 	}
 
 	@Override
@@ -77,7 +62,7 @@ public class OwnerDaoImpl implements OwnerDao {
 		Owner owner = null;
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM owners WHERE loginId=?";
+			String sql = "SELECT * FROM owners WHERE loginId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, loginId);
 			ResultSet rs = stmt.executeQuery();
@@ -92,17 +77,58 @@ public class OwnerDaoImpl implements OwnerDao {
 		return owner;
 	}
 
+	@Override
+	public void insert(Owner owner) throws Exception {
+		try (Connection con = ds.getConnection()) {
+
+			String sql = "INSERT INTO owners (loginId, loginPassword, registrationDate) VALUES (?,?,NOW())";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, owner.getLoginId());
+			stmt.setString(2, owner.getLoginPassword());
+			stmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
+	@Override
+	public void update(Owner owner) throws Exception {
+		try (Connection con = ds.getConnection()) {
+			String sql = "UPDATE owners SET loginId = ? WHERE loginId = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, owner.getLoginId());
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
+	@Override
+	public void delete(Owner owner) throws Exception {
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM owners WHERE loginId = ? ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, owner.getLoginId());
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
 	private Owner mapToOwner(ResultSet rs) throws Exception {
-		Integer ownerId = (Integer) rs.getObject("ownerId");
-		String thumbnail = rs.getString("thumbnail");
+//		Integer ownerId = (Integer) rs.getObject("ownerId");
+//		String thumbnail = rs.getString("thumbnail");
 		String loginId = rs.getString("loginId");
 		String loginPassword = rs.getString("loginPassword");
-		Integer statusId = (Integer) rs.getObject("statusId");
+//		Integer statusId = (Integer) rs.getObject("statusId");
 		Date registrationDate = rs.getTimestamp("registrationDate");
 
-		return new Owner(ownerId, thumbnail, loginId, loginPassword, statusId, registrationDate);
-		
-		//		Owner owner = new Owner();
+		return new Owner(/* ownerId, thumbnail, */ loginId, loginPassword, /* statusId, */ registrationDate);
+
+		// Owner owner = new Owner();
 //		owner.setLoginId(rs.getString("loginId"));
 //		owner.setLoginPassword(rs.getString("loginPassword"));
 //
