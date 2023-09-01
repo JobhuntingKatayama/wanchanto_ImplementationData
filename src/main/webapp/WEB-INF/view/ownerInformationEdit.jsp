@@ -22,7 +22,7 @@
 				<c:out value="※${loginIdError }"/>
 				</c:if>
 				<input required type="text" pattern="^[0-9A-Za-z]*$"
-					minlength="5" maxlength="15" name="newLoginId" value="${loginId }" /></td>
+					minlength="5" maxlength="15" name="loginId" value="${loginId }" /></td>
 			</tr>
 			<tr>
 				<th>パスワード<span class="small">※半角英数字5～15文字</span><span

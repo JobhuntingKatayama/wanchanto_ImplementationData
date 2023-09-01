@@ -5,26 +5,29 @@ import java.util.Date;
 public class Destination {
 
 	private Integer ownerId;
+	private Integer destinationId;
 	private Integer genreId;
 	private String name;
 	private String image;
 	private Integer evaluation;
 	private Integer statusId;
 	private Date addedDate;
-	
+
 	public Destination() {
-		
+
 	}
 
-	public Destination(Integer ownerId, Integer genreId, String name, String image, Integer evaluation,
-			Integer statusId, Date addedDate) {
-		this.ownerId = ownerId;
+	public Destination(/* Integer ownerId, Integer destinationId, */Integer genreId, String name,
+			/* String image, */ Integer evaluation/* , */
+	/* Integer statusId, Date addedDate */) {
+//		this.ownerId = ownerId;
+//		this.destinationId = destinationId;
 		this.genreId = genreId;
 		this.name = name;
-		this.image = image;
+//		this.image = image;
 		this.evaluation = evaluation;
-		this.statusId = statusId;
-		this.addedDate = addedDate;
+//		this.statusId = statusId;
+//		this.addedDate = addedDate;
 	}
 
 	public Integer getOwnerId() {
@@ -33,6 +36,14 @@ public class Destination {
 
 	public void setOwnerId(Integer ownerId) {
 		this.ownerId = ownerId;
+	}
+
+	public Integer getDestinationId() {
+		return destinationId;
+	}
+
+	public void setDestinationId(Integer destinationId) {
+		this.destinationId = destinationId;
 	}
 
 	public Integer getGenreId() {
@@ -82,7 +93,5 @@ public class Destination {
 	public void setAddedDate(Date addedDate) {
 		this.addedDate = addedDate;
 	}
-	
-	
-	
+
 }

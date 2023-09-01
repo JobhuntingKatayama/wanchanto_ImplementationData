@@ -25,12 +25,16 @@ public class OwnerInformationDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String loginId = request.getParameter("loginId");
+		
+		//削除する会員のIDの取得
+		String strId = request.getParameter("ownerId");
+		Integer ownerId = Integer.parseInt(strId);
 
 		try {
+			// 削除する会員データの取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
-			Owner owner = ownerDao.findById(loginId);
-
+			Owner owner = ownerDao.findById(ownerId);
+			// 削除ページの表示
 			request.setAttribute("owner", owner);
 			request.getRequestDispatcher("/WEB-INF/view/ownerInformationDelete.jsp").forward(request, response);
 		} catch (Exception e) {
@@ -45,12 +49,17 @@ public class OwnerInformationDeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String loginId = request.getParameter("loginId");
 
+		//削除する会員のIDの取得
+		String strId = request.getParameter("ownerId");
+		Integer ownerId = Integer.parseInt(strId);
+
+		// 削除メソッドの引数用にOwnerオブジェクトを作成
 		Owner owner = new Owner();
-		owner.setLoginId(loginId);
+		owner.setOwnerId(ownerId);
 
 		try {
+			// データの削除
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			ownerDao.delete(owner);
 

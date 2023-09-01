@@ -25,15 +25,20 @@ public class OwnerInformationEditServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String loginId = request.getParameter("loginId");
+
+		String strOwnerId = request.getParameter("ownerId");
+		Integer ownerId = Integer.parseInt(strOwnerId);
+
 		try {
+			// 編集する会員データの取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
-			Owner owner = ownerDao.findById(loginId);
-			
+			Owner owner = ownerDao.findById(ownerId);
+
+			// 編集ページの表示
 			request.setAttribute("loginId", owner.getLoginId());
 			request.setAttribute("loginPassword", owner.getLoginPassword());
 			request.getRequestDispatcher("/WEB-INF/view/ownerInformationEdit.jsp").forward(request, response);
-			
+
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
@@ -46,38 +51,48 @@ public class OwnerInformationEditServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		boolean isError=false;
+		// 編集する会員のIDの取得
+		String strOwnerId = request.getParameter("ownerId");
+		Integer ownerId = Integer.parseInt(strOwnerId);
 
+		// バリデーション用のフラグ
+		boolean isError = false;
+
+		// 各パラメータの取得とバリデーション
 		String loginId = request.getParameter("loginId");
-
-		String newLoginId = loginId;
-		request.setAttribute("loginId", newLoginId);
-		if(loginId.isEmpty()) {
+		request.setAttribute("loginId", loginId);// 再表示用
+		if (loginId.isEmpty()) {
+			// エラーメッセージの作成
 			request.setAttribute("loginIdError", "ログインIDが未入力です.");
 			isError = true;
 		}
 
-		String loginPassword=request.getParameter("loginPassword");
-		request.setAttribute("loginPassword", loginPassword);
-		if(loginPassword.isEmpty()) {
+		String loginPassword = request.getParameter("loginPassword");
+		request.setAttribute("loginPassword", loginPassword);// 再表示用
+		if (loginPassword.isEmpty()) {
 			request.setAttribute("loginPasswordError", "パスワードが未入力です.");
 			isError = true;
 		}
-		
-		if(isError == true) {
+
+		// 入力不備がある場合は、フォームを再表示し、処理を中断
+		if (isError == true) {
 			request.getRequestDispatcher("/WEB-INF/view/ownerInformationEdit.jsp").forward(request, response);
 			return;
 		}
-		
+
+		// 入力に不備がなければ、データの更新
 		Owner owner = new Owner();
-		owner.setLoginId(newLoginId);
+		owner.setOwnerId(ownerId);
+		owner.setLoginId(loginId);
 		owner.setLoginPassword(loginPassword);
 		try {
+			// データの更新
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			ownerDao.update(owner);
-			
+
+			// 更新完了ページの表示
 			request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditComplete.jsp").forward(request, response);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new ServletException(e);
 		}
 	}

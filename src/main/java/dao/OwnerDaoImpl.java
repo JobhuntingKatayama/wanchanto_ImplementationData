@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,7 @@ public class OwnerDaoImpl implements OwnerDao {
 		List<Owner> ownerList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT owners.loginId, owners.loginPassword, owners.registrationDate FROM owners";
+			String sql = "SELECT owners.ownerId, owners.loginId, owners.loginPassword, owners.registrationDate FROM owners";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -39,13 +40,13 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public Owner findById(String loginId) throws Exception {
+	public Owner findById(Integer ownerId) throws Exception {
 		Owner owner = new Owner();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT owners.loginId, owners.loginPassword, owners.registrationDate FROM owners WHERE owners.loginId = ?";
+			String sql = "SELECT owners.ownerId, owners.loginId, owners.loginPassword, owners.registrationDate FROM owners WHERE owners.ownerId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, loginId);
+			stmt.setObject(1, ownerId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next() == true) {
 				owner = mapToOwner(rs);
@@ -55,7 +56,8 @@ public class OwnerDaoImpl implements OwnerDao {
 		}
 		return owner;
 	}
-
+	
+	
 	@Override
 	public Owner findByLoginIdAndLoginPass(String loginId, String loginPassword) throws Exception {
 
@@ -86,7 +88,6 @@ public class OwnerDaoImpl implements OwnerDao {
 			stmt.setString(1, owner.getLoginId());
 			stmt.setString(2, owner.getLoginPassword());
 			stmt.executeUpdate();
-
 		} catch (Exception e) {
 			throw e;
 		}
@@ -96,9 +97,11 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public void update(Owner owner) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE owners SET loginId = ? WHERE loginId = ?";
+			String sql = "UPDATE owners SET loginId = ?, loginPassword = ? WHERE ownerId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, owner.getLoginId());
+			stmt.setString(2, owner.getLoginPassword());
+			stmt.setObject(3, owner.getOwnerId(), Types.INTEGER);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -109,30 +112,27 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public void delete(Owner owner) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "DELETE FROM owners WHERE loginId = ? ";
+			String sql = "DELETE FROM owners WHERE ownerId = ? ";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, owner.getLoginId());
+			stmt.setObject(1, owner.getOwnerId(), Types.INTEGER);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
+	/*
+	 * ResultSetからOwnerオブジェクトへの変換
+	 */
 	private Owner mapToOwner(ResultSet rs) throws Exception {
-//		Integer ownerId = (Integer) rs.getObject("ownerId");
+		Integer ownerId = (Integer) rs.getObject("ownerId");
 //		String thumbnail = rs.getString("thumbnail");
 		String loginId = rs.getString("loginId");
 		String loginPassword = rs.getString("loginPassword");
 //		Integer statusId = (Integer) rs.getObject("statusId");
 		Date registrationDate = rs.getTimestamp("registrationDate");
 
-		return new Owner(/* ownerId, thumbnail, */ loginId, loginPassword, /* statusId, */ registrationDate);
-
-		// Owner owner = new Owner();
-//		owner.setLoginId(rs.getString("loginId"));
-//		owner.setLoginPassword(rs.getString("loginPassword"));
-//
-//		return owner;
+		return new Owner(ownerId,/*  thumbnail, */ loginId, loginPassword, /* statusId, */ registrationDate);
 
 	}
 }

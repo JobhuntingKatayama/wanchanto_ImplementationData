@@ -17,9 +17,8 @@
 
 </head>
 <body>
-	<h1>${handleName}さんのマイページ</h1>
-	<p>${handleName}さん、こんにちは！</p>
-	<p>${loginId }</p>
+	<h1>${loginId }さんのマイページ</h1>
+	<p></p>
 	<div id="ownerMypageContents">
 		<dl>
 			<dt id="ownerInfomation">
@@ -29,10 +28,10 @@
 					</dt>
 					<dd>
 						<h2>
-							<c:out value="${ownerId }" /><span>さん</span>							
+							愛犬家ID：<c:out value="${ownerId }" /><span></span>							
 						</h2>
-						<p><a href="ownerInformationEdit?loginId=<c:out value="${loginId}"/>">情報の更新</a></p>
-						<p><a href="ownerInformationDelete?loginId=<c:out value="${loginId}"/>">登録情報の削除</a></p>
+						<p><a href="ownerInformationEdit?ownerId=<c:out value="${ownerId}"/>">情報の更新</a></p>
+						<p><a href="ownerInformationDelete?ownerId=<c:out value="${ownerId}"/>">登録情報の削除</a></p>
 					</dd>
 				</dl>
 			</dt>
@@ -50,6 +49,7 @@
 								<th>ジャンル</th>
 								<th>名称</th>
 								<th>評価</th>
+								<th>編集</th>
 							</tr>
 							<c:forEach items="${destinationList}" var="destination">
 							<tr>

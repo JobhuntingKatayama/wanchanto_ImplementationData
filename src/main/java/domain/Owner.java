@@ -3,7 +3,7 @@ package domain;
 import java.util.Date;
 
 public class Owner {
-//	private Integer ownerId;
+	private Integer ownerId;
 //	private String thumbnail;
 	private String loginId;
 	private String loginPassword;
@@ -14,8 +14,8 @@ public class Owner {
 	
 	}
 	
-	public Owner(/* Integer ownerId, String thumbnail, */String loginId, String loginPassword,/* Integer statusId, */Date registrationDate) {
-//		this.ownerId = ownerId;
+	public Owner( Integer ownerId, /*String thumbnail, */String loginId, String loginPassword,/* Integer statusId, */Date registrationDate) {
+		this.ownerId = ownerId;
 		this.loginId = loginId;
 //		this.thumbnail = thumbnail;
 		this.loginPassword = loginPassword;
@@ -23,13 +23,13 @@ public class Owner {
 		this.registrationDate = registrationDate;
 	}
 
-//	public Integer getOwnerId() {
-//		return ownerId;
-//	}
-//
-//	public void setOwnerId(Integer ownerId) {
-//		this.ownerId = ownerId;
-//	}
+	public Integer getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(Integer ownerId) {
+		this.ownerId = ownerId;
+	}
 
 	public String getLoginId() {
 		return loginId;

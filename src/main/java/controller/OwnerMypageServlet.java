@@ -36,30 +36,32 @@ public class OwnerMypageServlet extends HttpServlet {
 
 		try {
 
-			DestinationDao destinationDao = DaoFactory.createDestinationDao();
-			List<Destination> destinationList = destinationDao.findAll();
-
-			request.setAttribute("destinationList", destinationList);
-
 			HttpSession session = request.getSession();
-			String loginId = (String) session.getAttribute("loginId");
-			session.setAttribute("loginId", loginId);
-
-			int odid = 0;
+			String strLoginId = (String) session.getAttribute("loginId");
+//			Integer IntOwnerId = (Integer) session.getAttribute("ownerId"); // セッションからownerIdを取得
+//			String strOwnerId = String.valueOf(IntOwnerId);
 
 			InitialContext ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/wanchanto");
 			Connection con = ds.getConnection();
 
+			int odid = 0;
 			String sql = "SELECT ownerId FROM owners WHERE loginId = ?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, loginId); // プレースホルダーに変数の値を設定
+			stmt.setString(1, strLoginId); // プレースホルダーに変数の値を設定
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				odid = rs.getInt("ownerId");
 			}
 			request.setAttribute("ownerId", odid);
-
+						
+			//DestinationDAOによるデータ取得
+			DestinationDao destinationDao = DaoFactory.createDestinationDao();
+			List<Destination> destinationList = destinationDao.findAll();
+			// JSP へフォワード
+			request.setAttribute("destinationList", destinationList);
+			
+			
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
