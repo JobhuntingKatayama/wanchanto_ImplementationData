@@ -7,6 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import dao.DaoFactory;
 import dao.OwnerDao;
@@ -50,11 +53,12 @@ public class OwnerInformationEditServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 
 		// 編集する会員のIDの取得
 		String strOwnerId = request.getParameter("ownerId");
 		Integer ownerId = Integer.parseInt(strOwnerId);
-
+		
 		// バリデーション用のフラグ
 		boolean isError = false;
 
@@ -73,6 +77,9 @@ public class OwnerInformationEditServlet extends HttpServlet {
 			request.setAttribute("loginPasswordError", "パスワードが未入力です.");
 			isError = true;
 		}
+		//パスワードのハッシュ化
+		String hashedPassword = BCrypt.hashpw(loginPassword, BCrypt.gensalt());
+		request.setAttribute("hashedPassword", hashedPassword);
 
 		// 入力不備がある場合は、フォームを再表示し、処理を中断
 		if (isError == true) {
@@ -80,21 +87,26 @@ public class OwnerInformationEditServlet extends HttpServlet {
 			return;
 		}
 
-		// 入力に不備がなければ、データの更新
-		Owner owner = new Owner();
-		owner.setOwnerId(ownerId);
-		owner.setLoginId(loginId);
-		owner.setLoginPassword(loginPassword);
-		try {
-			// データの更新
-			OwnerDao ownerDao = DaoFactory.createOwnerDao();
-			ownerDao.update(owner);
+		// 入力に不備がなければ、確認ページへ遷移
+//		Owner owner = new Owner();
+//		owner.setOwnerId(ownerId);
+//		owner.setLoginId(loginId);
+//		owner.setLoginPassword(hashedPassword);
+//		try {
+//			// データの更新
+//			OwnerDao ownerDao = DaoFactory.createOwnerDao();
+//			ownerDao.update(owner);
+//
+		// 入力に不備がなければ、確認ページへ遷移
+		session.setAttribute("loginId", loginId);
+		session.setAttribute("hashedPassword", hashedPassword);
+		
+		request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditConfirm.jsp").forward(request, response);
+//		} catch (Exception e) {
+//			throw new ServletException(e);
+//		}
 
-			// 更新完了ページの表示
-			request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditComplete.jsp").forward(request, response);
-		} catch (Exception e) {
-			throw new ServletException(e);
-		}
 	}
 
 }
+

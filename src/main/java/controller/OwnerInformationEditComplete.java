@@ -7,13 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class OwnerRegistrationConfirmServlet
  */
-@WebServlet("/ownerRegistrationConfirm")
-public class OwnerRegistrationConfirmServlet extends HttpServlet {
+@WebServlet("/ownerInformationEditComplete")
+public class OwnerInformationEditComplete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	/**
@@ -21,10 +20,7 @@ public class OwnerRegistrationConfirmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getParameter("loginId");
-		
-		request.getRequestDispatcher("/WEB-INF/view/ownerRegistrationConfirm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditComplete.jsp").forward(request, response);
+	
 	}
-
-
 }

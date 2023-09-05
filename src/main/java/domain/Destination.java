@@ -17,11 +17,11 @@ public class Destination {
 
 	}
 
-	public Destination(/* Integer ownerId, Integer destinationId, */Integer genreId, String name,
+	public Destination(/* Integer ownerId, */Integer destinationId, Integer genreId, String name,
 			/* String image, */ Integer evaluation/* , */
 	/* Integer statusId, Date addedDate */) {
 //		this.ownerId = ownerId;
-//		this.destinationId = destinationId;
+		this.destinationId = destinationId;
 		this.genreId = genreId;
 		this.name = name;
 //		this.image = image;

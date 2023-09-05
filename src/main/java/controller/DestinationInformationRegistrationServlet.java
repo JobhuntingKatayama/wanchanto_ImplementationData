@@ -13,10 +13,10 @@ import dao.DestinationDao;
 import domain.Destination;
 
 /**
- * Servlet implementation class DestinationInformationRegistrationServket
+ * Servlet implementation class DestinationInformationRegistrationServlet
  */
 @WebServlet("/destinationInformationRegistration")
-public class DestinationInformationRegistrationServket extends HttpServlet {
+public class DestinationInformationRegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**

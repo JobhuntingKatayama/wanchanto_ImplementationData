@@ -51,7 +51,7 @@ public class OwnerMypageServlet extends HttpServlet {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, strLoginId); // プレースホルダーに変数の値を設定
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
+			if (rs.next() == true) {
 				odid = rs.getInt("ownerId");
 			}
 			request.setAttribute("ownerId", odid);
@@ -61,13 +61,12 @@ public class OwnerMypageServlet extends HttpServlet {
 			List<Owner> ownerList = ownerDao.findByOwnerId(odid);
 			// JSP へフォワード
 			request.setAttribute("ownerList", ownerList);
-
+			
 			//DestinationDAOによるデータ取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			List<Destination> destinationList = destinationDao.findByOwnerId(odid);
 			// JSP へフォワード
 			request.setAttribute("destinationList", destinationList);
-
 			
 		} catch (Exception e) {
 			throw new ServletException(e);

@@ -40,13 +40,14 @@
 					<dt>
 						<h2>お出掛け先情報一覧</h2>
 						<input type="button"
-							onclick="location.href='destinationInformationRegistration'"
+							onclick="location.href='destinationInformationRegistration?ownerId=<c:out value="${ownerId}"/>'"
 							value="お出掛け先情報の新規追加">
 					</dt>
 					<dd>
 						<table>
 							<tr>
 								<th>ジャンル</th>
+								<th>ID</th>
 								<th>名称</th>
 								<th>評価</th>
 								<th>編集</th>
@@ -54,8 +55,10 @@
 							<c:forEach items="${destinationList}" var="destination">
 							<tr>
 								<td><c:out value="${destination.genreId}" /></td>
+								<td><c:out value="${destination.destinationId }" /></td>
 								<td><c:out value="${destination.name}" /></td>
 								<td><c:out value="${destination.evaluation}" /></td>
+ 								<td><a href="destinationInformationEdit?destinationId=<c:out value="${destination.destinationId}"/>">更新</a></td>
 							</tr>
 							</c:forEach>
 						</table>

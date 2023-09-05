@@ -18,7 +18,6 @@ import domain.Destination;
 @WebServlet("/destinationInformationEdit")
 public class DestinationInformationEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Integer destinationId;
   
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,12 +25,12 @@ public class DestinationInformationEditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 編集するお出掛け先IDの取得
 		String strId = request.getParameter("destinationId");
-		Integer id = Integer.parseInt(strId);
+		Integer destinationId = Integer.parseInt(strId);
 
 		try {
 			// 編集するお出掛け先データの取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
-			Destination destination = destinationDao.findById(id);
+			Destination destination = destinationDao.findByDestinationId(destinationId);
 
 			// 編集ページの表示
 			request.setAttribute("genreId", destination.getGenreId());
@@ -48,9 +47,9 @@ public class DestinationInformationEditServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 編集する会員のIDの取得
+		// 編集するお出掛け先IDの取得
 		String strId = request.getParameter("destinationId");
-		Integer id = Integer.parseInt(strId);
+		Integer destinationId = Integer.parseInt(strId);
 
 		// バリデーション用のフラグ
 		boolean isError = false;
@@ -100,6 +99,7 @@ public class DestinationInformationEditServlet extends HttpServlet {
 
 		// 入力に不備がなければ、データの更新
 		Destination destination = new Destination();
+		destination.setDestinationId(destinationId);
 		destination.setGenreId(genreId);
 		destination.setName(name);
 		destination.setEvaluation(evaluation);

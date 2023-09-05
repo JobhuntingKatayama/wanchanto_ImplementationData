@@ -25,9 +25,11 @@ public class OwnerRegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.getRequestDispatcher("/WEB-INF/view/ownerRegistration.jsp").forward(request, response);
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -44,11 +46,15 @@ public class OwnerRegistrationServlet extends HttpServlet {
 		try {
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			ownerDao.insert(owner);
+			
+			request.setAttribute("loginId", loginId);
+
 			request.getRequestDispatcher("/WEB-INF/view/ownerRegistrationConfirm.jsp").forward(request, response);
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
 	
+
 	}
 
 }

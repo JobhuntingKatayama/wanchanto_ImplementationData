@@ -16,4 +16,6 @@ public interface DestinationDao {
 
 	void delete(Destination destination) throws Exception;
 
+	Destination findByDestinationId(Integer destinationId) throws Exception;
+
 }
