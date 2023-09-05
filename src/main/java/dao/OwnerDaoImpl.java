@@ -40,15 +40,32 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public Owner findById(Integer ownerId) throws Exception {
-		Owner owner = new Owner();
+	public List<Owner> findByOwnerId(Integer ownerId) throws Exception {
+		List<Owner> ownerList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT owners.ownerId, owners.loginId, owners.loginPassword, owners.registrationDate FROM owners WHERE owners.ownerId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, ownerId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next() == true) {
+			while (rs.next()) {
+				ownerList.add(mapToOwner(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return ownerList;
+	}
+
+	@Override
+	public Owner findById(Integer ownerId) throws Exception {
+		Owner owner = new Owner();
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT owners.ownerId, owners.loginId, owners.loginPassword, owners.registrationDate FROM owners WHERE owners.ownerId = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, ownerId, Types.INTEGER);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next() == true) {
 				owner = mapToOwner(rs);
 			}
 		} catch (Exception e) {
@@ -56,8 +73,7 @@ public class OwnerDaoImpl implements OwnerDao {
 		}
 		return owner;
 	}
-	
-	
+
 	@Override
 	public Owner findByLoginIdAndLoginPass(String loginId, String loginPassword) throws Exception {
 
@@ -132,7 +148,7 @@ public class OwnerDaoImpl implements OwnerDao {
 //		Integer statusId = (Integer) rs.getObject("statusId");
 		Date registrationDate = rs.getTimestamp("registrationDate");
 
-		return new Owner(ownerId,/*  thumbnail, */ loginId, loginPassword, /* statusId, */ registrationDate);
+		return new Owner(ownerId, /* thumbnail, */ loginId, loginPassword, /* statusId, */ registrationDate);
 
 	}
 }

@@ -17,7 +17,9 @@ import javax.sql.DataSource;
 
 import dao.DaoFactory;
 import dao.DestinationDao;
+import dao.OwnerDao;
 import domain.Destination;
+import domain.Owner;
 
 /**
  * Servlet implementation class ListDestinationServlet
@@ -26,6 +28,7 @@ import domain.Destination;
 public class OwnerMypageServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+//	private static final Integer Integer = null;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -38,8 +41,6 @@ public class OwnerMypageServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			String strLoginId = (String) session.getAttribute("loginId");
-//			Integer IntOwnerId = (Integer) session.getAttribute("ownerId"); // セッションからownerIdを取得
-//			String strOwnerId = String.valueOf(IntOwnerId);
 
 			InitialContext ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/wanchanto");
@@ -55,12 +56,18 @@ public class OwnerMypageServlet extends HttpServlet {
 			}
 			request.setAttribute("ownerId", odid);
 						
+			//OwnerDAOによるデータ取得
+			OwnerDao ownerDao = DaoFactory.createOwnerDao();
+			List<Owner> ownerList = ownerDao.findByOwnerId(odid);
+			// JSP へフォワード
+			request.setAttribute("ownerList", ownerList);
+
 			//DestinationDAOによるデータ取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
-			List<Destination> destinationList = destinationDao.findAll();
+			List<Destination> destinationList = destinationDao.findByOwnerId(odid);
 			// JSP へフォワード
 			request.setAttribute("destinationList", destinationList);
-			
+
 			
 		} catch (Exception e) {
 			throw new ServletException(e);

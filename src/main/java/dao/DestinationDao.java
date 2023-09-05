@@ -8,7 +8,7 @@ public interface DestinationDao {
 
 	List<Destination> findAll() throws Exception;
 
-	Destination findById(Integer ownerId) throws Exception;
+	List<Destination> findByOwnerId(Integer ownerId) throws Exception;
 
 	void insert(Destination destination) throws Exception;
 

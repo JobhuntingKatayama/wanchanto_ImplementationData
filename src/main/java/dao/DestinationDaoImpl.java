@@ -39,8 +39,8 @@ public class DestinationDaoImpl implements DestinationDao {
 	}
 
 	@Override
-	public Destination findById(Integer ownerId) throws Exception {
-		Destination destination = new Destination();
+	public List<Destination> findByOwnerId(Integer ownerId) throws Exception {
+		List<Destination> destinationList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT destinations.genreId,"
@@ -50,14 +50,14 @@ public class DestinationDaoImpl implements DestinationDao {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, ownerId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next() == true) {
-				destination = mapToDestination(rs);
+			while  (rs.next()) {
+				destinationList.add(mapToDestination(rs));
 			}
 		} catch (Exception e) {
 			throw e;
 		}
 
-		return destination;
+		return destinationList;
 	}
 
 	@Override
@@ -108,9 +108,20 @@ public class DestinationDaoImpl implements DestinationDao {
 		Integer evaluation = (Integer) rs.getObject("evaluation");
 //		Integer statusId = (Integer) rs.getObject("statusId");
 //		Date addedDate = rs.getTimestamp("addeDate");
-
 		return new Destination(/* ownerId, */genreId, name, /* image, */ evaluation/*,  statusId, addedDate */);
 
 	}
+
+//	private Destination mapToDestinationList(ResultSet rs) throws Exception {
+////		Integer ownerId = (Integer) rs.getObject("ownerId");
+//		Integer genreId = (Integer) rs.getObject("genreId");
+//		String name = rs.getString("name");
+////		String image = rs.getString("image");
+//		Integer evaluation = (Integer) rs.getObject("evaluation");
+////		Integer statusId = (Integer) rs.getObject("statusId");
+////		Date addedDate = rs.getTimestamp("addeDate");
+//		return new Destination(/* ownerId, */genreId, name, /* image, */ evaluation/*,  statusId, addedDate */);
+//
+//	}
 
 }
