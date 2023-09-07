@@ -13,10 +13,23 @@
 	</p>
 	
 	<form action="" method="post">
-	<input type="text" name="loginId" value="${loginId }"><%-- リクエストスコープから取得 --%>
-	<input type="text" name="loginPassword" value="${loginPassword }"><%-- リクエストスコープから取得 --%>
-
+		<table>
+			<tr>
+				<th>ログインID<span class="small">※半角英数字5～15文字</span><span
+					class="required">*</span></th>
+				<td><input required type="text" pattern="^[0-9A-Za-z]*$"
+					minlength="5" maxlength="15" name="loginId" placeholder="${loginId}"></td>
+			</tr>
+			<tr>
+				<th>パスワード<span class="small">※半角英数字5～15文字</span><span
+					class="required">*</span></th>
+				<td><input required type="password" minlength="5"
+					pattern="^[0-9A-Za-z]*$" minlength="5" maxlength="15"
+					name="loginPassword" placeholder="***************"></td>
+			</tr>
+		</table>
 		<input type="submit" value="登録内容を更新する">
 	</form>
+<a href="ownerMypage">マイページへ戻る</a>
 </body>
 </html>

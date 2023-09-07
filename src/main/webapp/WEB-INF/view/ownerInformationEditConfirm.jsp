@@ -15,7 +15,7 @@
 		<h2>ご自身の情報</h2>
 		<%-- Editでpostされた情報をConfirmから取得 --%>
 		<p>${loginId }</p>
-		<p>${loginPassword }</p>
+		<p>セキュリティのため表示されません。</p>
 		
 		<input type="submit" value="登録内容を更新する">
 	</form>

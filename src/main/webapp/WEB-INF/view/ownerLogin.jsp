@@ -24,14 +24,14 @@
 				<th>ログインID<span class="small">※半角英数字5～15文字</span><span
 					class="required">*</span></th>
 				<td><input required type="text" pattern="^[0-9A-Za-z]*$"
-					minlength="5" maxlength="15" name="loginId"></td>
+					minlength="5" maxlength="15" name="loginId" placeholder="ログインID"></td>
 			</tr>
 			<tr>
 				<th>パスワード<span class="small">※半角英数字5～15文字</span><span
 					class="required">*</span></th>
 				<td><input required type="password" minlength="5"
 					pattern="^[0-9A-Za-z]*$" minlength="5" maxlength="15"
-					name="loginPassword"></td>
+					name="loginPassword" placeholder="パスワード"></td>
 			</tr>
 		</table>
 		<input type="submit" value="ログイン">

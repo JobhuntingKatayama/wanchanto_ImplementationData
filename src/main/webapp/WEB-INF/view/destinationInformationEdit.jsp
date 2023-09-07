@@ -13,7 +13,7 @@
 		<p class="small right">
 			「<span class="required">*</span>」がついている項目は必須項目です。
 		</p>
-		<form action="" method="post">
+		<form action="destinationInformationEditConfirm" method="post">
 			<table>
 				<tr>
 					<td>お出掛け先のジャンル<span class="required">*</span><br>

@@ -23,6 +23,11 @@ public class DestinationInformationRegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String strId = (String)request.getParameter("ownerId");
+		Integer ownerId = Integer.parseInt(strId);
+		request.setAttribute("ownerId", ownerId);
+		
 		request.getRequestDispatcher("/WEB-INF/view/destinationInformationRegistration.jsp").forward(request, response);
 	}
 

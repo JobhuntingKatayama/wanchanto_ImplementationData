@@ -27,7 +27,8 @@
 				<td>セキュリティのため表示されません。</td>
 			</tr>
 		</table>
-		<input type="submit" value="削除">
+		<a href="ownerMypage">削除はせずにマイページに戻る</a><br>
+		<input type="submit" value="削除する">
 	</form>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
