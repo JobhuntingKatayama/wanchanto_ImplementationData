@@ -10,7 +10,6 @@
 <body>
 <h1>愛犬家情報の更新</h1>
 <p>更新しました。</p>
-
 <p><a href="ownerMypage">マイページへ戻る</a></p>
 </body>
 </html>

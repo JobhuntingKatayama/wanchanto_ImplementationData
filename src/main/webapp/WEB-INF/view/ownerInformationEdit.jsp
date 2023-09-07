@@ -11,31 +11,10 @@
 	<p class="small right">
 		「<span class="required">*</span>」がついている項目は必須項目です。
 	</p>
+	
 	<form action="" method="post">
-		<h2>ご自身の情報</h2>
-		<table>
-			<tr>
-				<th>ログインID<span class="small">※半角英数字5～15文字</span><span
-					class="required">*</span></th>
-				<td>
-				<c:if test="${not empty loginIdError }">
-				<c:out value="※${loginIdError }"/>
-				</c:if>
-				<input required type="text" pattern="^[0-9A-Za-z]*$"
-					minlength="5" maxlength="15" name="loginId" value="${loginId }" /></td>
-			</tr>
-			<tr>
-				<th>パスワード<span class="small">※半角英数字5～15文字</span><span
-					class="required">*</span></th>
-				<td>
-				<c:if test="${not empty loginPasswordError }">
-				<c:out value="※${loginPasswordError }"/>
-				</c:if>
-				<input required type="password" minlength="5"
-					pattern="^[0-9A-Za-z]*$" minlength="5" maxlength="15"
-					name="loginPassword" value="${loginPassword }" /></td>
-			</tr>
-		</table>
+	<input type="text" name="loginId" value="${loginId }"><%-- リクエストスコープから取得 --%>
+	<input type="text" name="loginPassword" value="${loginPassword }"><%-- リクエストスコープから取得 --%>
 
 		<input type="submit" value="登録内容を更新する">
 	</form>

@@ -11,35 +11,15 @@
 <h1>愛犬家登録内容確認</h1>
 <p>下記の情報で登録をしてもよろしいでしょうか？</p>
 
-	<form action="" method="post">
+	<form action="ownerInformationEditComplete" method="post">
 		<h2>ご自身の情報</h2>
-		<table>
-			<tr>
-				<th>ログインID</th>
-				<td><input required type="text" pattern="^[0-9A-Za-z]*$"
-					minlength="5" maxlength="15" name="loginId" value="${loginId }" /></td>
-			</tr>
-			<tr>
-				<th>パスワード</th>
-				<td>セキュリティのため表示されません。</td>
-			</tr>
-		</table>
-
+		<%-- Editでpostされた情報をConfirmから取得 --%>
+		<p>${loginId }</p>
+		<p>${loginPassword }</p>
+		
 		<input type="submit" value="登録内容を更新する">
 	</form>
 	
 	
-<table>
-<tr>
-    <th>ログインID</th>
-    <td>${loginId }</td>
-</tr>
-<tr>
-    <th>パスワード</th>
-    <td>セキュリティのため表示されません。</td>
-</tr>
-</table>
-<p><a href="ownerInformationEditComplete">登録する</a></p>
-<p><a href="ownerInformationEdit">編集しなおす</a></p>
 </body>
 </html>

@@ -27,59 +27,55 @@ public class OwnerInformationEditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
-		HttpSession session = request.getSession();
-
-		// 編集するownerIDの取得とセッションスコープへ格納
-		String strId = request.getParameter("ownerId");
-		Integer ownerId = Integer.parseInt(strId);
-		session.setAttribute("ownerId", ownerId);
+		String strOwnerId = request.getParameter("ownerId");
+		Integer ownerId = Integer.parseInt(strOwnerId);
 
 		try {
-			// 編集するownerデータの取得
+			// 編集する会員データの取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			Owner owner = ownerDao.findById(ownerId);
 
-			// 編集するownerデータをリクエストスコープへ格納
+			// 編集ページの表示
 			request.setAttribute("loginId", owner.getLoginId());
 			request.setAttribute("loginPassword", owner.getLoginPassword());
-
-			// 編集するownerデータを編集ページで表示
 			request.getRequestDispatcher("/WEB-INF/view/ownerInformationEdit.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
-	 *      
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {	
+			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
 
+		// 編集する会員のIDの取得
+		String strOwnerId = request.getParameter("ownerId");
+		Integer ownerId = Integer.parseInt(strOwnerId);
+		
 		// バリデーション用のフラグ
 		boolean isError = false;
 
 		// 各パラメータの取得とバリデーション
 		String loginId = request.getParameter("loginId");
-		session.setAttribute("loginId", loginId);// 入力されたloginIdをセッションへ格納
+		request.setAttribute("loginId", loginId);// 再表示用
 		if (loginId.isEmpty()) {
 			// エラーメッセージの作成
-			request.setAttribute("loginIdError", "ログインIDが未入力です。");
-			isError = true; // 入力に不備ありと判定
+			request.setAttribute("loginIdError", "ログインIDが未入力です.");
+			isError = true;
 		}
+
 		String loginPassword = request.getParameter("loginPassword");
-		session.setAttribute("loginPassword", loginPassword);// 入力されたloginPasswordをセッションへ格納
+		request.setAttribute("loginPassword", loginPassword);// 再表示用
 		if (loginPassword.isEmpty()) {
 			// エラーメッセージの作成
-			request.setAttribute("loginPasswordError", "パスワードが未入力です。");
-			isError = true; // 入力に不備ありと判定
+			request.setAttribute("loginPasswordError", "パスワードが未入力です.");
+			isError = true;
 		}
 
 		// 入力不備がある場合は、フォームを再表示し、処理を中断
@@ -88,9 +84,28 @@ public class OwnerInformationEditServlet extends HttpServlet {
 			return;
 		}
 
-		//submitでConfirmへPostフォワード
+		// 入力に不備がなければ、確認ページへ遷移
+//		Owner owner = new Owner();
+//		owner.setOwnerId(ownerId);
+//		owner.setLoginId(loginId);
+//		owner.setLoginPassword(hashedPassword);
+//		try {
+//			// データの更新
+//			OwnerDao ownerDao = DaoFactory.createOwnerDao();
+//			ownerDao.update(owner);
+//
+		// 入力に不備がなければ、セッションへ格納し確認ページへ遷移
+//		session.setAttribute("ownerId", ownerId);
+//		session.setAttribute("loginId", loginId);
+//		session.setAttribute("loginPassword", loginPassword);
+//		session.setAttribute("hashedPassword", hashedPassword);
+		
 		request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditConfirm.jsp").forward(request, response);
+//		} catch (Exception e) {
+//			throw new ServletException(e);
+//		}
 
 	}
 
 }
+

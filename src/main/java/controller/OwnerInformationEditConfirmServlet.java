@@ -9,10 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.DaoFactory;
-import dao.OwnerDao;
-import domain.Owner;
-
 /**
  * Servlet implementation class OwnerRegistrationConfirmServlet
  */
@@ -27,37 +23,20 @@ public class OwnerInformationEditConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getParameter("ownerId");
-		request.getParameter("loginId");
-		request.getParameter("hashedPassword");
-
-		request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditConfirm.jsp").forward(request, response);
+		//getは受信せず
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Integer ownerId = Integer.parseInt(request.getParameter("ownerId"));
-		String loginId = request.getParameter("loginId");
+		//Editページからポストされた情報をセッションスコープから取得
 		HttpSession session = request.getSession();
-		String hashedPassword = (String)session.getAttribute("hashedPassword");
+		session.getAttribute("ownerId");
+		session.getAttribute("loginId");
+		session.getAttribute("loginPassword");
 
-		// 入力に不備がなければ、データの更新
-		Owner owner = new Owner();
-		owner.setOwnerId(ownerId);
-		owner.setLoginId(loginId);
-		owner.setLoginPassword(hashedPassword);
-		
-		try {
-			// データの更新
-			OwnerDao ownerDao = DaoFactory.createOwnerDao();
-			ownerDao.update(owner);
-
-			// 更新完了ページの表示
-			request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditComplete.jsp").forward(request, response);
-			
-		} catch (Exception e) {
-			throw new ServletException(e);
-		}
+		request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditComplete.jsp").forward(request, response);
 	}
+
 }
