@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.nameDate {
+	font-weight: bold;
+}
+.border {
+	border-radius:3px;
+}
+.required {
+	color: #ff0000;
+}

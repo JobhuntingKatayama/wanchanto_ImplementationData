@@ -7,70 +7,71 @@
 <meta charset="UTF-8">
 <title>愛犬家マイページ</title>
 
-<script type="text/javascript">
-<!--
-	function confirm() {
-		window.alert('本当にログアウトしますか？');
-	}
-// -->
-</script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 
 </head>
 <body>
-	<h1>${loginId }さんのマイページ</h1>
-	<p></p>
-	<div id="ownerMypageContents">
-		<dl>
-			<dt id="ownerInfomation">
-				<dl>
-					<dt>
-						<img id="thumbnailOwner" src="img/thumbnail.jpg">
-					</dt>
-					<dd>
-						<h2>
-							愛犬家ID：<c:out value="${ownerId }" /><span></span>							
-						</h2>
-						<p><a href="ownerInformationEdit?ownerId=<c:out value="${ownerId}"/>">情報の更新</a></p>
-						<p><a href="ownerInformationDelete?ownerId=<c:out value="${ownerId}"/>">登録情報の削除</a></p>
-					</dd>
-				</dl>
-			</dt>
-			<dd id="destinationInformation">
-				<dl>
-					<dt>
-						<h2>お出掛け先情報一覧</h2>
-						<input type="button"
-							onclick="location.href='destinationInformationRegistration?ownerId=<c:out value="${ownerId}"/>'"
-							value="お出掛け先情報の新規追加">
-					</dt>
-					<dd>
-						<table>
-							<tr>
-								<th>ジャンル</th>
-								<th>ID</th>
-								<th>名称</th>
-								<th>評価</th>
-								<th>編集</th>
-							</tr>
-							<c:forEach items="${destinationList}" var="destination">
-							<tr>
-								<td><c:out value="${destination.genreId}" /></td>
-								<td><c:out value="${destination.destinationId }" /></td>
-								<td><c:out value="${destination.name}" /></td>
-								<td><c:out value="${destination.evaluation}" /></td>
- 								<td><a href="destinationInformationEdit?destinationId=<c:out value="${destination.destinationId}"/>">更新</a></td>
-							</tr>
-							</c:forEach>
-						</table>
+	<div class="container mt-5 mb-5">
 
-					</dd>
-				</dl>
-			</dd>
-		</dl>
+		<h1>${loginId }さんのマイページ</h1>
+			<dl>
+				<dt>
+					<dl>
+						<dt>
+							<img id="thumbnailOwner" src="img/thumbnail.jpg">
+						</dt>
+						<dd>
+							<p>
+								<button type="button" class="btn btn-outline-primary"
+									onclick="location.href='ownerInformationEdit?ownerId=<c:out value="${ownerId}"/>'">愛犬家情報の更新</button>
+							</p>
+							<p>
+								<button type="button" class="btn btn-light"
+									onclick="location.href='ownerInformationDelete?ownerId=<c:out value="${ownerId}"/>'">愛犬家情報の削除</button>
+							</p>
+
+						</dd>
+					</dl>
+				</dt>
+				<dd>
+					<dl>
+						<dt>
+							<h2>お出掛け先情報一覧</h2>
+							<p>
+								<button type="button" class="btn btn-primary"
+									onclick="location.href='destinationInformationRegistration?ownerId=<c:out value="${ownerId}"/>'">お出掛け先情報の新規追加</button>
+							</p>
+						</dt>
+						<dd>
+							<table class="table table-striped">
+								<tr>
+									<th>ジャンル</th>
+									<th>名称</th>
+									<th>評価</th>
+									<th>編集</th>
+								</tr>
+								<c:forEach items="${destinationList}" var="destination">
+									<tr>
+										<td><c:out value="${destination.genreId}" /></td>
+										<td><a
+											href="destinationDetail?destinationId=<c:out value="${destination.destinationId }" />"><c:out
+													value="${destination.name}" /></a></td>
+										<td><c:out value="${destination.evaluation}" /></td>
+										<td><button type="button" class="btn btn-outline-primary"
+												onclick="location.href='destinationInformationEdit?destinationId=<c:out value="${destination.destinationId}"/>'">編集する</button></td>
+									</tr>
+								</c:forEach>
+							</table>
+
+						</dd>
+					</dl>
+				</dd>
+			</dl>
+		<p>
+			<button type="button" class="btn btn-outline-primary"
+				onclick="location.href='ownerLogout'">ログアウトする</button>
+		</p>
 	</div>
-
-	<input type="button" onclick="location.href='ownerLogout'"
-		value="ログアウトする">
-
 </body>
 </html>

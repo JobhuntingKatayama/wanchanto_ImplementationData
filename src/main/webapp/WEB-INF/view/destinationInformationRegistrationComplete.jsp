@@ -1,47 +1,49 @@
 <%@ page pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>お出掛け先情報登録完了</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
 </head>
 <body>
-<div id="destinationInformationRegistrationComplete">
-    <h1>お出掛け先情報登録完了</h1>
-<p>下記の情報でお出掛け先を登録しました。</p>
+	<div class="container mt-5 mb-5">
+		<h1>お出掛け先情報登録完了</h1>
+		<p>下記の情報でお出掛け先を登録しました。</p>
 
-<input type="button" onclick="window.open('park230823hwc72.html')" value="登録した内容を確認する">
+		<p>
+			<button type="button" class="btn btn-primary"
+				onclick="location.href='destinationDetail'">登録した内容を確認する</button>
+		</p>
 
-<table>
-    <tr>
-        <th>お出掛け先のジャンル</th>
-        <td><c:out value="${genreId}" />
-        </td>
-    </tr>
-    <tr>
-        <th>お出掛け先の名称</th>
-        <td><c:out value="${name}" /></td>
-    </tr>
-    <!-- <tr>
-        <th>写真</th>
-        <td>
-            <ul>
-                <li><img class="thumbnailDestination" src="img/park230823hwc72001.jpg"></li>
-                <li><img class="thumbnailDestination" src="img/park230823hwc72002.jpg"></li>
-                <li><img class="thumbnailDestination" src="img/park230823hwc72003.jpg"></li>
-            </ul>
-        </td>
-    </tr> -->
-    <tr>
-        <th>評価</th>
-        <td><c:out value="${evaluation}" /></td>
-    </tr>
-</table>
+		<p>お出掛け先のジャンル</p>
+		<p
+			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
+			<c:out value="${genreId}" />
+		</p>
 
-        <!-- <input type="button" onclick="location.href='destinationInformationEdit.html'" value="登録した内容を編集する"> -->
-        <input type="button" onclick="location.href='ownerMypage'" value="マイページへ戻る">
-    </div>
+		<p>お出掛け先の名称</p>
+		<p
+			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
+			<c:out value="${name}" />
+		</p>
+
+		<p>評価</p>
+		<p
+			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
+			<c:out value="${evaluation}" />
+		</p>
+
+		<p>
+			<button type="button" class="btn btn-primary"
+				onclick="location.href='ownerMypage'">マイページに戻る</button>
+		</p>
+	</div>
+
 </body>
 </html>

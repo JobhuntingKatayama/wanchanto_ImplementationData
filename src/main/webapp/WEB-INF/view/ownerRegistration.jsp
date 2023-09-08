@@ -6,32 +6,39 @@
 <head>
 <meta charset="UTF-8">
 <title>愛犬家登録</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
 </head>
 <body>
+	<div class="container mt-5 mb-5">
 	<h1>愛犬家登録画面</h1>
 	<p class="small right">
 		「<span class="required">*</span>」がついている項目は必須項目です。
 	</p>
 
 	<h2>ご自身の情報</h2>
-	<form action="" method="post">
-		<table>
-			<tr>
-				<th>ログインID<span class="small">※半角英数字5～15文字</span><span
-					class="required">*</span></th>
-				<td><input required type="text" pattern="^[0-9A-Za-z]*$"
-					minlength="5" maxlength="15" name="loginId" placeholder="ログインID"></td>
-			</tr>
-			<tr>
-				<th>パスワード<span class="small">※半角英数字5～15文字</span><span
-					class="required">*</span></th>
-				<td><input required type="password" minlength="5"
+	<form action="" method="post" class="mb-3">
+<div class="mb-3">
+				<p>ログインID<span class="small">※半角英数字5～15文字</span><span
+					class="required">*</span></p>
+				<input class="form-control" aria-describedby="basic-addon1" required type="text" pattern="^[0-9A-Za-z]*$"
+					minlength="5" maxlength="15" name="loginId" placeholder="ログインID" value="${loginId }">
+</div>
+<div class="mb-3">
+				<p>パスワード<span class="small">※半角英数字5～15文字</span><span
+					class="required">*</span></p>
+				<input class="form-control" aria-describedby="basic-addon1" required type="password" minlength="5"
 					pattern="^[0-9A-Za-z]*$" minlength="5" maxlength="15"
-					name="loginPassword" placeholder="パスワード"></td>
-			</tr>
-		</table>
-
-		<input type="submit" value="登録内容を確認する">
+					name="loginPassword" placeholder="パスワード">
+</div>
+		<input class="btn btn-primary" type="submit" value="登録内容を確認する">
 	</form>
-</body>
+			<p>
+			<button type="button" class="btn btn-outline-primary"
+				onclick="location.href='ownerLogin'">ログイン画面に戻る</button>
+		</p>
+	
+</div></body>
 </html>
