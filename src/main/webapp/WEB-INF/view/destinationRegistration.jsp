@@ -17,7 +17,7 @@
 		<p class="small right">
 			「<span class="required">*</span>」がついている項目は必須項目です。
 		</p>
-		<form action="" method="post" class="mb-3">
+		<form class="mb-3" action="" method="post">
 			<div class="mb-3">
 				<p>
 					お出掛け先のジャンル<span class="required">*</span>
@@ -44,19 +44,19 @@
 				
 				<div class="form-check">
 				
-				<input class="form-check-input" required type="radio" name="evaluation" value="1">
+				<input class="form-check-input" required type="radio" name="evaluation" id="flexRadioDefault1" value="1">
 				<label class="form-check-label" for="flexRadioDefault1">１</label>
 
-				<input class="form-check-input" type="radio" name="evaluation" value="2">
+				<input class="form-check-input" type="radio" name="evaluation" id="flexRadioDefault2" value="2">
 				<label class="form-check-label" for="flexRadioDefault2">２</label>
 				
-				<input class="form-check-input" type="radio" name="evaluation" value="3" checked>
+				<input class="form-check-input" type="radio" name="evaluation" id="flexRadioDefault3" value="3" checked>
 				<label class="form-check-label" for="flexRadioDefault3">３</label>
 
-				<input class="form-check-input" type="radio" name="evaluation" value="4">
+				<input class="form-check-input" type="radio" name="evaluation" id="flexRadioDefault5" value="4">
 				<label class="form-check-label" for="flexRadioDefault4">４</label>
 
-				<input class="form-check-input" type="radio" name="evaluation" value="5">
+				<input class="form-check-input" type="radio" name="evaluation" id="flexRadioDefault6" value="5">
 				<label class="form-check-label" for="flexRadioDefault5">５</label>
 				
 				</div>

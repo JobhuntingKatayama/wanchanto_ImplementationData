@@ -21,23 +21,6 @@
 				onclick="location.href='destinationDetail'">登録した内容を確認する</button>
 		</p>
 
-		<p>お出掛け先のジャンル</p>
-		<p
-			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
-			<c:out value="${genreId}" />
-		</p>
-
-		<p>お出掛け先の名称</p>
-		<p
-			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
-			<c:out value="${name}" />
-		</p>
-
-		<p>評価</p>
-		<p
-			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
-			<c:out value="${evaluation}" />
-		</p>
 
 		<p>
 			<button type="button" class="btn btn-primary"

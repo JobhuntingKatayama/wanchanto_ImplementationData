@@ -29,6 +29,7 @@ public class OwnerRegistrationConfirmServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		//セッションから情報を取得
 		HttpSession session = request.getSession();
 		session.getAttribute("loginId");
 		session.getAttribute("loginPassword");

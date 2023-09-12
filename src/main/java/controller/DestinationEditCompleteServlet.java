@@ -14,10 +14,10 @@ import dao.DestinationDao;
 import domain.Destination;
 
 /**
- * Servlet implementation class DestinationInformationEditServlet
+ * Servlet implementation class DestinationEditServlet
  */
-@WebServlet("/destinationInformationEditComplete")
-public class DestinationInformationEditCompleteServlet extends HttpServlet {
+@WebServlet("/destinationEditComplete")
+public class DestinationEditCompleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -38,27 +38,32 @@ public class DestinationInformationEditCompleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//セッションスコープからEditで入力した値を取得
 		HttpSession session = request.getSession();
-		Integer destinationId = (Integer) session.getAttribute("destinationId");
-		Integer genreId = (Integer) session.getAttribute("genreId");
-		String name = (String) session.getAttribute("name");
-		Integer evaluation = (Integer) session.getAttribute("evaluation");
+
+		// destinationIdをセッションから取得
+		Integer destinationId=(Integer)session.getAttribute("destinationId");
+		Integer ownerId=(Integer)session.getAttribute("ownerId");
+		Integer genreId = (Integer)session.getAttribute("newGenreId");
+		String name =(String)session.getAttribute("newName");
+		Integer evaluation = (Integer)session.getAttribute("newEvaluation");
 
 		// 入力に不備がなければ、データの更新
 		Destination destination = new Destination();
-		destination.setDestinationId(destinationId);
+		destination.setGenreId(ownerId);
 		destination.setGenreId(genreId);
+		destination.setDestinationId(destinationId);
 		destination.setName(name);
 		destination.setEvaluation(evaluation);
+
 		try {
-			// データの更新
+			//データの更新
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			destinationDao.update(destination);
-
+			
 			// 更新完了ページの表示
-			request.getRequestDispatcher("/WEB-INF/view/destinationInformationRegistrationComplete.jsp")
-					.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/destinationEditComplete.jsp").forward(request,
+					response);
+			
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}

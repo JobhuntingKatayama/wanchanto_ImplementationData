@@ -8,7 +8,7 @@
 <title>お出掛け先情報登録完了</title>
 </head>
 <body>
-	<div id="destinationInformationEdit">
+	<div>
 		<h1>お出掛け先情報更新完了</h1>
 更新しました。
 	</div>

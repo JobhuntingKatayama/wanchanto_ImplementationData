@@ -40,6 +40,7 @@ public class OwnerRegistrationCompleteServlet extends HttpServlet {
 		Owner owner = new Owner();
 		owner.setLoginId(loginId);
 		owner.setLoginPassword(loginPassword);
+
 		try {
 			// データの更新
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();

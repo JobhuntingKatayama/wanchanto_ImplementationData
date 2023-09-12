@@ -42,7 +42,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		List<Destination> destinationList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT destinations.genreId," + " destinations.destinationId,"
+			String sql = "SELECT destinations.ownerId, destinations.genreId," + " destinations.destinationId,"
 					+ " destinations.name, destinations.evaluation" + " FROM destinations" + " WHERE ownerId = ? ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, ownerId, Types.INTEGER);
@@ -98,13 +98,14 @@ public class DestinationDaoImpl implements DestinationDao {
 	@Override
 	public void update(Destination destination) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE destination SET genreId = ?, destinationId = ?, name = ?, evaluation = ?, addedDate = NOW()"
+			String sql = "UPDATE destinations SET genreId = ?, destinationId = ?, name = ?, evaluation = ?, addedDate = NOW()"
 					+ " WHERE ownerId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destination.getGenreId(), Types.INTEGER);
 			stmt.setObject(2, destination.getDestinationId(), Types.INTEGER);
 			stmt.setString(3, destination.getName());
 			stmt.setObject(4, destination.getEvaluation(), Types.INTEGER);
+			stmt.setObject(5, destination.getOwnerId(), Types.INTEGER);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;

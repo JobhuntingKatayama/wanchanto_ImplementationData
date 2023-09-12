@@ -40,7 +40,7 @@
 							<h2>お出掛け先情報一覧</h2>
 							<p>
 								<button type="button" class="btn btn-primary"
-									onclick="location.href='destinationInformationRegistration?ownerId=<c:out value="${ownerId}"/>'">お出掛け先情報の新規追加</button>
+									onclick="location.href='destinationRegistration?ownerId=<c:out value="${ownerId}"/>'">お出掛け先情報の新規追加</button>
 							</p>
 						</dt>
 						<dd>
@@ -59,7 +59,7 @@
 													value="${destination.name}" /></a></td>
 										<td><c:out value="${destination.evaluation}" /></td>
 										<td><button type="button" class="btn btn-outline-primary"
-												onclick="location.href='destinationInformationEdit?destinationId=<c:out value="${destination.destinationId}"/>'">編集する</button></td>
+												onclick="location.href='destinationEdit?ownerId=${destination.ownerId}&destinationId=${destination.destinationId}'">編集する</button></td>
 									</tr>
 								</c:forEach>
 							</table>
