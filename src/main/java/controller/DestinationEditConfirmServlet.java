@@ -23,7 +23,9 @@ public class DestinationEditConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// getで受信せず
+		HttpSession session = request.getSession();
+		Integer destinationId=(Integer)session.getAttribute("destinatinId");
+		session.setAttribute("destinationId", destinationId);
 
 	}
 
@@ -36,9 +38,9 @@ public class DestinationEditConfirmServlet extends HttpServlet {
 
 		//Editページからポストされた情報をセッションスコープから取得
 		HttpSession session = request.getSession();
-		session.getAttribute("newGenreId");
-		session.getAttribute("newName");
-		session.getAttribute("newEvaluation");
+		session.getAttribute("genreId");
+		session.getAttribute("name");
+		session.getAttribute("evaluation");
 
 		request.getRequestDispatcher("/WEB-INF/view/destinationEditConfirm.jsp").forward(request, response);
 

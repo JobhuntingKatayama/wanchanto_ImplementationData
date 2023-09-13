@@ -59,13 +59,11 @@ public class OwnerMypageServlet extends HttpServlet {
 			//OwnerDAOによるデータ取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			List<Owner> ownerList = ownerDao.findByOwnerId(odid);
-			// JSP へフォワード
 			request.setAttribute("ownerList", ownerList);
 			
 			//DestinationDAOによるデータ取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			List<Destination> destinationList = destinationDao.findByOwnerId(odid);
-			// JSP へフォワード
 			request.setAttribute("destinationList", destinationList);
 			
 		} catch (Exception e) {

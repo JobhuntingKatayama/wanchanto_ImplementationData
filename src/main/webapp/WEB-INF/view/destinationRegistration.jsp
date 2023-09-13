@@ -41,33 +41,34 @@
 				<p>
 					総合評価<span class="required">*</span>
 				</p>
-				
+								
 				<div class="form-check">
-				
-				<input class="form-check-input" required type="radio" name="evaluation" id="flexRadioDefault1" value="1">
-				<label class="form-check-label" for="flexRadioDefault1">１</label>
-
-				<input class="form-check-input" type="radio" name="evaluation" id="flexRadioDefault2" value="2">
-				<label class="form-check-label" for="flexRadioDefault2">２</label>
-				
-				<input class="form-check-input" type="radio" name="evaluation" id="flexRadioDefault3" value="3" checked>
-				<label class="form-check-label" for="flexRadioDefault3">３</label>
-
-				<input class="form-check-input" type="radio" name="evaluation" id="flexRadioDefault5" value="4">
-				<label class="form-check-label" for="flexRadioDefault4">４</label>
-
-				<input class="form-check-input" type="radio" name="evaluation" id="flexRadioDefault6" value="5">
-				<label class="form-check-label" for="flexRadioDefault5">５</label>
-				
+					<input type="radio" id="flexRadioDefault1" required name="evaluation" value="1" class="form-check-input" />
+					<label for="flexRadioDefault1" class="form-check-label">1</label><br>	
+					<input type="radio" id="flexRadioDefault2" name="evaluation" value="2" class="form-check-input" /> 
+					<label for="flexRadioDefault2" class="form-check-label">2</label><br> 
+					<input class="form-check-input" id="flexRadioDefault3" type="radio" name="evaluation" value="3" /> 
+					<label class="form-check-label" for="flexRadioDefault3">3</label> <br>
+					<input class="form-check-input" id="flexRadioDefault4" type="radio" name="evaluation" value="4" /> 
+					<label class="form-check-label" for="flexRadioDefault4">4</label> <br>
+					<input class="form-check-input" id="flexRadioDefault5" type="radio" name="evaluation" value="5" /> 
+					<label class="form-check-label" for="flexRadioDefault5">5</label><br>
 				</div>
+			
 				
 			</div>
-			<input type="submit" class="btn btn-primary" value="上記の内容で登録する">
-		</form>
-				<p>
-			<button type="button" class="btn btn-outline-primary"
+			
+			<div class="d-flex justify-content-between pt-3">
+				<div class="bd-highlight">
+					<input type="submit" class="btn btn-primary" value="上記の内容で登録する">
+				</div>
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-outline-primary"
 				onclick="location.href='ownerMypage'">登録せずにマイページへ戻る</button>
-		</p>
+				</div>
+			</div>
+			
+		</form>
 	</div>
 </body>
 </html>

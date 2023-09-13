@@ -20,10 +20,22 @@
 	<form action="ownerInformationEditComplete" method="post">
 		<h2>ご自身の情報</h2>
 		<%-- Editでpostされた情報をConfirmから取得 --%>
-		<p>${loginId }</p>
-		<p>セキュリティのため表示されません</p>
+		<p>ログインID</p>
+		<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${loginId }</p>
+		<p>ログインパスワード</p>
+		<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">セキュリティのため表示されません</p>
+
+
+			<div class="d-flex justify-content-between pt-3">
+				<div class="bd-highlight">
+					<input type="submit" class="btn btn-primary" value="登録内容を更新する">
+				</div>
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-outline-primary"
+				onclick="location.href='ownerMypage'">更新せずにマイページへ戻る</button>
+				</div>
+			</div>
 		
-		<input type="submit" class="btn btn-primary" value="登録内容を更新する">
 	</form>
 	
 	</div>

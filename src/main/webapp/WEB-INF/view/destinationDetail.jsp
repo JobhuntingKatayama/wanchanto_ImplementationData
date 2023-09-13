@@ -41,8 +41,14 @@ img {
 	</script>
 </head>
 <body>
-	<h1>${destinationId }の情報</h1>
-	<p>お出掛け先のジャンル：公園</p>
+	<h1>${name}の情報</h1>
+	<p>お出掛け先のジャンル：
+		<c:choose>
+			<c:when test="${genreId == 1}">公園</c:when>
+			<c:when test="${genreId == 2}">ドッグラン</c:when>
+			<c:when test="${genreId == 3}">飲食店</c:when>
+			<c:otherwise>その他の施設</c:otherwise>
+		</c:choose></p>
 
 	<div class="container">
 		<div class="slider">
@@ -75,11 +81,12 @@ img {
 		</div>
 	</div>
 
-	<h2>${destinationId }の評価</h2>
-	<p>星４つ</p>
+	<h2>${name}の評価</h2>
+	<p>星${evaluation}</p>
 	<h3>この情報を共有した愛犬家さん</h3>
-	<p>testowner001さん</p>
+	<p>${ownerId}さん</p>
 
+<p><a href="destinationIndex">お出掛け先一覧を見る</a></p>
 
 </body>
 </html>

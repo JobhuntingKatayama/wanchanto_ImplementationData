@@ -6,11 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>お出掛け先情報登録完了</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
 </head>
 <body>
-	<div>
+	<div class="container mt-5 mb-3">
 		<h1>お出掛け先情報更新完了</h1>
-更新しました。
+<p>更新しました。</p>
+
+		<p>
+			<button class="btn btn-primary" type="button" class="btn btn-outline-primary"
+				onclick="location.href='ownerMypage'">マイページへ戻る</button>
+		</p>
+
 	</div>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -24,8 +25,9 @@ public class DestinationDaoImpl implements DestinationDao {
 		List<Destination> destinationList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT destinations.genreId," + " destinations.destinationId,"
-					+ " destinations.name, destinations.evaluation" + " FROM destinations";
+			String sql = "SELECT destinations.ownerId, destinations.genreId, destinations.destinationId,"
+					+ " destinations.name, destinations.evaluation, destinations.addedDate"
+					+ " FROM destinations";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -42,8 +44,8 @@ public class DestinationDaoImpl implements DestinationDao {
 		List<Destination> destinationList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT destinations.ownerId, destinations.genreId," + " destinations.destinationId,"
-					+ " destinations.name, destinations.evaluation" + " FROM destinations" + " WHERE ownerId = ? ";
+			String sql = "SELECT destinations.ownerId, destinations.genreId, destinations.destinationId,"
+					+ " destinations.name, destinations.evaluation, destinations.addedDate" + " FROM destinations" + " WHERE ownerId = ? ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, ownerId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
@@ -62,8 +64,8 @@ public class DestinationDaoImpl implements DestinationDao {
 		Destination destination = new Destination();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT destinations.genreId, destinations.destinationId,"
-					+ " destinations.name, destinations.evaluation"
+			String sql = "SELECT destinations.ownerId, destinations.genreId, destinations.destinationId,"
+					+ " destinations.name, destinations.evaluation, destinations.addedDate"
 					+ " FROM destinations" + " WHERE destinationId = ? ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destinationId, Types.INTEGER);
@@ -98,14 +100,13 @@ public class DestinationDaoImpl implements DestinationDao {
 	@Override
 	public void update(Destination destination) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE destinations SET genreId = ?, destinationId = ?, name = ?, evaluation = ?, addedDate = NOW()"
-					+ " WHERE ownerId = ?";
+			String sql = "UPDATE destinations SET genreId = ?, name = ?, evaluation = ?, addedDate = NOW()"
+					+ " WHERE destinationId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destination.getGenreId(), Types.INTEGER);
-			stmt.setObject(2, destination.getDestinationId(), Types.INTEGER);
-			stmt.setString(3, destination.getName());
-			stmt.setObject(4, destination.getEvaluation(), Types.INTEGER);
-			stmt.setObject(5, destination.getOwnerId(), Types.INTEGER);
+			stmt.setString(2, destination.getName());
+			stmt.setObject(3, destination.getEvaluation(), Types.INTEGER);
+			stmt.setObject(4, destination.getDestinationId(), Types.INTEGER);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -120,29 +121,17 @@ public class DestinationDaoImpl implements DestinationDao {
 	}
 
 	private Destination mapToDestination(ResultSet rs) throws Exception {
-//		Integer ownerId = (Integer) rs.getObject("ownerId");
+		Integer ownerId = (Integer) rs.getObject("ownerId");
 		Integer genreId = (Integer) rs.getObject("genreId");
 		Integer destinationId = (Integer) rs.getObject("destinationId");
 		String name = rs.getString("name");
 //		String image = rs.getString("image");
 		Integer evaluation = (Integer) rs.getObject("evaluation");
 //		Integer statusId = (Integer) rs.getObject("statusId");
-//		Date addedDate = rs.getTimestamp("addeDate");
-		return new Destination(/* ownerId, */destinationId, genreId, name,
-				/* image, */ evaluation/* , statusId, addedDate */);
-
+		Date addedDate = rs.getTimestamp("addedDate");
+		
+		return new Destination(ownerId, destinationId, genreId, name, /* image, */ evaluation ,/* statusId,*/ addedDate );
 	}
 
-//	private Destination mapToDestinationList(ResultSet rs) throws Exception {
-////		Integer ownerId = (Integer) rs.getObject("ownerId");
-//		Integer genreId = (Integer) rs.getObject("genreId");
-//		String name = rs.getString("name");
-////		String image = rs.getString("image");
-//		Integer evaluation = (Integer) rs.getObject("evaluation");
-////		Integer statusId = (Integer) rs.getObject("statusId");
-////		Date addedDate = rs.getTimestamp("addeDate");
-//		return new Destination(/* ownerId, */genreId, name, /* image, */ evaluation/*,  statusId, addedDate */);
-//
-//	}
 
 }

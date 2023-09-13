@@ -31,23 +31,19 @@ public class DestinationEditServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// getから編集するお出掛け先IDの取得しセッションへ格納
-		String strOwnerId = request.getParameter("ownerId");
-		Integer ownerId = Integer.parseInt(strOwnerId);
-		session.setAttribute("ownerId", ownerId);
-
 		String strDestinationId = request.getParameter("destinationId");
-		Integer destinationId = Integer.parseInt(strDestinationId);
-		session.setAttribute("destinationId", destinationId);
+		Integer intDestinationId = Integer.parseInt(strDestinationId);
+		session.setAttribute("destinationId", intDestinationId);
 
 		try {
 			// 編集するお出掛け先データの取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
-			Destination destination = destinationDao.findByDestinationId(destinationId);
+			Destination destination = destinationDao.findByDestinationId(intDestinationId);
 
-			// データの情報をセッションに格納
-			request.setAttribute("preGenreId", destination.getGenreId());
-			request.setAttribute("preName", destination.getName());
-			request.setAttribute("preEvaluation", destination.getEvaluation());
+			// データの情報をリクエストに格納
+			request.setAttribute("genreId", destination.getGenreId());
+			request.setAttribute("name", destination.getName());
+			request.setAttribute("evaluation", destination.getEvaluation());
 
 			// ページの出力（フォワード）
 			request.getRequestDispatcher("/WEB-INF/view/destinationEdit.jsp").forward(request, response);
@@ -71,17 +67,17 @@ public class DestinationEditServlet extends HttpServlet {
 
 //		// お出掛け先ジャンル
 //		// 編集されたパラメータを取得しリクエストにnewとして格納
-		Integer intGenreId = Integer.parseInt(request.getParameter("newGenreId"));
-		session.setAttribute("newGenreId", intGenreId);
+		Integer intGenreId = Integer.parseInt(request.getParameter("genreId"));
+		session.setAttribute("genreId", intGenreId);
 
 //		// お出掛け先名前
 //		// 編集されたパラメータを取得しリクエストにnewとして格納
-		String strName = request.getParameter("newName");
-		session.setAttribute("newName", strName);
+		String strName = request.getParameter("name");
+		session.setAttribute("name", strName);
 
 //		// 評価の変更をリクエストにnewとして格納
-		Integer intEvaluation = Integer.parseInt(request.getParameter("newEvaluation"));
-		session.setAttribute("newEvaluation", intEvaluation);
+		Integer intEvaluation = Integer.parseInt(request.getParameter("evaluation"));
+		session.setAttribute("evaluation", intEvaluation);
 
 		// 上記に不備がある場合はdestinationEditを再表示
 		if (isError == true) {

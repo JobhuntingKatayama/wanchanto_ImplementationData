@@ -37,12 +37,17 @@
 					maxlength="15" name="loginPassword" placeholder="セキュリティのため表示されません">
 			</div>
 
-			<input type="submit" class="btn btn-primary" value="登録内容を更新する">
+			<div class="d-flex justify-content-between pt-3">
+				<div class="bd-highlight">
+					<input type="submit" class="btn btn-primary" value="登録内容を更新する">
+				</div>
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-outline-primary"
+				onclick="location.href='ownerMypage'">マイページへ戻る</button>
+				</div>
+			</div>
+
 		</form>
 
-		<p>
-			<button type="button" class="btn btn-outline-primary"
-				onclick="location.href='ownerMypage'">マイページへ戻る</button>
-		</p>
 </body>
 </html>

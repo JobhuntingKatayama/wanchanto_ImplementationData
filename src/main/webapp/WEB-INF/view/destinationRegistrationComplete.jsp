@@ -16,16 +16,18 @@
 		<h1>お出掛け先情報登録完了</h1>
 		<p>下記の情報でお出掛け先を登録しました。</p>
 
-		<p>
-			<button type="button" class="btn btn-primary"
-				onclick="location.href='destinationDetail'">登録した内容を確認する</button>
-		</p>
 
+			<div class="d-flex justify-content-between pt-3">
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-primary"
+				onclick="window.open('destinationDetail?destinationId=${destinationId}')">登録した内容を確認する</button>
+				</div>
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-outline-primary"
+					onclick="location.href='ownerMypage'">マイページへ戻る</button>
+				</div>
+			</div>
 
-		<p>
-			<button type="button" class="btn btn-primary"
-				onclick="location.href='ownerMypage'">マイページに戻る</button>
-		</p>
 	</div>
 
 </body>

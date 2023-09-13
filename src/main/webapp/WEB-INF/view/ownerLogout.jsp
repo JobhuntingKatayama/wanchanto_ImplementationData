@@ -17,10 +17,16 @@
     <h1>ログアウト完了</h1>
 
     <p>ログアウトしました。</p>
-		<p>
-			<button type="button" class="btn btn-primary"
+	  		<div class="d-flex justify-content-between pt-3">
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-outline-primary"
 				onclick="location.href='ownerLogin'">ログインページを開く</button>
-		</p>
+				</div>
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-primary"
+				onclick="location.href='destinationIndex'">お出掛け先一覧を開く</button>
+				</div>
+			</div>
     
 </div>
 </body>

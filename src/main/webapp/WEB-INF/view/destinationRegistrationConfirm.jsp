@@ -22,7 +22,21 @@
 			<p>お出掛け先のジャンル</p>
 			<p
 				class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
-				${genreId}</p>
+				<c:choose>
+					<c:when test="${genreId == 1}">
+公園
+</c:when>
+					<c:when test="${genreId == 2}">
+ドッグラン
+</c:when>
+					<c:when test="${genreId == 3}">
+飲食店
+</c:when>
+					<c:otherwise>
+その他の施設
+</c:otherwise>
+				</c:choose>
+			</p>
 
 			<p>お出掛け先の名称</p>
 			<p
@@ -32,14 +46,22 @@
 			<p>評価</p>
 			<p
 				class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
-				${evaluation}
-				</p>
-			<input type="submit" value="登録する">
+				${evaluation}</p></br>
+			
+			
+			<div class="d-flex justify-content-between pt-3">
+				<div class="bd-highlight">
+					<input class="btn btn-primary" type="submit" value="登録する">
+				</div>
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-outline-primary"
+				onclick="location.href='ownerMypage'">登録せずにマイページへ戻る</button>
+				</div>
+			</div>
+			
 		</form>
-		<p>
-			<button type="button" class="btn btn-primary"
-				onclick="location.href='ownerMypage'">マイページに戻る</button>
-		</p>
+
+
 	</div>
 
 </body>

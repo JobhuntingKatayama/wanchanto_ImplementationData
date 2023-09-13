@@ -43,9 +43,9 @@ public class DestinationEditCompleteServlet extends HttpServlet {
 		// destinationIdをセッションから取得
 		Integer destinationId=(Integer)session.getAttribute("destinationId");
 		Integer ownerId=(Integer)session.getAttribute("ownerId");
-		Integer genreId = (Integer)session.getAttribute("newGenreId");
-		String name =(String)session.getAttribute("newName");
-		Integer evaluation = (Integer)session.getAttribute("newEvaluation");
+		Integer genreId = (Integer)session.getAttribute("genreId");
+		String name =(String)session.getAttribute("name");
+		Integer evaluation = (Integer)session.getAttribute("evaluation");
 
 		// 入力に不備がなければ、データの更新
 		Destination destination = new Destination();

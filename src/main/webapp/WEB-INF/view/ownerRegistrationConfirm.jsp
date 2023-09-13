@@ -18,14 +18,25 @@
 
 	<form action="ownerRegistrationComplete" method="post" class="mb-3">
 <p>ログインID</p>
-<p>${loginId }</p>
+<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${loginId }</p>
 <p>パスワード</p>
-<p>セキュリティのため表示されません。</p>
-		<input class="btn btn-primary" type="submit" value="登録する">
-	</form>
+<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">セキュリティのため表示されません。</p>
+		<br/>
+
+
+			<div class="d-flex justify-content-between pt-3">
+				<div class="bd-highlight">
+					<input class="btn btn-primary" type="submit" value="登録する">
+				</div>
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-outline-primary"
+						onclick="location.href='ownerRegistration'">入力しなおす</button>
+				</div>
+			</div>
+
+		</form>
 			<p>
-			<button type="button" class="btn btn-outline-primary"
-				onclick="location.href='ownerRegistration'">入力しなおす</button>
+			
 		</p>
 	
 </div>

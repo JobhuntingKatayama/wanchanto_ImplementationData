@@ -33,11 +33,21 @@
 					pattern="^[0-9A-Za-z]*$" minlength="5" maxlength="15"
 					name="loginPassword" placeholder="パスワード">
 </div>
-		<input class="btn btn-primary" type="submit" value="登録内容を確認する">
-	</form>
-			<p>
-			<button type="button" class="btn btn-outline-primary"
-				onclick="location.href='ownerLogin'">ログイン画面に戻る</button>
+
+
+			<div class="d-flex justify-content-between pt-3">
+				<div class="bd-highlight">
+					<input class="btn btn-primary" type="submit" value="登録内容を確認する">
+				</div>
+				<div class="bd-highlight">
+					<button type="button" class="btn btn-outline-primary"
+						onclick="location.href='ownerLogin'">ログイン画面に戻る</button>
+				</div>
+			</div>
+
+		</form>
+
+			
 		</p>
 	
 </div></body>

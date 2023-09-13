@@ -43,13 +43,12 @@
 					name="loginPassword" placeholder="パスワード">
 			</div>
 
-			<input class="btn btn-primary" type="submit" value="ログイン">
+	<div class="d-flex justify-content-between pt-3">
+    <div class="bd-highlight"><input class="btn btn-primary" type="submit" value="ログイン"></div>
+    <div class="bd-highlight"><button type="button" class="btn btn-outline-primary" onclick="location.href='ownerRegistration'">新規で愛犬家登録をされる場合はこちら</button></div>
+	</div>
+		
 		</form>
-
-		<p>
-			<button type="button" class="btn btn-outline-primary"
-				onclick="location.href='ownerRegistration'">新規で愛犬家登録をされる場合はこちら</button>
-		</p>
 	</div>
 
 </body>
