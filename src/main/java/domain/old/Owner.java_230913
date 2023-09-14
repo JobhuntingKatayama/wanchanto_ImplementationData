@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Base64;
 import java.util.Date;
 
 public class Owner {
@@ -8,22 +7,21 @@ public class Owner {
 	private String loginId;
 	private String loginPassword;
 	private String thumbnail;
-	private byte[] img; //画像ファイル
-	private String imgData;
-	private Integer statusId;
+	private byte[] img; //画像サイズ？
+	private String imgData; //画像を表示するためのエンコードされた文字列
+//	private Integer statusId;
 	private Date registrationDate;
 
 	public Owner() {
 	
 	}
 	
-	public Owner( Integer ownerId, String thumbnail, byte[] img, String loginId, String loginPassword, Integer statusId, Date registrationDate) {
+	public Owner( Integer ownerId, String thumbnail, String loginId, String loginPassword,/* Integer statusId, */Date registrationDate) {
 		this.ownerId = ownerId;
-		this.thumbnail = thumbnail;
-		this.img = img;
 		this.loginId = loginId;
+		this.thumbnail = thumbnail;
 		this.loginPassword = loginPassword;
-		this.statusId = statusId;
+//		this.statusId = statusId;
 		this.registrationDate = registrationDate;
 	}
 
@@ -50,36 +48,22 @@ public class Owner {
 	public void setLoginPassword(String loginPassword) {
 		this.loginPassword = loginPassword;
 	}
-	
-	public String getThumbnail() {
-		return thumbnail;
-	}
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
-	public byte[] getImg() {
-		return img;
-	}
-	public void setImg(byte[] img) {
-		this.img = img;
-	}
-	public String getImgData() {
-		if(img!=null) {
-			this.imgData = Base64.getEncoder().encodeToString(img);
-		}
-		return imgData;
-	}
-	public void setImgData(String imgData) {
-		this.imgData = imgData;
-	}
-	
-	public Integer getStatusId() {
-		return statusId;
-	}
 
-	public void setStatusId(Integer statusId) {
-		this.statusId = statusId;
-	}
+//	public String getThumbnail() {
+//		return thumbnail;
+//	}
+//
+//	public void setThumbnail(String thumbnail) {
+//		this.thumbnail = thumbnail;
+//	}
+//
+//	public Integer getStatusId() {
+//		return statusId;
+//	}
+//
+//	public void setStatusId(Integer statusId) {
+//		this.statusId = statusId;
+//	}
 
 	public Date getRegistrationDate() {
 		return registrationDate;

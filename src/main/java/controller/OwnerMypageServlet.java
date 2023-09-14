@@ -47,14 +47,17 @@ public class OwnerMypageServlet extends HttpServlet {
 			Connection con = ds.getConnection();
 
 			int odid = 0;
-			String sql = "SELECT ownerId FROM owners WHERE loginId = ?;";
+			byte[] odimg =null;
+			String sql = "SELECT ownerId, img FROM owners WHERE loginId = ?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, strLoginId); // プレースホルダーに変数の値を設定
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next() == true) {
 				odid = rs.getInt("ownerId");
+				odimg =rs.getBytes("img");
 			}
 			request.setAttribute("ownerId", odid);
+			request.setAttribute("ownerImg", odimg);
 						
 			//OwnerDAOによるデータ取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();

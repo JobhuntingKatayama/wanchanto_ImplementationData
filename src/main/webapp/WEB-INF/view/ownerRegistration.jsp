@@ -20,7 +20,7 @@
 	</p>
 
 	<h2>ご自身の情報</h2>
-	<form action="" method="post" class="mb-3">
+	<form action="" method="post" class="mb-3" enctype="multipart/form-data">
 <div class="mb-3">
 				<p>ログインID<span class="small">※半角英数字5～15文字</span><span
 					class="required">*</span></p>
@@ -35,6 +35,7 @@
 					name="loginPassword" placeholder="パスワード">
 </div>
 
+							<input type="file" name="upfile" id="file_photo">
 
 			<div class="d-flex justify-content-between pt-3">
 				<div class="bd-highlight">

@@ -35,17 +35,11 @@ public class OwnerRegistrationCompleteServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String loginId =(String)session.getAttribute("loginId");
 		String loginPassword =(String)session.getAttribute("loginPassword");
-		String thumbnail =(String)session.getAttribute("thumbnail");
-		byte[] bytes = (byte[])session.getAttribute("bytes");
-		
-		
 		
 		// 入力に不備がなければ、データの更新
 		Owner owner = new Owner();
 		owner.setLoginId(loginId);
 		owner.setLoginPassword(loginPassword);
-		owner.setThumbnail(thumbnail);
-		owner.setImg(bytes);
 
 		try {
 			// データの更新

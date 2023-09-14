@@ -27,7 +27,7 @@ public class OwnerDaoImpl implements OwnerDao {
 		List<Owner> ownerList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM owners";
+			String sql = "SELECT owners.ownerId, owners.loginId, owners.loginPassword, owners.registrationDate FROM owners";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -44,7 +44,7 @@ public class OwnerDaoImpl implements OwnerDao {
 		List<Owner> ownerList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM owners WHERE owners.ownerId = ?";
+			String sql = "SELECT owners.ownerId, owners.loginId, owners.loginPassword, owners.registrationDate FROM owners WHERE owners.ownerId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, ownerId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
@@ -60,9 +60,8 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public Owner findById(Integer ownerId) throws Exception {
 		Owner owner = new Owner();
-		
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM owners WHERE owners.ownerId = ?";
+			String sql = "SELECT owners.ownerId, owners.loginId, owners.loginPassword, owners.registrationDate FROM owners WHERE owners.ownerId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, ownerId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
@@ -77,8 +76,9 @@ public class OwnerDaoImpl implements OwnerDao {
 
 	@Override
 	public Owner findByLoginIdAndLoginPass(String loginId, String loginPassword) throws Exception {
+
 		Owner owner = null;
-		
+
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT * FROM owners WHERE loginId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -98,12 +98,11 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public void insert(Owner owner) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "INSERT INTO owners (thumbnail, img, loginId, loginPassword, registrationDate) VALUES (?,?,?,?,NOW())";
+
+			String sql = "INSERT INTO owners (loginId, loginPassword, registrationDate) VALUES (?,?,NOW())";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,owner.getThumbnail());
-			stmt.setBytes(2, owner.getImg());
-			stmt.setString(3, owner.getLoginId());
-			stmt.setString(4, owner.getLoginPassword());
+			stmt.setString(1, owner.getLoginId());
+			stmt.setString(2, owner.getLoginPassword());
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -114,13 +113,11 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public void update(Owner owner) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE owners SET thumbnail =?, img = ?, loginId = ?, loginPassword = ? WHERE ownerId = ?";
+			String sql = "UPDATE owners SET loginId = ?, loginPassword = ? WHERE ownerId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1,owner.getThumbnail());
-			stmt.setBytes(2, owner.getImg());
-			stmt.setString(3, owner.getLoginId());
-			stmt.setString(4, owner.getLoginPassword());
-			stmt.setObject(5, owner.getOwnerId(), Types.INTEGER);
+			stmt.setString(1, owner.getLoginId());
+			stmt.setString(2, owner.getLoginPassword());
+			stmt.setObject(3, owner.getOwnerId(), Types.INTEGER);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -145,14 +142,13 @@ public class OwnerDaoImpl implements OwnerDao {
 	 */
 	private Owner mapToOwner(ResultSet rs) throws Exception {
 		Integer ownerId = (Integer) rs.getObject("ownerId");
-		String thumbnail = rs.getString("thumbnail");
-		byte[] img = rs.getBytes("img");
+//		String thumbnail = rs.getString("thumbnail");
 		String loginId = rs.getString("loginId");
 		String loginPassword = rs.getString("loginPassword");
-		Integer statusId = (Integer) rs.getObject("statusId");
+//		Integer statusId = (Integer) rs.getObject("statusId");
 		Date registrationDate = rs.getTimestamp("registrationDate");
 
-		return new Owner(ownerId, thumbnail, img, loginId, loginPassword, statusId, registrationDate);
+		return new Owner(ownerId, /* thumbnail, */ loginId, loginPassword, /* statusId, */ registrationDate);
 
 	}
 }

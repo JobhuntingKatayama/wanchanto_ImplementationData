@@ -26,6 +26,7 @@
   <div class="row">
 	<div id="ownerInfo" class="col-sm-4 text-center">
 
+<img class="img-fluid" src='data:image/jpeg;base64,<c:out value="${ownerImg}" />'>
 		<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
 
 		<ul class="nav flex-column">

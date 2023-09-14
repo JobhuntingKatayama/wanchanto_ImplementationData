@@ -21,7 +21,9 @@
 <p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${loginId }</p>
 <p>パスワード</p>
 <p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">セキュリティのため表示されません。</p>
-		<br/>
+<br/>
+<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${thumbnail }</p>
+<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${bytes }</p>
 
 
 			<div class="d-flex justify-content-between pt-3">
