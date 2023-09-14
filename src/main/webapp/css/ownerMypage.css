@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+img#ownerThumbnail {
+	width:120px;
+	height:120px;
+	object-fit:cover;
+	border-radius:50%;
+}
+* button {
+	white-space: nowrap;
+}
+#destinationsList table tr td button{
+	font-size: .66em;
+}

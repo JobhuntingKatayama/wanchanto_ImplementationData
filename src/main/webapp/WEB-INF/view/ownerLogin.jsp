@@ -12,8 +12,9 @@
 
 </head>
 <body>
-	<div class="container mt-5 mb-5">
-
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
+  
+ 
 		<h1>愛犬家ログイン画面</h1>
 
 		<c:if test="${not empty error }">

@@ -12,8 +12,9 @@
 
 </head>
 <body>
-	<div class="container mt-5 mb-5">
-	<h1>愛犬家登録画面</h1>
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
+  
+  	<h1>愛犬家登録画面</h1>
 	<p class="small right">
 		「<span class="required">*</span>」がついている項目は必須項目です。
 	</p>

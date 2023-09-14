@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<div class="container mt-5 mb-3">
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
 		<h1>お出掛け先情報更新完了</h1>
 <p>更新しました。</p>
 

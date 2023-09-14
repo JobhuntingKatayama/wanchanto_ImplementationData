@@ -12,8 +12,8 @@
 
 </head>
 <body>
-	<div class="container mt-5 mb-5">
-	<h1>愛犬家登録内容確認</h1>
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
+  	<h1>愛犬家登録内容確認</h1>
 	<p>下記の情報で登録をしてもよろしいでしょうか？</p>
 
 	<form action="ownerRegistrationComplete" method="post" class="mb-3">

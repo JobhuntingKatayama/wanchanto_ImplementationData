@@ -12,8 +12,9 @@
 
 </head>
 <body>
-	<div class="container mt-5 mb-5">
-<h1>愛犬家情報の登録</h1>
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
+  
+  <h1>愛犬家情報の登録</h1>
 <p>登録しました。</p>
 <button type="button" class="btn btn-primary"
 				onclick="location.href='ownerMypage'">マイページへ進む</button>

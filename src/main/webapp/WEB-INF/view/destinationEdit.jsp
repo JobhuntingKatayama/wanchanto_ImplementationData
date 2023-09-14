@@ -12,7 +12,8 @@
 
 </head>
 <body>
-	<div class="container mt-5 mb-5">
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
+  
 		<h1>お出掛け先情報編集画面</h1>
 		<p class="small right">
 			「<span class="required">*</span>」がついている項目は必須項目です。

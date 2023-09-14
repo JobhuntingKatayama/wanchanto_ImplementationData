@@ -63,6 +63,8 @@ public class OwnerInformationDeleteServlet extends HttpServlet {
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			ownerDao.delete(owner);
 
+			//セッションの削除とログアウト完了ページのフォワード
+			request.getSession().invalidate();
 			request.getRequestDispatcher("/WEB-INF/view/ownerInformationDeleteComplete.jsp").forward(request, response);
 
 		} catch (Exception e) {

@@ -12,8 +12,8 @@
 
 </head>
 <body>
-	<div class="container mt-5 mb-5">
-		<h1>お出掛け先情報登録内容確認</h1>
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
+  		<h1>お出掛け先情報登録内容確認</h1>
 		<p>下記の情報でお出掛け先を登録してもよろしいですか？</p>
 
 		<form action="destinationRegistrationComplete" method="post"

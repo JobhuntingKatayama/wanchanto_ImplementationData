@@ -12,8 +12,8 @@
 
 </head>
 <body>
-<div class="container mt-5 mb-5">
-
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
+  
 <h1>愛犬家情報の更新</h1>
 <p>更新しました。</p>
 		<p>

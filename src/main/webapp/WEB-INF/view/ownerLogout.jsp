@@ -12,8 +12,8 @@
 
 </head>
 <body>
-	<div class="container mt-5 mb-5">
-
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
+  
     <h1>ログアウト完了</h1>
 
     <p>ログアウトしました。</p>

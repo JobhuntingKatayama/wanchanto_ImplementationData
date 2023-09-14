@@ -12,8 +12,8 @@
 
 </head>
 <body>
-	<div class="container mt-5 mb-5">
-
+  <jsp:include page="include/ownerMypageContainer.jsp"/>
+  
 		<h1>愛犬家登録情報削除画面</h1>
 		<p>ご登録いただいた愛犬家情報を削除しますか？</p>
 		<p>削除を進める場合は画面下部の「削除する」ボタンを押してください。
@@ -45,8 +45,7 @@
 					onclick="location.href='ownerMypage'">削除はせずにマイページに戻る</button>
 			</p>
 
-			<input type="button" class="btn btn-danger" type="submit"
-				value="削除する">
+			<input type="submit" class="btn btn-danger" value="削除する">
 		</form>
 
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

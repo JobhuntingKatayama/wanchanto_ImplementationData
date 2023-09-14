@@ -12,19 +12,10 @@
 <link href="css/style.css" rel="stylesheet">
 
 <body>
+  <jsp:include page="include/loginButton.jsp"/>
 
-  <div class="d-flex justify-content-end mb-3">
-
-<c:if test="${loginId != null }">
-    <div class="p-2 bd-highlight"><button type="button" class="btn btn-outline-primary" onclick="location.href='ownerMypage'">マイページ</button></div>
-</c:if>
-<c:if test="${loginId == null }">
-    <div class="p-2 bd-highlight"><button type="button" class="btn btn-outline-primary" onclick="location.href='ownerRegistration'">新規愛犬家登録</button></div>
-    <div class="p-2 bd-highlight"><button type="button" class="btn btn-primary" onclick="location.href='ownerLogin'">愛犬家ログイン</button></div>
-</c:if>
-  </div>
-
-	<div class="container mt-5 mb-5">
+	<jsp:include page="include/destinationIndex.jsp"/>
+	
 	<h1>ワンちゃんとのお出掛け先一覧</h1>
 		<table class="table table-striped">
 		<tr>
