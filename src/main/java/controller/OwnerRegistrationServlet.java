@@ -53,17 +53,15 @@ public class OwnerRegistrationServlet extends HttpServlet {
 
 		// partオブジェクトをbyte[ ]に変換
 		FileInputStream fis;
-		byte[] bytes;
+		byte[] bytes=null;
+		String strBytes=null;
 		if(part.getSize()>0) {
 			fis = (FileInputStream)part.getInputStream();
 			bytes = fis.readAllBytes();
-		} else {
-			response.sendRedirect("ownerRegistration");
-			return;
-		}
+			//確認用に画像をエンコード
+			strBytes = Base64.getEncoder().encodeToString(bytes);
+		} 
 		
-		//確認用に画像をエンコード
-	    String strBytes = Base64.getEncoder().encodeToString(bytes);
 
 		session.setAttribute("loginId", loginId);
 		session.setAttribute("loginPassword", hashedPassword);

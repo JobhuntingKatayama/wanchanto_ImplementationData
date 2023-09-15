@@ -12,43 +12,43 @@
 
 </head>
 <body>
-  <jsp:include page="include/ownerMypageContainer.jsp"/>
-  
-  		<h1>愛犬家登録情報の更新</h1>
-		<p class="small right">
-			「<span class="required">*</span>」がついている項目は必須項目です。
-		</p>
+	<jsp:include page="include/ownerMypageContainer.jsp" />
 
-		<form action="" method="post" class="mb-3">
-			<div class="mb-3">
-				<p>
-					ログインID<span class="small">※半角英数字5～15文字</span><span class="required">*</span>
-				</p>
-				<input class="form-control" aria-describedby="basic-addon1" required
-					type="text" pattern="^[0-9A-Za-z]*$" minlength="5" maxlength="15"
-					name="loginId" placeholder="${loginId}" value="${loginId }">
+	<h1>愛犬家登録情報の更新</h1>
+	<p class="small right">
+		「<span class="required">*</span>」がついている項目は必須項目です。
+	</p>
+
+	<form action="" method="post" class="mb-3">
+		<div class="mb-3">
+			<p>
+				ログインID<span class="small">※半角英数字5～15文字</span><span class="required">*</span>
+			</p>
+			<input class="form-control" aria-describedby="basic-addon1" required
+				type="text" pattern="^[0-9A-Za-z]*$" minlength="5" maxlength="15"
+				name="loginId" placeholder="${loginId}" value="${loginId }">
+		</div>
+
+		<div class="mb-3">
+			<p>
+				パスワード<span class="small">※半角英数字5～15文字</span><span class="required">*</span>
+			</p>
+			<input class="form-control" aria-describedby="basic-addon1" required
+				type="password" pattern="^[0-9A-Za-z]*$" minlength="5"
+				maxlength="15" name="loginPassword" placeholder="セキュリティのため表示されません">
+		</div>
+
+		<div class="d-flex justify-content-between pt-3">
+			<div class="bd-highlight">
+				<input type="submit" class="btn btn-primary" value="登録内容を更新する">
 			</div>
-
-			<div class="mb-3">
-				<p>
-					パスワード<span class="small">※半角英数字5～15文字</span><span class="required">*</span>
-				</p>
-				<input class="form-control" aria-describedby="basic-addon1" required
-					type="password" pattern="^[0-9A-Za-z]*$" minlength="5"
-					maxlength="15" name="loginPassword" placeholder="セキュリティのため表示されません">
+			<div class="bd-highlight">
+				<button type="button" class="btn btn-outline-primary"
+					onclick="location.href='ownerMypage'">マイページへ戻る</button>
 			</div>
+		</div>
 
-			<div class="d-flex justify-content-between pt-3">
-				<div class="bd-highlight">
-					<input type="submit" class="btn btn-primary" value="登録内容を更新する">
-				</div>
-				<div class="bd-highlight">
-					<button type="button" class="btn btn-outline-primary"
-				onclick="location.href='ownerMypage'">マイページへ戻る</button>
-				</div>
-			</div>
-
-		</form>
+	</form>
 
 </body>
 </html>

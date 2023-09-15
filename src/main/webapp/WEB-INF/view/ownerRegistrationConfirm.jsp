@@ -24,9 +24,22 @@
 		<p
 			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">セキュリティのため表示されません。</p>
 		<p>サムネイル画像</p>
-		<p
-			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2"><img class="img-fluid" src='data:image/jpeg;base64,<c:out value="${ownerImg}" />' alt="${thumbnail }"></p>
-
+		<c:choose>
+			<c:when test="${ownerImg == null}">
+				<p
+					class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
+					<img class="img-fluid" src="img/thumbnail.jpg">
+				</p>
+			</c:when>
+			<c:otherwise>
+				<p
+					class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
+					<img class="img-fluid"
+						src='data:image/jpeg;base64,<c:out value="${ownerImg}" />'
+						alt="${thumbnail }">
+				</p>
+			</c:otherwise>
+		</c:choose>
 		<div class="d-flex justify-content-between pt-3">
 			<div class="bd-highlight">
 				<input class="btn btn-primary" type="submit" value="登録する">

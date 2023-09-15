@@ -25,7 +25,6 @@
 		<p>ログインパスワード</p>
 		<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">セキュリティのため表示されません</p>
 
-
 			<div class="d-flex justify-content-between pt-3">
 				<div class="bd-highlight">
 					<input type="submit" class="btn btn-primary" value="登録内容を更新する">

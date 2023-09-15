@@ -48,7 +48,8 @@ public class OwnerInformationEditCompleteServlet extends HttpServlet {
 		owner.setOwnerId(ownerId);
 		owner.setLoginId(loginId);
 		owner.setLoginPassword(hashedPassword);
-		
+
+
 		try {
 			// データの更新
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();

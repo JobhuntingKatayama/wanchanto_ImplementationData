@@ -74,6 +74,7 @@ public class OwnerInformationEditServlet extends HttpServlet {
 			request.setAttribute("loginIdError", "ログインIDが未入力です。");
 			isError = true; // 入力に不備ありと判定
 		}
+
 		String loginPassword = request.getParameter("loginPassword");
 		session.setAttribute("loginPassword", loginPassword);// 入力されたloginPasswordをセッションへ格納
 		if (loginPassword.isEmpty()) {
@@ -82,6 +83,7 @@ public class OwnerInformationEditServlet extends HttpServlet {
 			isError = true; // 入力に不備ありと判定
 		}
 
+		
 		// 入力不備がある場合は、フォームを再表示し、処理を中断
 		if (isError == true) {
 			request.getRequestDispatcher("/WEB-INF/view/ownerInformationEdit.jsp").forward(request, response);

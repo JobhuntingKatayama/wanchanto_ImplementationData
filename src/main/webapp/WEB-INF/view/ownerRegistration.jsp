@@ -46,7 +46,7 @@
 		
 		<div class="d-flex justify-content-between pt-3">
 			<div class="bd-highlight">
-				<button class="btn btn-primary" type="submit" value="登録内容を確認する">登録内容を確認する</button>
+				<input class="btn btn-primary" type="submit" value="登録内容を確認する">
 			</div>
 			<div class="bd-highlight">
 				<button type="button" class="btn btn-outline-primary"

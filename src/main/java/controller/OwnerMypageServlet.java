@@ -48,29 +48,32 @@ public class OwnerMypageServlet extends HttpServlet {
 			Connection con = ds.getConnection();
 
 			int ownerId = 0;
-			byte[] byteImg =null;
+			byte[] byteImg = null;
 			String sql = "SELECT ownerId, img FROM owners WHERE loginId = ?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, loginId); 
+			stmt.setString(1, loginId);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next() == true) {
 				ownerId = rs.getInt("ownerId");
-				byteImg =rs.getBytes("img");
+				byteImg = rs.getBytes("img");
 			}
-		    String strImg = Base64.getEncoder().encodeToString(byteImg);
 			request.setAttribute("ownerId", ownerId);
-			request.setAttribute("ownerImg", strImg);
-						
-			//OwnerDAOによるデータ取得
+			if (byteImg != null) {
+				String strImg = Base64.getEncoder().encodeToString(byteImg);
+				request.setAttribute("ownerImg", strImg);
+			} else {
+				request.setAttribute("ownerImg", null);
+			}
+			// OwnerDAOによるデータ取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			List<Owner> ownerList = ownerDao.findByOwnerId(ownerId);
 			request.setAttribute("ownerList", ownerList);
-			
-			//DestinationDAOによるデータ取得
+
+			// DestinationDAOによるデータ取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			List<Destination> destinationList = destinationDao.findByOwnerId(ownerId);
 			request.setAttribute("destinationList", destinationList);
-			
+
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
