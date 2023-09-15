@@ -8,16 +8,18 @@ public class Owner {
 	private String loginId;
 	private String loginPassword;
 	private String thumbnail;
-	private byte[] img; //画像ファイル
+
+	private byte[] img;
 	private String imgData;
+
 	private Integer statusId;
 	private Date registrationDate;
 
 	public Owner() {
-	
+
 	}
-	
-	public Owner( Integer ownerId, String thumbnail, byte[] img, String loginId, String loginPassword, Integer statusId, Date registrationDate) {
+
+	public Owner(Integer ownerId, String thumbnail, byte[] img, String loginId, String loginPassword, Integer statusId, Date registrationDate) {
 		this.ownerId = ownerId;
 		this.thumbnail = thumbnail;
 		this.img = img;
@@ -50,29 +52,34 @@ public class Owner {
 	public void setLoginPassword(String loginPassword) {
 		this.loginPassword = loginPassword;
 	}
-	
+
 	public String getThumbnail() {
 		return thumbnail;
 	}
+
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
+
 	public byte[] getImg() {
 		return img;
 	}
+
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
+
 	public String getImgData() {
-		if(img!=null) {
+		if (img != null) {
 			this.imgData = Base64.getEncoder().encodeToString(img);
 		}
 		return imgData;
 	}
+
 	public void setImgData(String imgData) {
 		this.imgData = imgData;
 	}
-	
+
 	public Integer getStatusId() {
 		return statusId;
 	}
@@ -88,6 +95,23 @@ public class Owner {
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-	
+
+//	// InputStream → byte[ ]
+//	public void setImgFromInputStream(InputStream is) {
+//		try {
+//			ByteArrayOutputStream bout = new ByteArrayOutputStream();
+//			byte[] buffer = new byte[1024];
+//			while (true) {
+//				int len = is.read(buffer);
+//				if (len < 0) {
+//					break;
+//				}
+//				bout.write(buffer, 0, len);
+//			}
+//			this.img = bout.toByteArray();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 }

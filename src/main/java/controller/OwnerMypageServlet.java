@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Base64;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -40,33 +41,34 @@ public class OwnerMypageServlet extends HttpServlet {
 		try {
 
 			HttpSession session = request.getSession();
-			String strLoginId = (String) session.getAttribute("loginId");
+			String loginId = (String) session.getAttribute("loginId");
 
 			InitialContext ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/wanchanto");
 			Connection con = ds.getConnection();
 
-			int odid = 0;
-			byte[] odimg =null;
+			int ownerId = 0;
+			byte[] byteImg =null;
 			String sql = "SELECT ownerId, img FROM owners WHERE loginId = ?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, strLoginId); // プレースホルダーに変数の値を設定
+			stmt.setString(1, loginId); 
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next() == true) {
-				odid = rs.getInt("ownerId");
-				odimg =rs.getBytes("img");
+				ownerId = rs.getInt("ownerId");
+				byteImg =rs.getBytes("img");
 			}
-			request.setAttribute("ownerId", odid);
-			request.setAttribute("ownerImg", odimg);
+		    String strImg = Base64.getEncoder().encodeToString(byteImg);
+			request.setAttribute("ownerId", ownerId);
+			request.setAttribute("ownerImg", strImg);
 						
 			//OwnerDAOによるデータ取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
-			List<Owner> ownerList = ownerDao.findByOwnerId(odid);
+			List<Owner> ownerList = ownerDao.findByOwnerId(ownerId);
 			request.setAttribute("ownerList", ownerList);
 			
 			//DestinationDAOによるデータ取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
-			List<Destination> destinationList = destinationDao.findByOwnerId(odid);
+			List<Destination> destinationList = destinationDao.findByOwnerId(ownerId);
 			request.setAttribute("destinationList", destinationList);
 			
 		} catch (Exception e) {
@@ -75,4 +77,5 @@ public class OwnerMypageServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/WEB-INF/view/ownerMypage.jsp").forward(request, response);
 	}
+
 }

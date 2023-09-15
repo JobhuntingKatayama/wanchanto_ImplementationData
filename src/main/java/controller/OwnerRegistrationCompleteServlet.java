@@ -27,7 +27,7 @@ public class OwnerRegistrationCompleteServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		//getは受信せず
-		
+
 	}
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,16 +36,14 @@ public class OwnerRegistrationCompleteServlet extends HttpServlet {
 		String loginId =(String)session.getAttribute("loginId");
 		String loginPassword =(String)session.getAttribute("loginPassword");
 		String thumbnail =(String)session.getAttribute("thumbnail");
-		byte[] bytes = (byte[])session.getAttribute("bytes");
-		
-		
+		byte[] imgByte = (byte[])session.getAttribute("bytes");
 		
 		// 入力に不備がなければ、データの更新
 		Owner owner = new Owner();
 		owner.setLoginId(loginId);
 		owner.setLoginPassword(loginPassword);
 		owner.setThumbnail(thumbnail);
-		owner.setImg(bytes);
+		owner.setImg(imgByte);
 
 		try {
 			// データの更新
@@ -59,6 +57,7 @@ public class OwnerRegistrationCompleteServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 	}
+
 
 
 }

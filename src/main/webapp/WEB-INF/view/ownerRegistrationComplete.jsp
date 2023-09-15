@@ -16,6 +16,7 @@
   
   <h1>愛犬家情報の登録</h1>
 <p>登録しました。</p>
+
 <button type="button" class="btn btn-primary"
 				onclick="location.href='ownerMypage'">マイページへ進む</button>
 </div>
