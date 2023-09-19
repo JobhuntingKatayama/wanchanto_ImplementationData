@@ -37,15 +37,10 @@
 
 	<div id="destinationImgSlider">
 		<ul class="slider">
-			<li><img
-				src="https://images.unsplash.com/photo-1597451857899-9ef64117da3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-				alt=""></li>
-			<li><img
-				src="https://images.unsplash.com/photo-1585938389612-a552a28d6914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80"
-				alt=""></li>
-			<li><img
-				src="https://images.unsplash.com/photo-1561283890-5d858c23b2ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1076&q=80"
-				alt=""></li>
+			<c:forEach items="${detailImageList}" var="detailImage">
+				<li><img class="mb-3"
+					src='data:image/jpeg;base64,<c:out value="${detailImage.imgData}" />'></li>
+			</c:forEach>
 		</ul>
 	</div>
 
@@ -54,15 +49,15 @@
 	<p>星${evaluation}</p>
 	<h3>この情報を共有した愛犬家さん</h3>
 	<p>${ownerId}さん</p>
-				<c:choose>
-					<c:when test="${ownerImg == null}">
-						<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
-					</c:when>
-					<c:otherwise>
-						<img class="mb-3" id="ownerThumbnail"
-							src='data:image/jpeg;base64,<c:out value="${ownerImg}" />'>
-					</c:otherwise>
-				</c:choose>
+	<c:choose>
+		<c:when test="${ownerImg == null}">
+			<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
+		</c:when>
+		<c:otherwise>
+			<img class="mb-3" id="ownerThumbnail"
+				src='data:image/jpeg;base64,<c:out value="${ownerImg}" />'>
+		</c:otherwise>
+	</c:choose>
 	<div class="d-flex justify-content-end mb-3">
 		<div class="p-2 bd-highlight">
 			<button type="button" class="btn btn-primary"

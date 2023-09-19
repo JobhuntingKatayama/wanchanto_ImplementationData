@@ -18,8 +18,10 @@ import javax.sql.DataSource;
 
 import dao.DaoFactory;
 import dao.DestinationDao;
+import dao.DetailImageDao;
 import dao.OwnerDao;
 import domain.Destination;
+import domain.DetailImage;
 import domain.Owner;
 
 /**
@@ -43,12 +45,18 @@ public class DestinationDetailServlet extends HttpServlet {
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			Destination destination = destinationDao.findByDestinationId(destinationId);
 			
+			//お出掛け先のイメージ画像を取得
+			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
+			List<DetailImage>detailImageList = detailImageDao.findByDestinationId(destinationId);
+
 			// データの情報をリクエストに格納
 			request.setAttribute("ownerId", destination.getOwnerId());
 			request.setAttribute("genreId", destination.getGenreId());
 			request.setAttribute("name", destination.getName());
 			request.setAttribute("evaluation", destination.getEvaluation());
-		
+			
+			request.setAttribute("detailImageList", detailImageList);
+					
 			//愛犬家情報の取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			List<Owner> ownerList = ownerDao.findByOwnerId(destination.getOwnerId());

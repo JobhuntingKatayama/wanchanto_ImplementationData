@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,10 +38,23 @@ public class DetailImageDaoImpl implements DetailImageDao {
 	}
 
 	@Override
-	public DetailImage findById(Integer id) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	public List<DetailImage> findByDestinationId(Integer destinationId) throws Exception {
+		List<DetailImage> detailImageList = new ArrayList<>();
+
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT * FROM detailimages WHERE destinationId = ? ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, destinationId, Types.INTEGER);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				detailImageList.add(mapToDetailImage(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return detailImageList;
 	}
+
 
 	@Override
 	public void insert(DetailImage detailImage) throws Exception {

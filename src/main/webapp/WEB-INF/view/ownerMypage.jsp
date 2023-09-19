@@ -35,7 +35,7 @@
 							src='data:image/jpeg;base64,<c:out value="${ownerImg}" />'>
 					</c:otherwise>
 				</c:choose>
-				
+
 				<ul class="nav flex-column">
 					<li class="nav-item mb-3">
 						<button type="button" class="btn btn-outline-primary"
@@ -85,6 +85,18 @@
 						</tr>
 					</c:forEach>
 				</table>
+
+<%-- 				<table>
+					<tr>
+						<th>イメージ</th>
+					</tr>
+					<tr>
+						<c:forEach items="${detailImageList}" var="detailImage">
+							<td><img class="mb-3" src='data:image/jpeg;base64,<c:out value="${detailImage.ImgData}" />'>
+							</td>
+						</c:forEach>
+					</tr>
+				</table> --%>
 			</div>
 		</div>
 	</div>

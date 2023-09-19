@@ -64,6 +64,18 @@ public class OwnerMypageServlet extends HttpServlet {
 			} else {
 				request.setAttribute("ownerImg", null);
 			}
+			
+			int destinationId = 0;
+			String sqlForDestination = "SELECT destinationId From destinations WHERE ownerId = ?;";
+			PreparedStatement stmtForDestination =con.prepareStatement(sqlForDestination);
+			stmtForDestination.setObject(1, ownerId);
+			ResultSet rsForDestination = stmtForDestination.executeQuery();
+			if (rsForDestination.next() == true) {
+				destinationId =(Integer)rsForDestination.getObject("destinationId");
+			}
+			request.setAttribute("destinationId", destinationId);
+			
+			
 			// OwnerDAOによるデータ取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			List<Owner> ownerList = ownerDao.findByOwnerId(ownerId);
@@ -73,6 +85,11 @@ public class OwnerMypageServlet extends HttpServlet {
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			List<Destination> destinationList = destinationDao.findByOwnerId(ownerId);
 			request.setAttribute("destinationList", destinationList);
+
+//			// DetailImageDAOによるデータ取得
+//			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
+//			List<DetailImage> detailImageList = detailImageDao.findByDestinationId(destinationId);
+//			request.setAttribute("detailImageList", detailImageList);
 
 		} catch (Exception e) {
 			throw new ServletException(e);
