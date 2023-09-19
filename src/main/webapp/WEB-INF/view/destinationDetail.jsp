@@ -54,7 +54,15 @@
 	<p>星${evaluation}</p>
 	<h3>この情報を共有した愛犬家さん</h3>
 	<p>${ownerId}さん</p>
-
+				<c:choose>
+					<c:when test="${ownerImg == null}">
+						<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
+					</c:when>
+					<c:otherwise>
+						<img class="mb-3" id="ownerThumbnail"
+							src='data:image/jpeg;base64,<c:out value="${ownerImg}" />'>
+					</c:otherwise>
+				</c:choose>
 	<div class="d-flex justify-content-end mb-3">
 		<div class="p-2 bd-highlight">
 			<button type="button" class="btn btn-primary"

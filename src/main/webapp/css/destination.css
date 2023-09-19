@@ -29,3 +29,9 @@ ul.slider li.slick-slide img {
 	position: relative;
 	top: -10vh;
 }
+img#ownerThumbnail {
+	width:120px;
+	height:120px;
+	object-fit:cover;
+	border-radius:50%;
+}

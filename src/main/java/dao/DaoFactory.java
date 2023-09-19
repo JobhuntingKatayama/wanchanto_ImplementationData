@@ -14,6 +14,10 @@ public class DaoFactory {
 		return new DestinationDaoImpl(getDataSource());
 	}
 
+	public static DetailImageDao createDetailImageDao() {
+		return new DetailImageDaoImpl(getDataSource());
+	}
+
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;
 		DataSource ds = null;
