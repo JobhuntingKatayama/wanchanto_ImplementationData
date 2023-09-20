@@ -38,6 +38,26 @@ public class DetailImageDaoImpl implements DetailImageDao {
 	}
 
 	@Override
+	public DetailImage findByImgId(Integer imgId) throws Exception {
+		DetailImage detailImage = new DetailImage();
+
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT * FROM detailimages WHERE imgId = ?;";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, imgId, Types.INTEGER);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next() == true) {
+				detailImage = mapToDetailImage(rs);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+
+		return detailImage;
+
+	}
+
+	@Override
 	public List<DetailImage> findByDestinationId(Integer destinationId) throws Exception {
 		List<DetailImage> detailImageList = new ArrayList<>();
 
@@ -55,19 +75,19 @@ public class DetailImageDaoImpl implements DetailImageDao {
 		return detailImageList;
 	}
 
-
 	@Override
 	public void insert(DetailImage detailImage) throws Exception {
 		try (Connection con = ds.getConnection()) {
 			String sql = "INSERT INTO detailimages"
-					+ " (destinationId,imgCategory,fileName,img,comment,registrationDate)"
-					+ " VALUES (?,?,?,?,?,NOW())";
+					+ " (destinationId,imgId,imgCategory,fileName,img,comment,registrationDate)"
+					+ " VALUES (?,?,?,?,?,?,NOW())";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, detailImage.getDestinationId());
-			stmt.setObject(2, detailImage.getImgCategory());
-			stmt.setString(3, detailImage.getFileName());
-			stmt.setBytes(4, detailImage.getImg());
-			stmt.setString(5, detailImage.getComment());
+			stmt.setObject(2, detailImage.getImgId());
+			stmt.setObject(3, detailImage.getImgCategory());
+			stmt.setString(4, detailImage.getFileName());
+			stmt.setBytes(5, detailImage.getImg());
+			stmt.setString(6, detailImage.getComment());
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -76,14 +96,29 @@ public class DetailImageDaoImpl implements DetailImageDao {
 
 	@Override
 	public void update(DetailImage detailImage) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "UPDATE detailimages SET imgCategory=?, img=?, comment=?,registrationDate=NOW() WHERE imgId=?;";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1,detailImage.getImgCategory(), Types.INTEGER);
+			stmt.setBytes(2, detailImage.getImg());
+			stmt.setString(3, detailImage.getComment());
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 
 	@Override
 	public void delete(DetailImage detailImage) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM detailimages WHERE imgId=?;";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, detailImage.getImgId(), Types.INTEGER);
+			stmt.executeUpdate();
+		}catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -91,14 +126,14 @@ public class DetailImageDaoImpl implements DetailImageDao {
 	 */
 	private DetailImage mapToDetailImage(ResultSet rs) throws Exception {
 		Integer destinationId = (Integer) rs.getObject("destinationId");
-//		Integer imgId = (Integer) rs.getObject("imgId");
+		Integer imgId = (Integer) rs.getObject("imgId");
 		Integer imgCategory = (Integer) rs.getObject("imgCategory");
 		String fileName = rs.getString("fileName");
 		byte[] img = rs.getBytes("img");
 		String comment = rs.getString("comment");
 		Date registrationDate = rs.getTimestamp("registrationDate");
 
-		return new DetailImage(destinationId, imgCategory, fileName, img, comment, registrationDate);
+		return new DetailImage(destinationId, imgId, imgCategory, fileName, img, comment, registrationDate);
 	}
 
 }

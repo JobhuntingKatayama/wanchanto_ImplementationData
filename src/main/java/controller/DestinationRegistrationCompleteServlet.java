@@ -17,6 +17,7 @@ import domain.Destination;
  * Servlet implementation class DestinationRegistrationCompleteServlet
  */
 @WebServlet("/destinationRegistrationComplete")
+
 public class DestinationRegistrationCompleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,11 +44,14 @@ public class DestinationRegistrationCompleteServlet extends HttpServlet {
 		Integer evaluation = (Integer)session.getAttribute("evaluation");
 
 		// 入力に不備がなければ、データの更新
+		//お出掛け先情報（destinations）
 		Destination destination = new Destination();
 		destination.setOwnerId(ownerId);
 		destination.setGenreId(genreId);
 		destination.setName(name);
 		destination.setEvaluation(evaluation);
+
+
 
 		try {
 			// データの更新

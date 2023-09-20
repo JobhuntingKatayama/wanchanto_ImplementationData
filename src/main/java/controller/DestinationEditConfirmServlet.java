@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class DestinationEditServlet
  */
 @WebServlet("/destinationEditConfirm")
+@MultipartConfig(location = "D:\\Users\\zd1P09\\tmp")
+
 public class DestinationEditConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,10 +41,17 @@ public class DestinationEditConfirmServlet extends HttpServlet {
 
 		//Editページからポストされた情報をセッションスコープから取得
 		HttpSession session = request.getSession();
+		session.getAttribute("destinationId");
 		session.getAttribute("genreId");
 		session.getAttribute("name");
 		session.getAttribute("evaluation");
-
+		session.getAttribute("imgCategory");
+		session.getAttribute("comment");
+		session.getAttribute("fileName");
+		session.getAttribute("strBytes");
+		
+		
+		
 		request.getRequestDispatcher("/WEB-INF/view/destinationEditConfirm.jsp").forward(request, response);
 
 	}

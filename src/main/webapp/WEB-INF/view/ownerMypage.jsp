@@ -61,6 +61,8 @@
 						</div>
 					</div>
 				</div>
+
+
 				<table class="table table-striped">
 					<tr class="text-center">
 						<th>名称</th>
@@ -70,6 +72,7 @@
 					</tr>
 					<c:forEach items="${destinationList}" var="destination">
 						<tr>
+							
 							<td><a target="_blank"
 								href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />"><c:out
 										value="${destination.name}" /></a></td>
@@ -86,17 +89,9 @@
 					</c:forEach>
 				</table>
 
-<%-- 				<table>
-					<tr>
-						<th>イメージ</th>
-					</tr>
-					<tr>
-						<c:forEach items="${detailImageList}" var="detailImage">
-							<td><img class="mb-3" src='data:image/jpeg;base64,<c:out value="${detailImage.ImgData}" />'>
-							</td>
-						</c:forEach>
-					</tr>
-				</table> --%>
+
+
+
 			</div>
 		</div>
 	</div>

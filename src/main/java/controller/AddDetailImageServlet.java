@@ -42,7 +42,7 @@ public class AddDetailImageServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// パラメータの取得
-//		Integer destinationId = Integer.parseInt(request.getParameter("destinationId")); 
+		Integer destinationId = Integer.parseInt(request.getParameter("destinationId")); 
 //		Integer imgId = Integer.parseInt(request.getParameter("imgId")); 
 		String strCategory = (String) request.getParameter("imgCategory");
 		Integer imgCategory = Integer.parseInt(strCategory);
@@ -65,7 +65,7 @@ public class AddDetailImageServlet extends HttpServlet {
 
 		// データの追加
 		DetailImage detailImage = new DetailImage();
-		detailImage.setDestinationId(1);
+		detailImage.setDestinationId(destinationId);
 		detailImage.setImgCategory(imgCategory);
 		detailImage.setFileName(fileName);
 		detailImage.setImg(bytes);

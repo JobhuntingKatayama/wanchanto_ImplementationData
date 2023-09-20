@@ -25,9 +25,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		List<Destination> destinationList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT destinations.ownerId, destinations.genreId, destinations.destinationId,"
-					+ " destinations.name, destinations.evaluation, destinations.addedDate"
-					+ " FROM destinations";
+			String sql = "SELECT * FROM destinations";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -44,8 +42,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		List<Destination> destinationList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT destinations.ownerId, destinations.genreId, destinations.destinationId,"
-					+ " destinations.name, destinations.evaluation, destinations.addedDate" + " FROM destinations" + " WHERE ownerId = ? ";
+			String sql = "SELECT * FROM destinations WHERE ownerId = ? ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, ownerId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
@@ -64,9 +61,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		Destination destination = new Destination();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT destinations.ownerId, destinations.genreId, destinations.destinationId,"
-					+ " destinations.name, destinations.evaluation, destinations.addedDate"
-					+ " FROM destinations" + " WHERE destinationId = ? ";
+			String sql = "SELECT * FROM destinations WHERE destinationId = ? ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destinationId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();

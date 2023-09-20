@@ -15,9 +15,11 @@
 	<div class="container mt-5 mb-3">
 		<h1>お出掛け先情報確認画面</h1>
 		<p class="small right">こちらの内容でお出掛け先を更新します。</p>
-		<form action="destinationEditComplete" method="post" class="mb-3">
+		<form action="destinationEditComplete" enctype="multipart/form-data"
+			method="post" class="mb-3">
 			<p>お出掛け先のジャンル</p>
-			<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
+			<p
+				class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
 				<c:choose>
 					<c:when test="${genreId == 1}">
 公園
@@ -34,26 +36,46 @@
 				</c:choose>
 			</p>
 			<p>お出掛け先の名称</p>
-			<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${name}</p>
+			<p
+				class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${name}</p>
 			<p>お出掛け先の評価</p>
-			<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${evaluation}</p>
-</br>
-			
-			
+			<p
+				class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${evaluation}</p>
+			<br>
+
+			<c:if test="${fileName != null }">
+				<p>追加する画像</p>
+				<table>
+					<tr>
+						<th>画像</th>
+						<th>画像ファイル名</th>
+						<th>画像の種類</th>
+						<th>コメント</th>
+					</tr>
+					<tr>
+						<td><img style="height: 100px;" class="mb-3"
+							src='data:image/jpeg;base64,<c:out value="${strBytes}" />'></td>
+						<td><c:out value="${fileName }" /></td>
+						<td><c:out value="${imgCategory }" /></td>
+						<td><c:out value="${comment }" /></td>
+					</tr>
+				</table>
+			</c:if>
+
 			<div class="d-flex justify-content-between pt-3">
 				<div class="bd-highlight">
 					<input class="btn btn-primary" type="submit" value="上記の内容で登録する">
 				</div>
 				<div class="bd-highlight">
 					<button type="button" class="btn btn-outline-primary"
-					onclick="location.href='destinationEdit?destinationId=<c:out value="${destinationId }"/>'">編集ページへ戻る</button>
+						onclick="location.href='destinationEdit?destinationId=<c:out value="${destinationId }"/>'">編集ページへ戻る</button>
 				</div>
 				<div class="bd-highlight">
 					<button type="button" class="btn btn-outline-primary"
-					onclick="location.href='ownerMypage'">マイページへ戻る</button>
+						onclick="location.href='ownerMypage'">マイページへ戻る</button>
 				</div>
 			</div>
-			
+
 		</form>
 
 	</div>

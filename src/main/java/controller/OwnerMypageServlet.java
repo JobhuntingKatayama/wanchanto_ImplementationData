@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.Base64;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class OwnerMypageServlet extends HttpServlet {
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/wanchanto");
 			Connection con = ds.getConnection();
 
+			// ownerIdと愛犬家のサムネイル画像の取得とリクエストへの格納
 			int ownerId = 0;
 			byte[] byteImg = null;
 			String sql = "SELECT ownerId, img FROM owners WHERE loginId = ?;";
@@ -64,18 +66,34 @@ public class OwnerMypageServlet extends HttpServlet {
 			} else {
 				request.setAttribute("ownerImg", null);
 			}
-			
+
+			// ownerIdに紐づくdestinationIdを抽出
 			int destinationId = 0;
 			String sqlForDestination = "SELECT destinationId From destinations WHERE ownerId = ?;";
-			PreparedStatement stmtForDestination =con.prepareStatement(sqlForDestination);
-			stmtForDestination.setObject(1, ownerId);
+			PreparedStatement stmtForDestination = con.prepareStatement(sqlForDestination);
+			stmtForDestination.setObject(1, ownerId, Types.INTEGER);
 			ResultSet rsForDestination = stmtForDestination.executeQuery();
 			if (rsForDestination.next() == true) {
-				destinationId =(Integer)rsForDestination.getObject("destinationId");
+				destinationId = (Integer) rsForDestination.getObject("destinationId");
 			}
 			request.setAttribute("destinationId", destinationId);
-			
-			
+
+			// お出掛け先画像を１つ書き出してリクエストへ格納
+			byte[] detailImage = null;
+			String sqlForDetailImage = "SELECT img FROM detailimages WHERE destinationId = ? LIMIT 1;";
+			PreparedStatement stmtForDetailImage = con.prepareStatement(sqlForDetailImage);
+			stmtForDetailImage.setObject(1, destinationId, Types.INTEGER);
+			ResultSet rsForDetailImage = stmtForDetailImage.executeQuery();
+			if (rsForDetailImage.next() == true) {
+				detailImage = rsForDetailImage.getBytes("img");
+			}
+			if (detailImage != null) {
+				String strDetailImage = Base64.getEncoder().encodeToString(detailImage);
+				request.setAttribute("destinationThumbnail", strDetailImage);
+			} else {
+				request.setAttribute("destinationThumbnail", null);
+			}
+
 			// OwnerDAOによるデータ取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			List<Owner> ownerList = ownerDao.findByOwnerId(ownerId);
@@ -86,9 +104,9 @@ public class OwnerMypageServlet extends HttpServlet {
 			List<Destination> destinationList = destinationDao.findByOwnerId(ownerId);
 			request.setAttribute("destinationList", destinationList);
 
-//			// DetailImageDAOによるデータ取得
+//			//お出掛け先のイメージ画像のテーブルを取得してリストをリクエストへの格納
 //			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
-//			List<DetailImage> detailImageList = detailImageDao.findByDestinationId(destinationId);
+//			List<DetailImage>detailImageList = detailImageDao.findByDestinationId(destinationId);
 //			request.setAttribute("detailImageList", detailImageList);
 
 		} catch (Exception e) {

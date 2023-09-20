@@ -6,7 +6,7 @@ import java.util.Date;
 public class DetailImage {
 
 	private Integer destinationId;
-//	private Integer imgId;
+	private Integer imgId;
 	private Integer imgCategory;
 	private String fileName;
 	private byte[] img;
@@ -19,10 +19,10 @@ public class DetailImage {
 
 	}
 
-	public DetailImage(Integer destinationId,/* Integer imgId,*/ Integer imgCategory, String fileName, byte[] img,
+	public DetailImage(Integer destinationId,Integer imgId,Integer imgCategory, String fileName, byte[] img,
 			String comment, Date registrationDate) {
 		this.destinationId = destinationId;
-//		this.imgId = imgId;
+		this.imgId = imgId;
 		this.imgCategory = imgCategory;
 		this.fileName = fileName;
 		this.img = img;
@@ -30,13 +30,13 @@ public class DetailImage {
 		this.registrationDate = registrationDate;
 	}
 
-//	public Integer getImgId() {
-//		return imgId;
-//	}
-//
-//	public void setImgId(Integer imgId) {
-//		this.imgId = imgId;
-//	}
+	public Integer getImgId() {
+		return imgId;
+	}
+
+	public void setImgId(Integer imgId) {
+		this.imgId = imgId;
+	}
 
 	public Integer getImgCategory() {
 		return imgCategory;
