@@ -27,12 +27,12 @@
 			<div id="ownerInfo" class="col-sm-4 text-center">
 
 				<c:choose>
-					<c:when test="${ownerImg == null}">
-						<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
+					<c:when test="${owner.imgData != null}">
+						<img class="mb-3" id="ownerThumbnail"
+							src='data:image/jpeg;base64,<c:out value="${owner.imgData}" />'>
 					</c:when>
 					<c:otherwise>
-						<img class="mb-3" id="ownerThumbnail"
-							src='data:image/jpeg;base64,<c:out value="${ownerImg}" />'>
+						<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
 					</c:otherwise>
 				</c:choose>
 

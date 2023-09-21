@@ -97,7 +97,7 @@
 
 
 
-		<div class="mb-3">
+ 		<div class="mb-3">
 			<p>画像の追加・削除</p>
 
 			<p>現在登録されている画像</p>
@@ -108,7 +108,7 @@
 						<th>画像ファイル名</th>
 						<th>画像の種類</th>
 						<th>コメント</th>
-						<th>更新／削除</th>
+						<th colspan="2">更新／削除</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -125,7 +125,7 @@
 								<td><c:out value="${detailImage.imgCategory }" /></td>
 								<td><c:out value="${detailImage.comment }" /></td>
 								<td><a target="_blank" href="updateDetailImage?imgId=<c:out value="${detailImage.imgId }"/>">更新</a>
-								<td><a target="_blank" href="deleteDetailImage?imgId=<c:out value="${detailImage.imgId }"/>">削除</a>
+								<td><a href="deleteDetailImage?imgId=<c:out value="${detailImage.imgId }"/>">削除</a>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -175,5 +175,6 @@
 	</form>
 
 	</div>
+	
 </body>
 </html>

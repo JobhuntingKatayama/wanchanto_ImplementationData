@@ -5,11 +5,10 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>画像登録完了</title>
+<title>お出掛け先画像編集完了</title>
 </head>
 <body>
-<p>画像登録完了</p>
-
-<p><a href="ownerMypage">マイページへ戻る</a></p>
+<p>更新しました。</p>
+<a href="destinationEdit?destinationId=<c:out value="${destinationId }"/>">お出掛け先情報の編集ページへ戻る</a>
 </body>
 </html>

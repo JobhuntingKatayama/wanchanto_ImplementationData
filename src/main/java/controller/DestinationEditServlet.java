@@ -83,8 +83,8 @@ public class DestinationEditServlet extends HttpServlet {
 		boolean isError = false;
 
 		// destinationIdを取得してセッションに格納
-		Integer destinationId = Integer.parseInt(request.getParameter("destinationId"));
-		session.setAttribute("destinationId", destinationId);
+		Integer intDestinationId = Integer.parseInt(request.getParameter("destinationId"));
+		session.setAttribute("destinationId", intDestinationId);
 
 		// お出掛け先ジャンル
 		// 編集されたパラメータを取得しセッションに格納
@@ -100,6 +100,7 @@ public class DestinationEditServlet extends HttpServlet {
 		Integer intEvaluation = Integer.parseInt(request.getParameter("evaluation"));
 		session.setAttribute("evaluation", intEvaluation);
 
+		
 		// 画像の登録有無の確認
 		if (request.getParameter("imgCategory") != null && !request.getParameter("imgCategory").isEmpty()) {
 

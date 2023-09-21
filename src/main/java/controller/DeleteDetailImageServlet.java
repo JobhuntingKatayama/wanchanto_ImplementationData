@@ -33,7 +33,7 @@ public class DeleteDetailImageServlet extends HttpServlet {
 			// 削除する画像のデータを取得
 			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
 			DetailImage detailImage = detailImageDao.findByImgId(imgId);
-
+			
 			// 削除ページの表示
 			request.setAttribute("detailImage", detailImage);
 			request.getRequestDispatcher("/WEB-INF/view/deleteDetailImage.jsp").forward(request, response);
@@ -49,24 +49,26 @@ public class DeleteDetailImageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//削除するimgIdの取得
-		Integer imgId=Integer.parseInt(request.getParameter("imgId"));
-		
-		//削除メソッドの引数用にdetailImage オブジェクトを作成
-		DetailImage detailImage=new DetailImage();
-		detailImage.setImgId(imgId);
-		
+		// 削除するimgIdの取得
+		Integer imgId = Integer.parseInt(request.getParameter("imgId"));
+
 		try {
+			// 削除する画像のデータを取得
+			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
+			DetailImage detailImage = detailImageDao.findByImgId(imgId);
+			
 			//データの削除
-			DetailImageDao detailImageDao =DaoFactory.createDetailImageDao();
 			detailImageDao.delete(detailImage);
-			
-			//削除完了ページの表示（お出掛け先情報編集ページへ戻る）
-			request.getRequestDispatcher("/WEB-INF/view/deleteDetailImageComplete.jsp").forward(request, response);
-			
-			} catch (Exception e) {
+
+
+			// 削除完了ページの表示
+			request.setAttribute("detailImage", detailImage);
+			request.getRequestDispatcher("/WEB-INF/view/deleteDetailImageDone.jsp").forward(request, response);
+
+		} catch (Exception e) {
 			throw new ServletException(e);
 		}
+
 	}
 
 }

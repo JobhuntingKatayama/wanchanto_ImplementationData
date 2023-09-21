@@ -9,11 +9,12 @@
 </head>
 <body>
 	<form action="" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="destinationId" value="<c:out value='${destinationId }'/>">
+	<p>こちらの画像を削除しますか？</p>
 	<img style="height: 100px;" class="mb-3"
 		src='data:image/jpeg;base64,<c:out value="${detailImage.imgData}" />'>、
 	${detailImage.fileName}、
-	
-	<input type="submit" value="削除">
+	<input type="submit" value="お出掛け先編集ページに戻る">
 	</form>
 </body>
 </html>

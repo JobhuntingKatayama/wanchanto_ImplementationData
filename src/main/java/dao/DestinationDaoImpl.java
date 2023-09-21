@@ -74,6 +74,8 @@ public class DestinationDaoImpl implements DestinationDao {
 
 		return destination;
 	}
+	
+
 
 	@Override
 	public void insert(Destination destination) throws Exception {

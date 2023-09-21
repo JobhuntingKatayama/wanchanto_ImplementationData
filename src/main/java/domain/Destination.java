@@ -12,7 +12,7 @@ public class Destination {
 	private Integer evaluation;
 	private Integer statusId;
 	private Date addedDate;
-
+	
 	public Destination() {
 
 	}

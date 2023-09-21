@@ -18,6 +18,5 @@ public interface OwnerDao {
 
 	Owner findByLoginIdAndLoginPass(String loginId, String loginPassword) throws Exception;
 
-	Owner findById(Integer ownerId) throws Exception;
-
+	Owner findByLoginId(String loginId) throws Exception;
 }

@@ -10,10 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.DaoFactory;
+import dao.DestinationDao;
 import dao.DetailImageDao;
+import domain.Destination;
 import domain.DetailImage;
 
 /**
@@ -40,10 +43,24 @@ public class AddDetailImageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
+		// destinationIdをセッションから取得
+		session.getAttribute("destinationId");
+		Integer destinationId = (Integer)session.getAttribute("destinationId");
 
-		// パラメータの取得
-		Integer destinationId = Integer.parseInt(request.getParameter("destinationId")); 
-//		Integer imgId = Integer.parseInt(request.getParameter("imgId")); 
+
+		try {
+		// DestinationDAOによるデータ取得
+		DestinationDao destinationDao = DaoFactory.createDestinationDao();
+		Destination destination = destinationDao.findByDestinationId(destinationId);
+		request.setAttribute("destination", destination);
+
+		}catch (Exception e) {
+			throw new ServletException(e) ;			
+		}
+		
+		// パラメータの取得 
 		String strCategory = (String) request.getParameter("imgCategory");
 		Integer imgCategory = Integer.parseInt(strCategory);
 		String comment = request.getParameter("comment");
@@ -74,6 +91,7 @@ public class AddDetailImageServlet extends HttpServlet {
 		try {
 			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
 			detailImageDao.insert(detailImage);	
+			
 			request.getRequestDispatcher("/WEB-INF/view/addDetailImageDone.jsp").forward(request, response);
 		
 		} catch (Exception e) {

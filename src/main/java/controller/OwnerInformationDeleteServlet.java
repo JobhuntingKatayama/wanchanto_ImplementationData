@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.DaoFactory;
 import dao.OwnerDao;
@@ -26,14 +27,17 @@ public class OwnerInformationDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//削除する会員のIDの取得
-		String strId = request.getParameter("ownerId");
-		Integer ownerId = Integer.parseInt(strId);
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
+
+//		//削除する会員のIDの取得
+//		String strId = request.getParameter("ownerId");
+//		Integer ownerId = Integer.parseInt(strId);
 
 		try {
 			// 削除する会員データの取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
-			Owner owner = ownerDao.findById(ownerId);
+			Owner owner = ownerDao.findByLoginId(loginId);
 			// 削除ページの表示
 			request.setAttribute("owner", owner);
 			request.getRequestDispatcher("/WEB-INF/view/ownerInformationDelete.jsp").forward(request, response);

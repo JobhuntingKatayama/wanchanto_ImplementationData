@@ -8,5 +8,6 @@
 <title>画像削除完了</title>
 </head>
 <body>
-<a onclick="window.close()">閉じる</a></body>
+<p>削除しました。</p>
+<a href="destinationEdit?destinationId=<c:out value="${destinationId }"/>">お出掛け先情報の編集ページへ戻る</a>
 </html>

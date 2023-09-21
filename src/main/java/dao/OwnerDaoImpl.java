@@ -58,13 +58,13 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public Owner findById(Integer ownerId) throws Exception {
+	public Owner findByLoginId(String loginId) throws Exception {
 		Owner owner = new Owner();
 		
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM owners WHERE owners.ownerId = ?";
+			String sql = "SELECT * FROM owners WHERE owners.loginId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setObject(1, ownerId, Types.INTEGER);
+			stmt.setString(1, loginId);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next() == true) {
 				owner = mapToOwner(rs);

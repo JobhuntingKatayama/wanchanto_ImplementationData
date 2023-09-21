@@ -97,11 +97,13 @@ public class DetailImageDaoImpl implements DetailImageDao {
 	@Override
 	public void update(DetailImage detailImage) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE detailimages SET imgCategory=?, img=?, comment=?,registrationDate=NOW() WHERE imgId=?;";
+			String sql = "UPDATE detailimages SET img=?,fileName=?, imgCategory=?, comment=?,registrationDate=NOW() WHERE imgId=?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setObject(1,detailImage.getImgCategory(), Types.INTEGER);
-			stmt.setBytes(2, detailImage.getImg());
-			stmt.setString(3, detailImage.getComment());
+			stmt.setBytes(1, detailImage.getImg());
+			stmt.setString(2, detailImage.getFileName());
+			stmt.setObject(3,detailImage.getImgCategory(), Types.INTEGER);
+			stmt.setString(4, detailImage.getComment());
+			stmt.setObject(5,detailImage.getImgId(), Types.INTEGER);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
