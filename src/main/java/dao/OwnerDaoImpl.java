@@ -40,7 +40,7 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public List<Owner> findByOwnerId(Integer ownerId) throws Exception {
+	public List<Owner> findByOwnerList(Integer ownerId) throws Exception {
 		List<Owner> ownerList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
@@ -65,6 +65,24 @@ public class OwnerDaoImpl implements OwnerDao {
 			String sql = "SELECT * FROM owners WHERE owners.loginId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, loginId);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next() == true) {
+				owner = mapToOwner(rs);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return owner;
+	}
+
+	@Override
+	public Owner findByOwnerId(Integer ownerId) throws Exception {
+		Owner owner = new Owner();
+		
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT * FROM owners WHERE owners.ownerId = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, ownerId);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next() == true) {
 				owner = mapToOwner(rs);

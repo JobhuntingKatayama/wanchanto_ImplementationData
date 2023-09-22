@@ -8,7 +8,7 @@ public interface OwnerDao {
 
 	List<Owner> findAll() throws Exception;
 
-	List<Owner> findByOwnerId(Integer ownerId) throws Exception;
+	List<Owner> findByOwnerList(Integer ownerId) throws Exception;
 
 	void insert(Owner owner) throws Exception;
 
@@ -18,5 +18,7 @@ public interface OwnerDao {
 
 	Owner findByLoginIdAndLoginPass(String loginId, String loginPassword) throws Exception;
 
+	Owner findByOwnerId(Integer ownerId) throws Exception;
+	
 	Owner findByLoginId(String loginId) throws Exception;
 }

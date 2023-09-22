@@ -54,20 +54,19 @@ public class OwnerRegistrationServlet extends HttpServlet {
 		// partオブジェクトをbyte[ ]に変換
 		FileInputStream fis;
 		byte[] bytes=null;
-		String strBytes=null;
+		String imgData=null;
 		if(part.getSize()>0) {
 			fis = (FileInputStream)part.getInputStream();
 			bytes = fis.readAllBytes();
 			//確認用に画像をエンコード
-			strBytes = Base64.getEncoder().encodeToString(bytes);
+			imgData = Base64.getEncoder().encodeToString(bytes);
 		} 
 		
-
 		session.setAttribute("loginId", loginId);
 		session.setAttribute("loginPassword", hashedPassword);
 		session.setAttribute("thumbnail", thumbnail);
-		session.setAttribute("bytes", bytes);
-		session.setAttribute("ownerImg", strBytes);
+		session.setAttribute("img", bytes);
+		session.setAttribute("imgData", imgData);
 
 		request.getRequestDispatcher("/WEB-INF/view/ownerRegistrationConfirm.jsp").forward(request, response);
 

@@ -9,6 +9,7 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+<link href="css/bootstrapChangeColor.css" rel="stylesheet">
 <link href="css/destination.css" rel="stylesheet">
 
 <link rel="stylesheet"
@@ -50,12 +51,12 @@
 	<h3>この情報を共有した愛犬家さん</h3>
 	<p>${ownerId}さん</p>
 	<c:choose>
-		<c:when test="${ownerImg == null}">
+		<c:when test="${imgData == null}">
 			<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
 		</c:when>
 		<c:otherwise>
 			<img class="mb-3" id="ownerThumbnail"
-				src='data:image/jpeg;base64,<c:out value="${ownerImg}" />'>
+				src='data:image/jpeg;base64,<c:out value="${imgData}" />'>
 		</c:otherwise>
 	</c:choose>
 	<div class="d-flex justify-content-end mb-3">

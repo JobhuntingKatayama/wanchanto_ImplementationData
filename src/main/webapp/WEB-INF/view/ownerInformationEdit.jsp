@@ -19,7 +19,8 @@
 		「<span class="required">*</span>」がついている項目は必須項目です。
 	</p>
 
-	<form action="" method="post" class="mb-3" enctype="multipart/form-data">
+	<form action="" method="post" class="mb-3"
+		enctype="multipart/form-data">
 		<div class="mb-3">
 			<p>
 				ログインID<span class="small">※半角英数字5～15文字</span><span class="required">*</span>
@@ -37,20 +38,20 @@
 				type="password" pattern="^[0-9A-Za-z]*$" minlength="5"
 				maxlength="15" name="loginPassword" placeholder="セキュリティのため表示されません">
 		</div>
-
 		<div class="mb-3">
 			<p>サムネイル用画像</p>
 			<c:choose>
-				<c:when test="${owner.imgDate != null }">
+				<c:when test="${imgData != null }">
 					<p>現在登録されている画像：</p>
 					<img style="height: 100px;" class="mb-3"
-						src='data:image/jpeg;base64,<c:out value="${owner.imgData}" />'>
+						src='data:image/jpeg;base64,<c:out value="${imgData}" />'>
 				</c:when>
 				<c:otherwise>
-					<input type="file" name="upfile"
-						value="<c:out value="${owner.imgData}" />">
+					<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
 				</c:otherwise>
 			</c:choose>
+			<%-- <a href="addOwnerThumbnail?ownerId=<c:out value="${ownerId }"/>">画像を登録／更新する</a> --%>
+			<input type="file" name="upfile" value="画像をアップロードする">
 		</div>
 
 		<div class="d-flex justify-content-between pt-3">

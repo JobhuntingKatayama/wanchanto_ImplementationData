@@ -44,16 +44,16 @@ public class OwnerMypageServlet extends HttpServlet {
 			// OwnerDAOによるデータ取得
 			OwnerDao OwnerDao = DaoFactory.createOwnerDao();
 			Owner owner = OwnerDao.findByLoginId(loginId);
-			request.setAttribute("owner", owner);
+			session.setAttribute("owner", owner);
 			int ownerId = owner.getOwnerId();
 			byte[] img = owner.getImg();
 
 			// ownerIdと愛犬家のサムネイル画像の取得とリクエストへの格納
-			request.setAttribute("ownerId", ownerId);
+			session.setAttribute("ownerId", ownerId);
 			if (img != null) {
-				request.setAttribute("ownerImg", img);
+				session.setAttribute("img", img);
 			}else {
-				request.setAttribute("ownerImg", null);
+				session.setAttribute("img", null);
 			}
 
 			// DestinationDAOによるデータ取得

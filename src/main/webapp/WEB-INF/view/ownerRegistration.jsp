@@ -48,6 +48,7 @@
 			<div class="bd-highlight">
 				<input class="btn btn-primary" type="submit" value="登録内容を確認する">
 			</div>
+			
 			<div class="bd-highlight">
 				<button type="button" class="btn btn-outline-primary"
 					onclick="location.href='ownerLogin'">ログイン画面に戻る</button>
@@ -57,7 +58,6 @@
 	</form>
 
 
-	</p>
 
 	</div>
 </body>

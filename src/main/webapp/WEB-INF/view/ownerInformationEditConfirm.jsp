@@ -17,7 +17,7 @@
 	<h1>愛犬家登録内容確認</h1>
 	<p>下記の情報で登録をしてもよろしいでしょうか？</p>
 
-	<form action="ownerInformationEditComplete" method="post">
+	<form action="ownerInformationEditComplete" method="post" enctype="multipart/form-data">
 		<h2>ご自身の情報</h2>
 
 		<p>ログインID</p>
@@ -26,10 +26,11 @@
 		<p>ログインパスワード</p>
 		<p
 			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">セキュリティのため表示されません</p>
+		<p>サムネイル</p>
 		<c:choose>
-			<c:when test="${owner.imgData != null}">
-				<img class="mb-3" id="ownerThumbnail"
-					src='data:image/jpeg;base64,<c:out value="${owner.imgData}" />'>
+			<c:when test="${imgData != null}">
+				<img style="height:100px;" class="mb-3" id="ownerThumbnail"
+					src='data:image/jpeg;base64,<c:out value="${imgData}" />'>
 			</c:when>
 			<c:otherwise>
 				<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">

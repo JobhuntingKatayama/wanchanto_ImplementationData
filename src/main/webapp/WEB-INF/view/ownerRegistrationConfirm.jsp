@@ -25,17 +25,15 @@
 			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">セキュリティのため表示されません。</p>
 		<p>サムネイル画像</p>
 		<c:choose>
-			<c:when test="${ownerImg == null}">
-				<p
-					class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
+			<c:when test="${imgData == null}">
+				<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
 					<img class="img-fluid" src="img/thumbnail.jpg">
 				</p>
 			</c:when>
 			<c:otherwise>
-				<p
-					class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
+				<p class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
 					<img class="img-fluid"
-						src='data:image/jpeg;base64,<c:out value="${ownerImg}" />'
+						src='data:image/jpeg;base64,<c:out value="${imgData}" />'
 						alt="${thumbnail }">
 				</p>
 			</c:otherwise>

@@ -39,6 +39,9 @@ public class OwnerInformationEditCompleteServlet extends HttpServlet {
 		Integer ownerId =(Integer)session.getAttribute("ownerId");
 		String loginId =(String) session.getAttribute("loginId");
 		String loginPassword =(String) session.getAttribute("loginPassword");
+		byte[] img =(byte[]) session.getAttribute("img");
+		String imgData =(String) session.getAttribute("imgData");
+		String thumbnail =(String) session.getAttribute("thumbnail");
 
 		//パスワードをハッシュ化
 		String hashedPassword = BCrypt.hashpw(loginPassword, BCrypt.gensalt());
@@ -48,6 +51,9 @@ public class OwnerInformationEditCompleteServlet extends HttpServlet {
 		owner.setOwnerId(ownerId);
 		owner.setLoginId(loginId);
 		owner.setLoginPassword(hashedPassword);
+		owner.setImg(img);
+		owner.setImgData(imgData);
+		owner.setThumbnail(thumbnail);
 
 
 		try {

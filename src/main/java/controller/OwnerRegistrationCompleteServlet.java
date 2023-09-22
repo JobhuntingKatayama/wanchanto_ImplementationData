@@ -36,14 +36,16 @@ public class OwnerRegistrationCompleteServlet extends HttpServlet {
 		String loginId =(String)session.getAttribute("loginId");
 		String loginPassword =(String)session.getAttribute("loginPassword");
 		String thumbnail =(String)session.getAttribute("thumbnail");
-		byte[] imgByte = (byte[])session.getAttribute("bytes");
+		byte[] img = (byte[])session.getAttribute("img");
+		String imgData =(String)session.getAttribute("imgData");
 		
 		// 入力に不備がなければ、データの更新
 		Owner owner = new Owner();
 		owner.setLoginId(loginId);
 		owner.setLoginPassword(loginPassword);
 		owner.setThumbnail(thumbnail);
-		owner.setImg(imgByte);
+		owner.setImg(img);
+		owner.setImgData(imgData);
 
 		try {
 			// データの更新

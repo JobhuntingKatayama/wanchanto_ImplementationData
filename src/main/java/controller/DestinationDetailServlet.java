@@ -1,20 +1,14 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.Base64;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 
 import dao.DaoFactory;
 import dao.DestinationDao;
@@ -59,33 +53,36 @@ public class DestinationDetailServlet extends HttpServlet {
 					
 			//愛犬家情報の取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
-			List<Owner> ownerList = ownerDao.findByOwnerId(destination.getOwnerId());
-			request.setAttribute("ownerList", ownerList);
-			
-			//データベース接続
-			InitialContext ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/wanchanto");
-			Connection con = ds.getConnection();
+			Owner owner = ownerDao.findByOwnerId(destination.getOwnerId());
+			request.setAttribute("owner", owner);
 
-			//リクエストからownerIdの取得と再定義
+			//ownerIdの取得と再定義
 			int ownerId=(Integer)request.getAttribute("ownerId");
-			
-			//ownerIdからのサムネイル取得
-			byte[] byteImg = null;			
-			String sql = "SELECT img FROM owners WHERE ownerId = ?;";
-			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setObject(1, ownerId);
-			ResultSet rs = stmt.executeQuery();
-			if (rs.next() == true) {
-				byteImg = rs.getBytes("img");
-			}
 			request.setAttribute("ownerId", ownerId);
-			if (byteImg != null) {
-				String strImg = Base64.getEncoder().encodeToString(byteImg);
-				request.setAttribute("ownerImg", strImg);
-			} else {
-				request.setAttribute("ownerImg", null);
+			
+			//愛犬家サムネイル画像の取得とリクエストスコープへの格納
+			String imgData = owner.getImgData();
+			request.setAttribute("imgData", imgData);
+			if (imgData == null) {
+				request.setAttribute("imgData", null);
 			}
+			
+//			//データベース接続
+//			InitialContext ctx = new InitialContext();
+//			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/wanchanto");
+//			Connection con = ds.getConnection();
+
+			
+//			//ownerIdからのサムネイル取得
+//			byte[] byteImg = null;			
+//			String sql = "SELECT img FROM owners WHERE ownerId = ?;";
+//			PreparedStatement stmt = con.prepareStatement(sql);
+//			stmt.setObject(1, ownerId);
+//			ResultSet rs = stmt.executeQuery();
+//			if (rs.next() == true) {
+//				byteImg = rs.getBytes("img");
+//			}
+
 			
 		} catch (Exception e) {
 			throw new ServletException(e);

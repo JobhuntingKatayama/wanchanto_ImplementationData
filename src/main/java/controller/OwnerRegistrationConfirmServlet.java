@@ -34,10 +34,10 @@ public class OwnerRegistrationConfirmServlet extends HttpServlet {
 		session.getAttribute("loginId");
 		session.getAttribute("loginPassword");
 		session.getAttribute("thumbnail");
-		session.getAttribute("bytes");
-		session.getAttribute("ownerImg");
+		session.getAttribute("img");
+		session.getAttribute("imgData");
 		
-		request.getRequestDispatcher("/WEB-INF/view/ownerRegistrationComplete.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/ownerRegistrationConfirm.jsp").forward(request, response);
 	}
 
 
