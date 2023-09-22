@@ -27,17 +27,18 @@ public class DestinationIndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		HttpSession session =request.getSession();
+
+		HttpSession session = request.getSession();
 		session.getAttribute("loginId");
-		
+
 		try {
 			// DestinationDAOによるデータ取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			List<Destination> destinationList = destinationDao.findAll();
+			request.setAttribute("destinationList", destinationList);
+
 
 			// JSP へフォワード
-			request.setAttribute("destinationList", destinationList);
 			request.getRequestDispatcher("/WEB-INF/view/destinationIndex.jsp").forward(request, response);
 		} catch (Exception e) {
 			throw new ServletException(e);

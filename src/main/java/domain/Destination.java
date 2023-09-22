@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Base64;
 import java.util.Date;
 
 public class Destination {
@@ -12,23 +13,25 @@ public class Destination {
 	private Integer evaluation;
 	private Integer statusId;
 	private Date addedDate;
+	private String formattedDate;
+	private byte[] img;
+	private String imgData;
+
 	
 	public Destination() {
-
 	}
 
-	public Destination( Integer ownerId, Integer destinationId, Integer genreId, String name,
-			/* String image, */ Integer evaluation/* , */
-	 /*Integer statusId*/, Date addedDate ) {
+	public Destination( Integer ownerId, Integer destinationId, Integer genreId, String name,Integer evaluation,byte[] img, Date addedDate, String formattedDate ) {
 		this.ownerId = ownerId;
 		this.destinationId = destinationId;
 		this.genreId = genreId;
 		this.name = name;
-//		this.image = image;
 		this.evaluation = evaluation;
-//		this.statusId = statusId;
 		this.addedDate = addedDate;
+		this.formattedDate = formattedDate;
+		this.img = img;
 	}
+
 
 	public Integer getOwnerId() {
 		return ownerId;
@@ -93,5 +96,25 @@ public class Destination {
 	public void setAddedDate(Date addedDate) {
 		this.addedDate = addedDate;
 	}
+	
+	public String getFormattedDate() {
+		return formattedDate;
+	}
+	public byte[] getImg() {
+		return img;
+	}
 
+	public void setImg(byte[] img) {
+		this.img = img;
+	}
+	public String getImgData() {
+		if (img != null) {
+			this.imgData = Base64.getEncoder().encodeToString(img);
+		}
+		return imgData;
+	}
+
+	public void setImgData(String imgData) {
+		this.imgData = imgData;
+	}
 }

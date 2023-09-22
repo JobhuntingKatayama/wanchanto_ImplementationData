@@ -3,7 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.sql.Types;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +27,14 @@ public class DestinationDaoImpl implements DestinationDao {
 		List<Destination> destinationList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM destinations";
+			String sql = "SELECT"
+					+ " destinations.ownerId, destinations.destinationId,"
+					+ " destinations.genreId, destinations.name,"
+					+ " destinations.evaluation, destinations.addedDate,"
+					+ " owners.img as ownerImg"
+					+ " FROM destinations"
+					+ " JOIN owners"
+					+ " ON destinations.ownerId = owners.ownerId";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -42,7 +51,15 @@ public class DestinationDaoImpl implements DestinationDao {
 		List<Destination> destinationList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM destinations WHERE ownerId = ? ";
+			String sql = "SELECT"
+					+ " destinations.ownerId, destinations.destinationId,"
+					+ " destinations.genreId, destinations.name,"
+					+ " destinations.evaluation, destinations.addedDate,"
+					+ " owners.img as ownerImg"
+					+ " FROM destinations"
+					+ " JOIN owners"
+					+ " ON destinations.ownerId = owners.ownerId"
+					+ " WHERE destinations.ownerId = ? ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, ownerId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
@@ -61,7 +78,15 @@ public class DestinationDaoImpl implements DestinationDao {
 		Destination destination = new Destination();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM destinations WHERE destinationId = ? ";
+			String sql = "SELECT"
+					+ " destinations.ownerId, destinations.destinationId,"
+					+ " destinations.genreId, destinations.name,"
+					+ " destinations.evaluation, destinations.addedDate,"
+					+ " owners.img as ownerImg"
+					+ " FROM destinations"
+					+ " JOIN owners"
+					+ " ON destinations.ownerId = owners.ownerId"
+					+ " WHERE destinations.destinationId = ? ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destinationId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
@@ -74,8 +99,6 @@ public class DestinationDaoImpl implements DestinationDao {
 
 		return destination;
 	}
-	
-
 
 	@Override
 	public void insert(Destination destination) throws Exception {
@@ -125,10 +148,19 @@ public class DestinationDaoImpl implements DestinationDao {
 //		String image = rs.getString("image");
 		Integer evaluation = (Integer) rs.getObject("evaluation");
 //		Integer statusId = (Integer) rs.getObject("statusId");
-		Date addedDate = rs.getTimestamp("addedDate");
-		
-		return new Destination(ownerId, destinationId, genreId, name, /* image, */ evaluation ,/* statusId,*/ addedDate );
-	}
 
+		// ownersのimgを取得
+		byte[] img = (byte[]) rs.getBytes("ownerImg");
+		
+		Date addedDate = rs.getTimestamp("addedDate");
+
+		// SimpleDateFormatを使用して日付をフォーマット
+		Timestamp timestamp = rs.getTimestamp("addedDate");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+		String formattedDate = sdf.format(new Date(timestamp.getTime()));
+
+
+		return new Destination(ownerId, destinationId, genreId, name, evaluation, img, addedDate, formattedDate);
+	}
 
 }
