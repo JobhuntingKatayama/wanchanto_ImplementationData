@@ -23,11 +23,12 @@ ul.slider li.slick-slide {
 	width: 100%;
 	max-height: 50vh;
 	position: relative;
-	
+	display: flex;
+	align-items: center;
 }
 ul.slider li.slick-slide img {
-	position: relative;
-	top: -10vh;
+    position: relative;
+    width: 100%;
 }
 img#ownerThumbnail {
 	width:120px;
@@ -35,3 +36,33 @@ img#ownerThumbnail {
 	object-fit:cover;
 	border-radius:50%;
 }
+p span#evaluation{
+	display:inline-block;
+	height: 2em;
+	width: calc(2em * 5.33);
+	text-indent:-10em;
+	background-image:url(../img/hyouka_stars.svg);
+	background-size:cover;
+	background-repeat:no-repeat;
+	margin-right: 1em;
+}
+p span#evaluation.oneStar {
+	background-position: -8.55em;
+}
+p span#evaluation.twoStars {
+	background-position: -6.4em;
+}
+p span#evaluation.threeStars {
+	background-position: -4.28em;
+}
+p span#evaluation.fourStars {
+	background-position: -2.15em;
+}
+p span#evaluation.fiveStars {
+	background-position: 0;
+}
+p span.score {
+	font-size: 2em;
+	vertical-align:text-bottom
+}
+

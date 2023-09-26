@@ -9,6 +9,7 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrapChangeColor.css" rel="stylesheet">
+<link href="css/destinationIndex.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 
 <%--リストのソート用 --%>
@@ -25,14 +26,14 @@
 	<jsp:include page="include/destinationIndex.jsp" />
 
 	<h1>ワンちゃんとのお出掛け先一覧</h1>
-	<table id="myTable" class="table table-striped display">
+	<table id="myTable" class="table table-striped display text-center">
 		<thead>
 			<tr>
-				<th>お出掛け先名称</th>
-				<th>お出掛け先ジャンル</th>
-				<th>評価</th>
-				<th>愛犬家</th>
-				<th>登録日</th>
+				<th class="text-center">名称</th>
+				<th class="text-center">ジャンル</th>
+				<th class="text-center">評価</th>
+				<th class="text-center">愛犬家</th>
+				<th class="text-center">登録日</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -54,21 +55,24 @@
 その他の施設
 </c:otherwise>
 						</c:choose></td>
-					<td>${destination.evaluation }</td>
-					<td>				
-
-				<c:choose>
-					<c:when test="${destination.imgData != null}">
-						<img style="height:80px;" class="mb-3" id="ownerThumbnail"
-							src='data:image/jpeg;base64,<c:out value="${destination.imgData}" />'>
-					</c:when>
-					<c:otherwise>
-						<img style="height:80px;" class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
-					</c:otherwise>
-				</c:choose>
-
-
-					</td>
+					<td><span id="evaluation"
+						class="<c:choose>
+					<c:when test="${destination.evaluation ==1}">oneStar</c:when>
+					<c:when test="${destination.evaluation ==2}">twoStars</c:when>
+					<c:when test="${destination.evaluation ==3}">threeStars</c:when>
+					<c:when test="${destination.evaluation ==4}">fourStars</c:when>
+					<c:otherwise>fiveStars</c:otherwise>
+					</c:choose>"></span><span
+						class="score">${destination.evaluation}</span></td>
+					<td><c:choose>
+							<c:when test="${destination.imgData != null}">
+								<img id="ownerThumbnail"
+									src='data:image/jpeg;base64,<c:out value="${destination.imgData}" />'>
+							</c:when>
+							<c:otherwise>
+								<img id="ownerThumbnail" src="img/thumbnail.jpg">
+							</c:otherwise>
+						</c:choose></td>
 					<td>${destination.formattedDate }</td>
 				</tr>
 			</c:forEach>
@@ -86,7 +90,7 @@
 		$(document).ready(function() {
 			$("#myTable").DataTable({
 				"columnDefs" : [ {
-					"targets" : [ ],
+					"targets" : [],
 					"orderable" : false
 				} ]
 			});

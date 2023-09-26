@@ -57,7 +57,7 @@
 						</div>
 						<div class="col-4 text-right">
 							<button type="button" class="btn btn-primary"
-								onclick="location.href='destinationRegistration?ownerId=<c:out value="${destination.ownerId}"/>'">追加する</button>
+								onclick="location.href='destinationRegistration?ownerId=<c:out value="${ownerId}"/>'">追加する</button>
 						</div>
 					</div>
 				</div>

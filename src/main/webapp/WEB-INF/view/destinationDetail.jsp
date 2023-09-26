@@ -39,15 +39,21 @@
 	<div id="destinationImgSlider">
 		<ul class="slider">
 			<c:forEach items="${detailImageList}" var="detailImage">
-				<li><img class="mb-3"
-					src='data:image/jpeg;base64,<c:out value="${detailImage.imgData}" />'></li>
+				<li><img src='data:image/jpeg;base64,<c:out value="${detailImage.imgData}" />'></li>
 			</c:forEach>
 		</ul>
 	</div>
 
 
 	<h2>${name}の評価</h2>
-	<p>星${evaluation}</p>
+	<p><span id="evaluation" class="<c:choose>
+					<c:when test="${evaluation ==1}">oneStar</c:when>
+					<c:when test="${evaluation ==2}">twoStars</c:when>
+					<c:when test="${evaluation ==3}">threeStars</c:when>
+					<c:when test="${evaluation ==4}">fourStars</c:when>
+					<c:otherwise>fiveStars</c:otherwise>
+					</c:choose>"></span><span class="score">${evaluation}</span>
+					</p>
 	<h3>この情報を共有した愛犬家さん</h3>
 	<p>${ownerId}さん</p>
 	<c:choose>
