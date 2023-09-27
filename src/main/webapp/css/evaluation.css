@@ -1,0 +1,32 @@
+@charset "UTF-8";
+#evaluation{
+	display:inline-block;
+	height: 1em;
+	width: calc(1em * 5.33);
+	text-indent:6em;
+	line-height: 1em;
+	background-image:url(../img/hyouka_stars.svg);
+	background-size:cover;
+	background-repeat:no-repeat;
+	margin-right: .5em;
+	vertical-align: middle;
+}
+#evaluation.oneStar {
+	background-position: -4.25em;
+}
+#evaluation.twoStars {
+	background-position: -3.2em;
+}
+#evaluation.threeStars {
+	background-position: -2.13em;
+}
+#evaluation.fourStars {
+	background-position: -1em;
+}
+#evaluation.fiveStars {
+	background-position: 0;
+}
+span.score {
+	font-size: 1em;
+	vertical-align:text-bottom
+}

@@ -5,9 +5,14 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>愛犬家マイページ</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+<jsp:include page="include/bootstrapCDN.jsp" />
+<link href="css/evaluation.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/ownerMypage.css" rel="stylesheet">
 
@@ -55,7 +60,7 @@
 						<div class="col-8">
 							<h2>お出掛け先一覧</h2>
 						</div>
-						<div class="col-4 text-right">
+						<div class="col-4 right">
 							<button type="button" class="btn btn-primary"
 								onclick="location.href='destinationRegistration?ownerId=<c:out value="${ownerId}"/>'">追加する</button>
 						</div>
@@ -71,7 +76,7 @@
 						<th>編集</th>
 					</tr>
 					<c:forEach items="${destinationList}" var="destination">
-						<tr>
+						<tr class="text-center">
 							
 							<td><a target="_blank"
 								href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />"><c:out
@@ -82,7 +87,15 @@
 									<c:when test="${destination.genreId == 3}">飲食店</c:when>
 									<c:otherwise>その他の施設</c:otherwise>
 								</c:choose></td>
-							<td><c:out value="${destination.evaluation}" /></td>
+							<td><div id="evaluation" class="
+							<c:choose>
+							<c:when test='${destination.evaluation == 1}'>oneStar">1</c:when>
+							<c:when test='${destination.evaluation == 2}'>twoStars">2</c:when>
+							<c:when test='${destination.evaluation == 3}'>threeStars">3</c:when>
+							<c:when test='${destination.evaluation == 4}'>fourStars">4</c:when>
+							<c:when test='${destination.evaluation == 5}'>fiveStars">5</c:when>
+							</c:choose></div>
+							</td>
 							<td><button type="button" class="btn btn-outline-primary"
 									onclick="location.href='destinationEdit?destinationId=${destination.destinationId}'">編集する</button></td>
 						</tr>

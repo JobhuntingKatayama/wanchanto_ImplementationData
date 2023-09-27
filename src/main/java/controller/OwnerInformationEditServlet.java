@@ -80,33 +80,44 @@ public class OwnerInformationEditServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
+		// 編集するownerIDをパラメーターから取得してセッションスコープへ格納
+		Integer ownerId = Integer.parseInt(request.getParameter("ownerId"));
+
+		try {
+			// 編集する愛犬家データを取得してownerに格納
+			OwnerDao ownerDao = DaoFactory.createOwnerDao();
+			Owner owner = ownerDao.findByOwnerId(ownerId);
+			// 愛犬家サムネイル画像をリクエストへ格納
+			request.setAttribute("img", owner.getImg());
+			request.setAttribute("imgData", owner.getImgData());
+			request.setAttribute("thumbnail", owner.getThumbnail());
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+
 		// バリデーション用のフラグ
 		boolean isError = false;
 
 		// 各パラメータの取得とバリデーション
 		String loginId = request.getParameter("loginId");
 		session.setAttribute("loginId", loginId);// 入力されたloginIdをセッションへ格納
-//		if (loginId.isEmpty()) {
-//			// エラーメッセージの作成
-//			request.setAttribute("loginIdError", "ログインIDが未入力です。");
-//			isError = true; // 入力に不備ありと判定
-//		}
 
 		String loginPassword = request.getParameter("loginPassword");
 		session.setAttribute("loginPassword", loginPassword);// 入力されたloginPasswordをセッションへ格納
-//		if (loginPassword.isEmpty()) {
-//			// エラーメッセージの作成
-//			request.setAttribute("loginPasswordError", "パスワードが未入力です。");
-//			isError = true; // 入力に不備ありと判定
-//		}
 
 		// 画像が更新・アップロードされたらそのデータをセッションへ格納
-		Part part = request.getPart("upfile");
-		String thumbnail = part.getSubmittedFileName();
 
+		Part part = null;
+		String thumbnail = (String) request.getAttribute("thunbnail");
+		if ((Object) request.getPart("upfile") != null) {
+			part = request.getPart("upfile");
+			thumbnail = part.getSubmittedFileName();
+			request.setAttribute("thumbnail", thumbnail);
+		}
 		// partオブジェクトをbyte[ ]に変換
 		FileInputStream fis;
-		byte[] bytes = null;
+		byte[] bytes = (byte[]) request.getAttribute("img");
 		String imgData = null;
 		if (part.getSize() > 0) {
 			fis = (FileInputStream) part.getInputStream();
@@ -114,7 +125,7 @@ public class OwnerInformationEditServlet extends HttpServlet {
 			// 確認用に画像をエンコード
 			imgData = Base64.getEncoder().encodeToString(bytes);
 		}
-		
+
 		session.setAttribute("img", bytes);// 画像ファイルをセッションへ格納
 		session.setAttribute("imgData", imgData);// 画像ファイルをエンコードした情報をセッションへ格納
 		session.setAttribute("thumbnail", thumbnail);// 画像ファイル名をセッションへ格納

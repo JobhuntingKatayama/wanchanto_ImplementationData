@@ -3,9 +3,28 @@
 * {
 font-family: 'M PLUS Rounded 1c', sans-serif!important;
 }
+img#logo {
+	height: 4.2vw;
+	max-height: 34px;
+}
 h1 {
-	margin-bottom: 2em;
+	margin-bottom: 1.5em;
+}
+h2 {
+	margin-bottom: 1em;
 }
 span.required {
 	color: red!important;
+	vertical-align: top;
+	margin: 0 0.25em;
+}
+.right {
+	text-align:right!important;
+}
+
+@media (min-width: 800px) {
+body div.container div.width-400 {
+	width: 480px;
+	margin: 0 auto;
+	}
 }

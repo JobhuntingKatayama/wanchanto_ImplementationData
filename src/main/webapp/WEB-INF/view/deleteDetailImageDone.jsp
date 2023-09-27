@@ -5,9 +5,27 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>画像削除完了</title>
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+
+<jsp:include page="include/bootstrapCDN.jsp" />
+<link href="css/style.css" rel="stylesheet">
+
 </head>
 <body>
-<p>削除しました。</p>
-<a href="destinationEdit?destinationId=<c:out value="${destinationId }"/>">お出掛け先情報の編集ページへ戻る</a>
+	<jsp:include page="include/destinationEditContainer.jsp" />
+	<jsp:include page="include/destinationEdit.jsp" />
+
+<h1>画像削除完了</h1>
+<p class="mb-3">お出掛け先情報から画像を削除しました。</p>
+	<div class="bd-highlight">
+		<button type="button" class="btn btn-primary"
+			onclick="location.href='destinationEdit?destinationId=<c:out value="${destinationId }" />'">編集画面に戻る</button>
+	</div>
+</div>
+</div>
+</body>
 </html>

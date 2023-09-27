@@ -4,6 +4,7 @@ img#ownerThumbnail {
 	width:120px;
 	height:120px;
 	object-fit:cover;
+	align-items: center;
 	border-radius:50%;
 }
 * button {

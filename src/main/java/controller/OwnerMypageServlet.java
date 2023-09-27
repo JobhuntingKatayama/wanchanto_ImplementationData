@@ -1,7 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,7 +62,24 @@ public class OwnerMypageServlet extends HttpServlet {
 			// DestinationDAOによるデータ取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			List<Destination> destinationList = destinationDao.findByOwnerId(ownerId);
-			request.setAttribute("destinationList", destinationList);
+//			request.setAttribute("destinationList", destinationList);
+			
+			// 重複を排除するためにHashSetを使用
+			Set<Integer> uniqueDestinationIds = new HashSet<>();
+			List<Destination> uniqueDestinationList = new ArrayList<>();
+
+			for (Destination destination : destinationList) {
+			    Integer destinationId = destination.getDestinationId();
+
+			    // HashSetに追加し、重複をチェック
+			    if (uniqueDestinationIds.add(destinationId)) {
+			        // 重複しない場合、新しいリストに追加
+			        uniqueDestinationList.add(destination);
+			    }
+			}
+
+			// リクエスト属性に設定
+			request.setAttribute("destinationList", uniqueDestinationList);
 			
 //			int destinationId = 0;
 //			for (Destination destination : destinationList) {
