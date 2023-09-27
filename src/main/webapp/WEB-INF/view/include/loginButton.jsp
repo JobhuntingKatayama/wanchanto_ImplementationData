@@ -20,4 +20,6 @@
 		</div>
 	</c:if>
 </div>
-
+<div class="text-center mt-3 mb-3 bg-red">
+	<img id="logo" src="img/logo_wanchanto.svg">
+</div>

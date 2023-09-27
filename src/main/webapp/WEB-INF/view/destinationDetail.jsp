@@ -5,7 +5,10 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>ワンちゃんと${destinationId }に関する情報／ワンちゃんとのための情報サイト「ワンちゃんと」</title>
+
+<title>ワンちゃんと${name}に関する情報／ワンちゃんとのための情報サイト「ワンちゃんと」</title>
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -38,22 +41,42 @@
 
 	<div id="destinationImgSlider">
 		<ul class="slider">
-			<c:forEach items="${detailImageList}" var="detailImage">
-				<li><img src='data:image/jpeg;base64,<c:out value="${detailImage.imgData}" />'></li>
-			</c:forEach>
+			<c:choose>
+				<c:when test="${empty detailImageList}">
+					<li><img src="img/noimage.jpg"></li>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${detailImageList}" var="detailImage">
+						<li><c:choose>
+								<c:when test="${empty detailImage.imgData}">
+									<img src="img/noimage.jpg">
+								</c:when>
+								<c:otherwise>
+									<img
+										src='data:image/jpeg;base64,<c:out value="${detailImage.imgData}" />'>
+								</c:otherwise>
+							</c:choose></li>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 
-
-	<h2>${name}の評価</h2>
-	<p><span id="evaluation" class="<c:choose>
+	<div class="onSlider">
+		<h2>${name}の評価</h2>
+		<p>
+			<span id="evaluation"
+				class="<c:choose>
 					<c:when test="${evaluation ==1}">oneStar</c:when>
 					<c:when test="${evaluation ==2}">twoStars</c:when>
 					<c:when test="${evaluation ==3}">threeStars</c:when>
 					<c:when test="${evaluation ==4}">fourStars</c:when>
 					<c:otherwise>fiveStars</c:otherwise>
-					</c:choose>"></span><span class="score">${evaluation}</span>
-					</p>
+					</c:choose>"></span><span
+				class="score">${evaluation}</span>
+		</p>
+	</div>
+
 	<h3>この情報を共有した愛犬家さん</h3>
 	<p>${ownerId}さん</p>
 	<c:choose>

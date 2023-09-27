@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>ワンちゃんとのお出掛け先一覧</title>
 
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrapChangeColor.css" rel="stylesheet">
 <link href="css/destinationIndex.css" rel="stylesheet">
@@ -22,7 +25,6 @@
 
 <body>
 	<jsp:include page="include/loginButton.jsp" />
-
 	<jsp:include page="include/destinationIndex.jsp" />
 
 	<h1>ワンちゃんとのお出掛け先一覧</h1>
@@ -39,7 +41,7 @@
 		<tbody>
 			<c:forEach items="${destinationList }" var="destination">
 				<tr>
-					<td><a target="_blank"
+					<td><a 
 						href="destinationDetail?destinationId=${destination.destinationId }">${destination.name }</a></td>
 					<td><c:choose>
 							<c:when test="${destination.genreId == 1}">

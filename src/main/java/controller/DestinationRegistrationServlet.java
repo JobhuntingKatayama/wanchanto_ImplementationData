@@ -39,8 +39,7 @@ public class DestinationRegistrationServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		//登録情報の取得
-		String strGenreId =(String)request.getParameter("genreId");
-		Integer genreId = Integer.parseInt(strGenreId);
+		Integer genreId =Integer.parseInt(request.getParameter("genreId"));
 		String name =(String)request.getParameter("name");
 		String strEvaluation=(String)request.getParameter("evaluation");
 		Integer evaluation = Integer.parseInt(strEvaluation);

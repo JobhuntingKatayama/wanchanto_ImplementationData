@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>詳細画像一覧</title>
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
 </head>
 <body>
 	<table>

@@ -5,14 +5,20 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>愛犬家登録情報の更新</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+<jsp:include page="include/bootstrapCDN.jsp" />
+<link href="css/ownerMypage.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 
 </head>
 <body>
 	<jsp:include page="include/ownerMypageContainer.jsp" />
+  <jsp:include page="include/ownerEntrance.jsp"/>
 
 	<h1>愛犬家登録情報の更新</h1>
 	<p class="small right">
@@ -21,37 +27,39 @@
 
 	<form action="" method="post" class="mb-3"
 		enctype="multipart/form-data">
-		<div class="mb-3">
-			<p>
-				ログインID<span class="small">※半角英数字5～15文字</span><span class="required">*</span>
+		<div class="mb-4">
+			<p class="fw-bold">
+				ログインID<span class="small"><span class="required">*</span>※半角英数字5～15文字</span>
 			</p>
 			<input class="form-control" aria-describedby="basic-addon1" required
 				type="text" pattern="^[0-9A-Za-z]*$" minlength="5" maxlength="15"
 				name="loginId" placeholder="${loginId}" value="${loginId}">
 		</div>
 
-		<div class="mb-3">
-			<p>
-				パスワード<span class="small">※半角英数字5～15文字</span><span class="required">*</span>
+		<div class="mb-4">
+			<p class="fw-bold">
+				パスワード<span class="small"><span class="required">*</span>※半角英数字5～15文字</span>
 			</p>
 			<input class="form-control" aria-describedby="basic-addon1" required
 				type="password" pattern="^[0-9A-Za-z]*$" minlength="5"
 				maxlength="15" name="loginPassword" placeholder="セキュリティのため表示されません">
 		</div>
 		<div class="mb-3">
-			<p>サムネイル用画像</p>
+			<p class="fw-bold">サムネイル用画像</p>
 			<c:choose>
 				<c:when test="${imgData != null }">
 					<p>現在登録されている画像：</p>
-					<img style="height: 100px;" class="mb-3"
+					<p><img id="ownerThumbnail" 
 						src='data:image/jpeg;base64,<c:out value="${imgData}" />'>
+					</p>
 				</c:when>
 				<c:otherwise>
-					<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
+					<p><img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg"></p>
 				</c:otherwise>
 			</c:choose>
-			<%-- <a href="addOwnerThumbnail?ownerId=<c:out value="${ownerId }"/>">画像を登録／更新する</a> --%>
-			<input type="file" name="upfile" value="画像をアップロードする">
+								<p>画像の変更：</p>
+			
+			<p><input type="file" name="upfile" value="画像をアップロードする"></p>
 		</div>
 
 		<div class="d-flex justify-content-between pt-3">
@@ -65,6 +73,7 @@
 		</div>
 
 	</form>
-
+</div>
+</div>
 </body>
 </html>

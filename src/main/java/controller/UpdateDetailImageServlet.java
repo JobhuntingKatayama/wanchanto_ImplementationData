@@ -46,6 +46,11 @@ public class UpdateDetailImageServlet extends HttpServlet {
 			request.setAttribute("imgCategory", detailImage.getImgCategory());
 			request.setAttribute("comment", detailImage.getComment());
 
+			byte[] byteImg = (byte[]) request.getAttribute("img");
+			if (byteImg != null) {
+				String imgData = Base64.getEncoder().encodeToString(byteImg);
+				request.setAttribute("imgData", imgData);
+			}
 			// 画像情報変更ページへのフォワード
 			request.getRequestDispatcher("/WEB-INF/view/updateDetailImage.jsp").forward(request, response);
 
@@ -62,8 +67,20 @@ public class UpdateDetailImageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// 画像削除のためimgIdを取得してリクエストに格納
 		Integer imgId = Integer.parseInt(request.getParameter("imgId"));
+
+		try {
+			// 画像の更新がなかった場合のため、既存の画像を取得してリクエストへ格納
+			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
+			DetailImage detailImage = detailImageDao.findByImgId(imgId);
+
+			// 画像情報をリクエストへ格納
+			request.setAttribute("img", detailImage.getImg());
+			request.setAttribute("fileName", detailImage.getFileName());
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
 
 		// バリデーション用のフラグ
 		boolean isError = false;
@@ -78,13 +95,18 @@ public class UpdateDetailImageServlet extends HttpServlet {
 		request.setAttribute("comment", comment);
 
 		// 画像の取得しpartへ代入、ファイル名はセッションへ格納
-		Part part = request.getPart("upfile");
-		String fileName = part.getSubmittedFileName();
-		request.setAttribute("fileName", fileName);
-
+		Part part = null;
+		String fileName = null;
+		if ((Object) request.getPart("upfile") != null) {
+			part = request.getPart("upfile");
+			fileName = part.getSubmittedFileName();
+			request.setAttribute("fileName", fileName);
+		}
 		// partオブジェクトをbyte[ ]に変換
 		FileInputStream fis;
-		byte[] bytes = null;
+		// 既存の画像をbytesへ格納
+		byte[] bytes = (byte[]) request.getAttribute("img");
+//		byte[] bytes = null;
 		String strBytes = null;
 		if (part.getSize() > 0) {
 			fis = (FileInputStream) part.getInputStream();
@@ -113,10 +135,10 @@ public class UpdateDetailImageServlet extends HttpServlet {
 			// データの更新
 			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
 			detailImageDao.update(detailImage);
-			
-			//お出掛け先編集ページへ戻る
-			request.getRequestDispatcher("/WEB-INF/view/updateDetailImageDone.jsp").forward(request, response);			
-			
+
+			// お出掛け先編集ページへ戻る
+			request.getRequestDispatcher("/WEB-INF/view/updateDetailImageDone.jsp").forward(request, response);
+
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
