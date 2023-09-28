@@ -154,7 +154,7 @@
 			<div class="mb-3">
 			<p>画像の種類：</p>
 			<select class="form-select" name="imgCategory">
-					<option value="" label="画像の種類をお選びください" selected>
+					<option value="0" label="画像の種類をお選びください" selected>
 					<option value="0" label="特に指定なし">
 					<option value="1" label="内観">
 					<option value="2" label="外観">

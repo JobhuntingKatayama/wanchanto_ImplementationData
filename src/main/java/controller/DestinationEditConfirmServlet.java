@@ -27,7 +27,7 @@ public class DestinationEditConfirmServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		Integer destinationId=(Integer)session.getAttribute("destinatinId");
+		Integer destinationId = (Integer) session.getAttribute("destinatinId");
 		session.setAttribute("destinationId", destinationId);
 
 	}
@@ -39,19 +39,24 @@ public class DestinationEditConfirmServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//Editページからポストされた情報をセッションスコープから取得
+		// Editページからポストされた情報をセッションスコープから取得
 		HttpSession session = request.getSession();
 		session.getAttribute("destinationId");
 		session.getAttribute("genreId");
 		session.getAttribute("name");
 		session.getAttribute("evaluation");
-		session.getAttribute("imgCategory");
-		session.getAttribute("comment");
-		session.getAttribute("fileName");
-		session.getAttribute("strBytes");
-		
-		
-		
+		if (session.getAttribute("bytes") != null) {
+			session.getAttribute("imgCategory");
+			session.getAttribute("comment");
+			session.getAttribute("fileName");
+			session.getAttribute("strBytes");
+		} else {
+			session.removeAttribute("imgCategory");
+			session.removeAttribute("comment");
+			session.removeAttribute("fileName");
+			session.removeAttribute("strBytes");
+		}
+
 		request.getRequestDispatcher("/WEB-INF/view/destinationEditConfirm.jsp").forward(request, response);
 
 	}

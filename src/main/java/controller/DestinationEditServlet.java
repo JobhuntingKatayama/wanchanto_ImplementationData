@@ -102,7 +102,9 @@ public class DestinationEditServlet extends HttpServlet {
 
 		
 		// 画像の登録有無の確認
-		if (request.getParameter("imgCategory") != null && !request.getParameter("imgCategory").isEmpty()) {
+		Part filePart = request.getPart("upfile");
+		if (filePart != null && filePart.getSize() > 0) {
+//		if (request.getParameter("imgCategory") != null && !request.getParameter("imgCategory").isEmpty()) {
 
 			// 画像カテゴリーを取得しセッションに格納
 			String strImgCategory = (String) request.getParameter("imgCategory");
@@ -132,7 +134,13 @@ public class DestinationEditServlet extends HttpServlet {
 			session.setAttribute("bytes", bytes);
 			session.setAttribute("strBytes", strBytes);
 
-		}
+		} 
+//			else {
+//			session.removeAttribute("imgCategory");
+//			session.removeAttribute("comment");
+//			session.removeAttribute("fileName");
+//			session.removeAttribute("strBytes");
+//		}
 
 		// 上記に不備がある場合はdestinationEditを再表示
 		if (isError == true) {
