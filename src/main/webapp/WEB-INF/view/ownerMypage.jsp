@@ -70,6 +70,7 @@
 
 				<table class="table table-striped">
 					<tr class="text-center">
+						<th>イメージ</th>
 						<th>名称</th>
 						<th>ジャンル</th>
 						<th>評価</th>
@@ -77,9 +78,21 @@
 					</tr>
 					<c:forEach items="${destinationList}" var="destination">
 						<tr class="text-center">
-							
-							<td><a target="_blank"
-								href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />"><c:out
+							<td><c:choose>
+									<c:when test="${destination.imageData != null}">
+									<a target="_blank" href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />">
+										<img class="destinationThumbnail" src='data:image/jpeg;base64,<c:out value="${destination.imageData}" />'>
+									</a>
+									</c:when>
+									<c:otherwise>
+									<a target="_blank" href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />">
+										<img class="destinationThumbnail" src="img/thumbnail.jpg">
+									</a>
+									</c:otherwise>
+								</c:choose>
+								</td>
+								<td>
+				<a target="_blank" href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />"><c:out
 										value="${destination.name}" /></a></td>
 							<td><c:choose>
 									<c:when test="${destination.genreId == 1}">公園</c:when>
@@ -87,15 +100,18 @@
 									<c:when test="${destination.genreId == 3}">飲食店</c:when>
 									<c:otherwise>その他の施設</c:otherwise>
 								</c:choose></td>
-							<td><div id="evaluation" class="
+							<td><div id="evaluation"
+									class="
 							<c:choose>
-							<c:when test='${destination.evaluation == 1}'>oneStar">1</c:when>
-							<c:when test='${destination.evaluation == 2}'>twoStars">2</c:when>
-							<c:when test='${destination.evaluation == 3}'>threeStars">3</c:when>
-							<c:when test='${destination.evaluation == 4}'>fourStars">4</c:when>
-							<c:when test='${destination.evaluation == 5}'>fiveStars">5</c:when>
-							</c:choose></div>
-							</td>
+							<c:when test='${destination.evaluation == 1}'>oneStar">
+									1
+									</c:when>
+									<c:when test='${destination.evaluation == 2}'>twoStars">2</c:when>
+									<c:when test='${destination.evaluation == 3}'>threeStars">3</c:when>
+									<c:when test='${destination.evaluation == 4}'>fourStars">4</c:when>
+									<c:when test='${destination.evaluation == 5}'>fiveStars">5</c:when>
+									</c:choose>
+								</div></td>
 							<td><button type="button" class="btn btn-outline-primary"
 									onclick="location.href='destinationEdit?destinationId=${destination.destinationId}'">編集する</button></td>
 						</tr>

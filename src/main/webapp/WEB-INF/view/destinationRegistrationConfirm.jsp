@@ -49,6 +49,19 @@
 			class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">
 			${name}</p>
 </div>
+
+<div class="mb-4">
+		<p class="fw-bold">お出掛け先のイメージ</p>
+		<c:choose>
+			<c:when test="${imageData != null}">
+				<img class="mb-3" style="width:100%;"
+					src='data:image/jpeg;base64,<c:out value="${imageData}" />'>
+			</c:when>
+			<c:otherwise>
+				<p>イメージ画像のご登録はありません。</p>
+			</c:otherwise>
+		</c:choose>
+</div>
 <div class="mb-4">
 		<p class="fw-bold">評価</p>
 		<p id="evaluation"

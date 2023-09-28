@@ -42,6 +42,12 @@
 	<div id="destinationImgSlider">
 		<ul class="slider">
 			<c:choose>
+			<c:when test="${imageData != null }">
+				<li><img
+					src='data:image/jpeg;base64,<c:out value="${imageData}" />'></li>
+			</c:when>
+			<c:otherwise>
+			<c:choose>
 				<c:when test="${empty detailImageList}">
 					<li><img src="img/noimage.jpg"></li>
 				</c:when>
@@ -58,6 +64,8 @@
 							</c:choose></li>
 					</c:forEach>
 				</c:otherwise>
+			</c:choose>
+			</c:otherwise>
 			</c:choose>
 		</ul>
 	</div>

@@ -45,6 +45,8 @@ public class DestinationEditConfirmServlet extends HttpServlet {
 		session.getAttribute("genreId");
 		session.getAttribute("name");
 		session.getAttribute("evaluation");
+		session.getAttribute("thnumbnail");
+		session.getAttribute("image");
 		if (session.getAttribute("bytes") != null) {
 			session.getAttribute("imgCategory");
 			session.getAttribute("comment");

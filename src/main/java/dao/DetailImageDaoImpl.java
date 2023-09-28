@@ -56,6 +56,7 @@ public class DetailImageDaoImpl implements DetailImageDao {
 		return detailImage;
 
 	}
+	
 
 	@Override
 	public List<DetailImage> findByDestinationId(Integer destinationId) throws Exception {

@@ -9,7 +9,8 @@ public class Destination {
 	private Integer destinationId;
 	private Integer genreId;
 	private String name;
-	private String image;
+	private byte[] image;
+	private String imageData;
 	private Integer evaluation;
 	private Integer statusId;
 	private Date addedDate;
@@ -21,11 +22,12 @@ public class Destination {
 	public Destination() {
 	}
 
-	public Destination( Integer ownerId, Integer destinationId, Integer genreId, String name,Integer evaluation,byte[] img, Date addedDate, String formattedDate ) {
+	public Destination( Integer ownerId, Integer destinationId, Integer genreId, String name,byte[]image,Integer evaluation,byte[] img, Date addedDate, String formattedDate ) {
 		this.ownerId = ownerId;
 		this.destinationId = destinationId;
 		this.genreId = genreId;
 		this.name = name;
+		this.image = image;
 		this.evaluation = evaluation;
 		this.addedDate = addedDate;
 		this.formattedDate = formattedDate;
@@ -65,12 +67,23 @@ public class Destination {
 		this.name = name;
 	}
 
-	public String getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(byte[] image) {
 		this.image = image;
+	}
+	
+	public String getImageData() {
+		if (image != null) {
+			this.imageData = Base64.getEncoder().encodeToString(image);
+		}
+		return imageData;
+	}
+
+	public void setImageData(String imageData) {
+		this.imageData = imageData;
 	}
 
 	public Integer getEvaluation() {

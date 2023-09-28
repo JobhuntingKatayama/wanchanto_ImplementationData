@@ -50,6 +50,7 @@ public class DestinationEditCompleteServlet extends HttpServlet {
 		Integer ownerId = (Integer) session.getAttribute("ownerId");
 		Integer genreId = (Integer) session.getAttribute("genreId");
 		String name = (String) session.getAttribute("name");
+		byte[] image = (byte[]) session.getAttribute("image");
 		Integer evaluation = (Integer) session.getAttribute("evaluation");
 
 
@@ -59,6 +60,7 @@ public class DestinationEditCompleteServlet extends HttpServlet {
 		destination.setGenreId(genreId);
 		destination.setDestinationId(destinationId);
 		destination.setName(name);
+		destination.setImage(image);
 		destination.setEvaluation(evaluation);
 
 		if (session.getAttribute("imgCategory") != null ) {

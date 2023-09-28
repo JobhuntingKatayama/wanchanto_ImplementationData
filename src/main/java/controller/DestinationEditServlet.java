@@ -39,8 +39,7 @@ public class DestinationEditServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// getから編集するお出掛け先IDの取得しセッションへ格納
-		String strDestinationId = request.getParameter("destinationId");
-		Integer intDestinationId = Integer.parseInt(strDestinationId);
+		Integer intDestinationId = Integer.parseInt(request.getParameter("destinationId"));
 		session.setAttribute("destinationId", intDestinationId);
 
 		try {
@@ -53,7 +52,9 @@ public class DestinationEditServlet extends HttpServlet {
 			request.setAttribute("genreId", destination.getGenreId());
 			request.setAttribute("name", destination.getName());
 			request.setAttribute("evaluation", destination.getEvaluation());
+			request.setAttribute("imageData", destination.getImageData());
 
+			
 			// お出掛け先のイメージ画像のテーブルを取得してリストをリクエストへの格納
 			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
 			List<DetailImage> detailImageList = detailImageDao.findByDestinationId(intDestinationId);
@@ -95,7 +96,23 @@ public class DestinationEditServlet extends HttpServlet {
 //		// 編集されたパラメータを取得し取得しセッションに格納
 		String strName = request.getParameter("name");
 		session.setAttribute("name", strName);
-
+		
+		// サムネイル画像を取得しセッションへ格納
+		Part tmnPart = request.getPart("thumbnail");
+		byte[] tmnBytes = null;
+		String tmnData = null;
+		if (tmnPart != null && tmnPart.getSize() > 0) {
+			FileInputStream fis;
+			if (tmnPart.getSize() > 0) {
+				fis = (FileInputStream) tmnPart.getInputStream();
+				tmnBytes = fis.readAllBytes();
+				// 確認用に画像をエンコード
+				tmnData = Base64.getEncoder().encodeToString(tmnBytes);
+			}
+			session.setAttribute("thnumbnail", tmnData);
+			session.setAttribute("image", tmnBytes);
+			
+		}
 //		// 評価の変更を取得しセッションに格納
 		Integer intEvaluation = Integer.parseInt(request.getParameter("evaluation"));
 		session.setAttribute("evaluation", intEvaluation);

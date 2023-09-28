@@ -19,7 +19,7 @@ public class DetailImage {
 
 	}
 
-	public DetailImage(Integer destinationId,Integer imgId,Integer imgCategory, String fileName, byte[] img,
+	public DetailImage(Integer destinationId, Integer imgId, Integer imgCategory, String fileName, byte[] img,
 			String comment, Date registrationDate) {
 		this.destinationId = destinationId;
 		this.imgId = imgId;
@@ -96,5 +96,6 @@ public class DetailImage {
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
+
 
 }

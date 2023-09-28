@@ -29,7 +29,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT"
 					+ " destinations.ownerId, destinations.destinationId,"
-					+ " destinations.genreId, destinations.name,"
+					+ " destinations.genreId, destinations.name, destinations.image,"
 					+ " destinations.evaluation, destinations.addedDate,"
 					+ " owners.img as ownerImg"
 					+ " FROM destinations"
@@ -53,7 +53,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT"
 					+ " destinations.ownerId, destinations.destinationId,"
-					+ " destinations.genreId, destinations.name,"
+					+ " destinations.genreId, destinations.name, destinations.image,"
 					+ " destinations.evaluation, destinations.addedDate,"
 					+ " owners.img as ownerImg"
 					+ " FROM destinations"
@@ -80,7 +80,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT"
 					+ " destinations.ownerId, destinations.destinationId,"
-					+ " destinations.genreId, destinations.name,"
+					+ " destinations.genreId, destinations.name, destinations.image,"
 					+ " destinations.evaluation, destinations.addedDate,"
 					+ " owners.img as ownerImg"
 					+ " FROM destinations"
@@ -103,13 +103,14 @@ public class DestinationDaoImpl implements DestinationDao {
 	@Override
 	public void insert(Destination destination) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "INSERT INTO destinations" + " (ownerId,genreId,name,evaluation,addedDate)"
-					+ " VALUES(?,?,?,?,NOW())";
+			String sql = "INSERT INTO destinations" + " (ownerId,genreId,name,image,evaluation,addedDate)"
+					+ " VALUES(?,?,?,?,?,NOW())";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destination.getOwnerId(), Types.INTEGER);
 			stmt.setObject(2, destination.getGenreId(), Types.INTEGER);
 			stmt.setString(3, destination.getName());
-			stmt.setObject(4, destination.getEvaluation(), Types.INTEGER);
+			stmt.setBytes(4, destination.getImage());
+			stmt.setObject(5, destination.getEvaluation(), Types.INTEGER);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -120,13 +121,14 @@ public class DestinationDaoImpl implements DestinationDao {
 	@Override
 	public void update(Destination destination) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE destinations SET genreId = ?, name = ?, evaluation = ?, addedDate = NOW()"
+			String sql = "UPDATE destinations SET genreId = ?, name = ?, image = ?, evaluation = ?, addedDate = NOW()"
 					+ " WHERE destinationId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destination.getGenreId(), Types.INTEGER);
 			stmt.setString(2, destination.getName());
-			stmt.setObject(3, destination.getEvaluation(), Types.INTEGER);
-			stmt.setObject(4, destination.getDestinationId(), Types.INTEGER);
+			stmt.setBytes(3, destination.getImage());
+			stmt.setObject(4, destination.getEvaluation(), Types.INTEGER);
+			stmt.setObject(5, destination.getDestinationId(), Types.INTEGER);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -145,7 +147,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		Integer genreId = (Integer) rs.getObject("genreId");
 		Integer destinationId = (Integer) rs.getObject("destinationId");
 		String name = rs.getString("name");
-//		String image = rs.getString("image");
+		byte[] image = (byte[]) rs.getBytes("image");
 		Integer evaluation = (Integer) rs.getObject("evaluation");
 //		Integer statusId = (Integer) rs.getObject("statusId");
 
@@ -160,7 +162,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		String formattedDate = sdf.format(new Date(timestamp.getTime()));
 
 
-		return new Destination(ownerId, destinationId, genreId, name, evaluation, img, addedDate, formattedDate);
+		return new Destination(ownerId, destinationId, genreId, name,image, evaluation, img, addedDate, formattedDate);
 	}
 
 }

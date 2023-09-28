@@ -42,13 +42,15 @@ public class DestinationRegistrationCompleteServlet extends HttpServlet {
 		Integer genreId = (Integer)session.getAttribute("genreId");
 		String name = (String)session.getAttribute("name");
 		Integer evaluation = (Integer)session.getAttribute("evaluation");
-
+		byte[] image =(byte[])session.getAttribute("bytes");
+		
 		// 入力に不備がなければ、データの更新
 		//お出掛け先情報（destinations）
 		Destination destination = new Destination();
 		destination.setOwnerId(ownerId);
 		destination.setGenreId(genreId);
 		destination.setName(name);
+		destination.setImage(image);
 		destination.setEvaluation(evaluation);
 
 

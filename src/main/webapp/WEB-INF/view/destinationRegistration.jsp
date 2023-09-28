@@ -25,7 +25,7 @@
 		「<span class="required">*</span>」がついている項目は必須項目です。
 	</p>
 	<p>お出掛け先のイメージ画像は、情報登録完了後にマイページの「編集する」ボタンから登録をお願いします。</p>
-	<form class="mb-3" action="" method="post">
+	<form class="mb-3" action="" method="post" enctype="multipart/form-data">
 		<div class="mb-4">
 			<p class="fw-bold">
 				お出掛け先のジャンル<span class="required">*</span>
@@ -44,6 +44,13 @@
 			</p>
 			<input class="form-control" aria-describedby="basic-addon1" required
 				type="text" name="name" placeholder="お出掛け先の名称">
+		</div>
+
+		<div class="mb-4">
+			<p class="fw-bold">
+				お出掛け先のイメージ画像
+			</p>
+			<input type="file" name="upfile">
 		</div>
 
 		<div class="mb-3">
