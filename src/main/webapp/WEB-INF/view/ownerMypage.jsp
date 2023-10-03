@@ -44,11 +44,11 @@
 				<ul class="nav flex-column">
 					<li class="nav-item mb-3">
 						<button type="button" class="btn btn-outline-primary"
-							onclick="location.href='ownerInformationEdit?ownerId=<c:out value="${ownerId}"/>'">愛犬家情報の更新</button>
+							onclick="location.href='ownerInformationEdit?ownerId=<c:out value="${owner.ownerId}"/>'">愛犬家情報の更新</button>
 					</li>
 					<li class="nav-item">
 						<button type="button" class="btn btn-light"
-							onclick="location.href='ownerInformationDelete?ownerId=<c:out value="${ownerId}"/>'">愛犬家情報の削除</button>
+							onclick="location.href='ownerInformationDelete?ownerId=<c:out value="${owner.ownerId}"/>'">愛犬家情報の削除</button>
 					</li>
 				</ul>
 
@@ -62,7 +62,7 @@
 						</div>
 						<div class="col-4 right">
 							<button type="button" class="btn btn-primary"
-								onclick="location.href='destinationRegistration?ownerId=<c:out value="${ownerId}"/>'">追加する</button>
+								onclick="location.href='destinationRegistration?ownerId=<c:out value="${owner.ownerId}"/>'">追加する</button>
 						</div>
 					</div>
 				</div>

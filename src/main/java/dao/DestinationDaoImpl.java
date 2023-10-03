@@ -109,7 +109,7 @@ public class DestinationDaoImpl implements DestinationDao {
 			stmt.setObject(1, destination.getOwnerId(), Types.INTEGER);
 			stmt.setObject(2, destination.getGenreId(), Types.INTEGER);
 			stmt.setString(3, destination.getName());
-			stmt.setBytes(4, destination.getImage());
+			stmt.setBytes(4, destination.getDesImg());
 			stmt.setObject(5, destination.getEvaluation(), Types.INTEGER);
 			stmt.executeUpdate();
 		} catch (Exception e) {
@@ -126,7 +126,7 @@ public class DestinationDaoImpl implements DestinationDao {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destination.getGenreId(), Types.INTEGER);
 			stmt.setString(2, destination.getName());
-			stmt.setBytes(3, destination.getImage());
+			stmt.setBytes(3, destination.getDesImg());
 			stmt.setObject(4, destination.getEvaluation(), Types.INTEGER);
 			stmt.setObject(5, destination.getDestinationId(), Types.INTEGER);
 			stmt.executeUpdate();
@@ -147,12 +147,12 @@ public class DestinationDaoImpl implements DestinationDao {
 		Integer genreId = (Integer) rs.getObject("genreId");
 		Integer destinationId = (Integer) rs.getObject("destinationId");
 		String name = rs.getString("name");
-		byte[] image = (byte[]) rs.getBytes("image");
+		byte[] desImg = (byte[]) rs.getBytes("desImg");
 		Integer evaluation = (Integer) rs.getObject("evaluation");
 //		Integer statusId = (Integer) rs.getObject("statusId");
 
 		// ownersのimgを取得
-		byte[] img = (byte[]) rs.getBytes("ownerImg");
+		byte[] ownerImg = (byte[]) rs.getBytes("ownerImg");
 		
 		Date addedDate = rs.getTimestamp("addedDate");
 
@@ -162,7 +162,7 @@ public class DestinationDaoImpl implements DestinationDao {
 		String formattedDate = sdf.format(new Date(timestamp.getTime()));
 
 
-		return new Destination(ownerId, destinationId, genreId, name,image, evaluation, img, addedDate, formattedDate);
+		return new Destination(ownerId, destinationId, genreId, name,desImg, evaluation, ownerImg, addedDate, formattedDate);
 	}
 
 }

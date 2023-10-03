@@ -34,11 +34,13 @@ public class DestinationRegistrationConfirmServlet extends HttpServlet {
 		session.getAttribute("ownerId");
 		session.getAttribute("genreId");
 		session.getAttribute("name");
-		session.getAttribute("evaluation");
-		session.getAttribute("bytes");
-		session.getAttribute("imageData");
-		session.getAttribute("imageName");
+		session.getAttribute("evaluation");	
+		session.getAttribute("desImgBytes");
 
+		if ("desImgBytes" != null) {
+		session.getAttribute("desImgData");
+		session.getAttribute("desImgName");
+		}
 		request.getRequestDispatcher("/WEB-INF/view/destinationRegistrationComplete.jsp").forward(request, response);
 	}
 

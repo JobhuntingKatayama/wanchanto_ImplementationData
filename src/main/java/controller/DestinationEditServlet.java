@@ -52,7 +52,7 @@ public class DestinationEditServlet extends HttpServlet {
 			request.setAttribute("genreId", destination.getGenreId());
 			request.setAttribute("name", destination.getName());
 			request.setAttribute("evaluation", destination.getEvaluation());
-			request.setAttribute("imageData", destination.getImageData());
+			request.setAttribute("imgData", destination.getDesImgData());
 
 			
 			// お出掛け先のイメージ画像のテーブルを取得してリストをリクエストへの格納

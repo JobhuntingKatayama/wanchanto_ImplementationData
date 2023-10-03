@@ -9,31 +9,30 @@ public class Destination {
 	private Integer destinationId;
 	private Integer genreId;
 	private String name;
-	private byte[] image;
-	private String imageData;
+	private byte[] desImg;
+	private String desImgData;
 	private Integer evaluation;
 	private Integer statusId;
 	private Date addedDate;
 	private String formattedDate;
-	private byte[] img;
-	private String imgData;
+	private byte[] ownerImg;
+	private String ownerImgData;
 
-	
 	public Destination() {
 	}
 
-	public Destination( Integer ownerId, Integer destinationId, Integer genreId, String name,byte[]image,Integer evaluation,byte[] img, Date addedDate, String formattedDate ) {
+	public Destination(Integer ownerId, Integer destinationId, Integer genreId, String name, byte[] desImg,
+			Integer evaluation, byte[] ownerImg, Date addedDate, String formattedDate) {
 		this.ownerId = ownerId;
 		this.destinationId = destinationId;
 		this.genreId = genreId;
 		this.name = name;
-		this.image = image;
+		this.desImg = desImg;
 		this.evaluation = evaluation;
 		this.addedDate = addedDate;
 		this.formattedDate = formattedDate;
-		this.img = img;
+		this.ownerImg = ownerImg;
 	}
-
 
 	public Integer getOwnerId() {
 		return ownerId;
@@ -67,23 +66,22 @@ public class Destination {
 		this.name = name;
 	}
 
-	public byte[] getImage() {
-		return image;
+	public byte[] getDesImg() {
+		return desImg;
 	}
 
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setDesImg(byte[] desImg) {
+		this.desImg = desImg;
 	}
-	
-	public String getImageData() {
-		if (image != null) {
-			this.imageData = Base64.getEncoder().encodeToString(image);
+
+	public String getDesImgData() {
+		if (desImg != null) {
+			this.desImgData = Base64.getEncoder().encodeToString(desImg);
 		}
-		return imageData;
+		return desImgData;
 	}
-
-	public void setImageData(String imageData) {
-		this.imageData = imageData;
+	public void setDesImgData(String desImgData) {
+		this.desImgData = desImgData;
 	}
 
 	public Integer getEvaluation() {
@@ -109,25 +107,27 @@ public class Destination {
 	public void setAddedDate(Date addedDate) {
 		this.addedDate = addedDate;
 	}
-	
+
 	public String getFormattedDate() {
 		return formattedDate;
 	}
-	public byte[] getImg() {
-		return img;
+
+	public byte[] getOwnerImg() {
+		return ownerImg;
 	}
 
-	public void setImg(byte[] img) {
-		this.img = img;
+	public void setImg(byte[] ownerImg) {
+		this.ownerImg = ownerImg;
 	}
-	public String getImgData() {
-		if (img != null) {
-			this.imgData = Base64.getEncoder().encodeToString(img);
+
+	public String getOwnerImgData() {
+		if (ownerImg != null) {
+			this.ownerImgData = Base64.getEncoder().encodeToString(ownerImg);
 		}
-		return imgData;
+		return ownerImgData;
 	}
 
-	public void setImgData(String imgData) {
-		this.imgData = imgData;
+	public void setOwnerImgData(String ownerImgData) {
+		this.ownerImgData = ownerImgData;
 	}
 }

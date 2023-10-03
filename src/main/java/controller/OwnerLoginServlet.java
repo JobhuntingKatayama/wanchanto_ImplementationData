@@ -34,6 +34,8 @@ public class OwnerLoginServlet extends HttpServlet {
 		try {
 			String loginId = request.getParameter("loginId");
 			String loginPassword = request.getParameter("loginPassword");
+			
+			//owner情報の取得
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			Owner owner = ownerDao.findByLoginIdAndLoginPass(loginId, loginPassword);
 			if (owner != null) {

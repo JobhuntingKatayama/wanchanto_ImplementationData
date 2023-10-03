@@ -60,7 +60,7 @@ public class DestinationEditCompleteServlet extends HttpServlet {
 		destination.setGenreId(genreId);
 		destination.setDestinationId(destinationId);
 		destination.setName(name);
-		destination.setImage(image);
+		destination.setDesImg(image);
 		destination.setEvaluation(evaluation);
 
 		if (session.getAttribute("imgCategory") != null ) {

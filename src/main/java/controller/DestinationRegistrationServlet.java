@@ -48,32 +48,34 @@ public class DestinationRegistrationServlet extends HttpServlet {
 		String strEvaluation = (String) request.getParameter("evaluation");
 		Integer evaluation = Integer.parseInt(strEvaluation);
 
+		HttpSession session = request.getSession();
+
 		// 画像の取得
 		Part part = request.getPart("upfile");
-		byte[] bytes = null;
-		String imageData = null;
-		String imageName = null;
+		byte[] desImgBytes = null;
+		String desImgData = null;
+		String desImgName = null;
 		if (part != null && part.getSize() > 0) {
-			imageName = part.getSubmittedFileName();
+			desImgName = part.getSubmittedFileName();
+			session.setAttribute("desImgName", desImgName);
 
 			// partオブジェクトをbyte[ ]に変換
 			FileInputStream fis;
 			if (part.getSize() > 0) {
 				fis = (FileInputStream) part.getInputStream();
-				bytes = fis.readAllBytes();
+				desImgBytes = fis.readAllBytes();
+		
 				// 確認用に画像をエンコード
-				imageData = Base64.getEncoder().encodeToString(bytes);
+				desImgData = Base64.getEncoder().encodeToString(desImgBytes);
+				session.setAttribute("desImgData", desImgData);
 			}
 		}
 
 		// 取得した情報をセッションに格納
-		HttpSession session = request.getSession();
 		session.setAttribute("genreId", genreId);
 		session.setAttribute("name", name);
 		session.setAttribute("evaluation", evaluation);
-		session.setAttribute("bytes", bytes);
-		session.setAttribute("imageData", imageData);
-		session.setAttribute("imageName", imageName);
+		session.setAttribute("desImgBytes", desImgBytes);
 		
 
 		// 確認ページへフォワード
