@@ -32,9 +32,9 @@
 			<div id="ownerInfo" class="col-sm-4 text-center">
 
 				<c:choose>
-					<c:when test="${owner.imgData != null}">
+					<c:when test="${owner.ownerImgData != null}">
 						<img class="mb-3" id="ownerThumbnail"
-							src='data:image/jpeg;base64,<c:out value="${owner.imgData}" />'>
+							src='data:image/jpeg;base64,<c:out value="${owner.ownerImgData}" />'>
 					</c:when>
 					<c:otherwise>
 						<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
@@ -79,38 +79,40 @@
 					<c:forEach items="${destinationList}" var="destination">
 						<tr class="text-center">
 							<td><c:choose>
-									<c:when test="${destination.imageData != null}">
-									<a target="_blank" href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />">
-										<img class="destinationThumbnail" src='data:image/jpeg;base64,<c:out value="${destination.imageData}" />'>
-									</a>
+									<c:when test="${destination.desImgData != null}">
+										<a target="_blank"
+											href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />">
+											<img class="destinationThumbnail"
+											src='data:image/jpeg;base64,<c:out value="${destination.desImgData}" />'>
+										</a>
 									</c:when>
 									<c:otherwise>
-									<a target="_blank" href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />">
-										<img class="destinationThumbnail" src="img/thumbnail.jpg">
-									</a>
+										<a target="_blank"
+											href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />">
+											<img class="destinationThumbnail" src="img/thumbnail.jpg">
+										</a>
 									</c:otherwise>
-								</c:choose>
-								</td>
-								<td>
-				<a target="_blank" href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />"><c:out
+								</c:choose></td>
+							<td><a target="_blank"
+								href="destinationDetail?destinationId=<c:out value="${destination.destinationId}" />"><c:out
 										value="${destination.name}" /></a></td>
-							<td><c:choose>
+							<td>
+								<c:choose>
 									<c:when test="${destination.genreId == 1}">公園</c:when>
 									<c:when test="${destination.genreId == 2}">ドッグラン</c:when>
 									<c:when test="${destination.genreId == 3}">飲食店</c:when>
 									<c:otherwise>その他の施設</c:otherwise>
-								</c:choose></td>
+								</c:choose>
+								</td>
 							<td><div id="evaluation"
 									class="
 							<c:choose>
-							<c:when test='${destination.evaluation == 1}'>oneStar">
-									1
-									</c:when>
+									<c:when test='${destination.evaluation == 1}'>oneStar">1</c:when>
 									<c:when test='${destination.evaluation == 2}'>twoStars">2</c:when>
 									<c:when test='${destination.evaluation == 3}'>threeStars">3</c:when>
 									<c:when test='${destination.evaluation == 4}'>fourStars">4</c:when>
 									<c:when test='${destination.evaluation == 5}'>fiveStars">5</c:when>
-									</c:choose>
+							</c:choose>
 								</div></td>
 							<td><button type="button" class="btn btn-outline-primary"
 									onclick="location.href='destinationEdit?destinationId=${destination.destinationId}'">編集する</button></td>

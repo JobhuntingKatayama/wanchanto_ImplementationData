@@ -29,9 +29,9 @@ public class DestinationDaoImpl implements DestinationDao {
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT"
 					+ " destinations.ownerId, destinations.destinationId,"
-					+ " destinations.genreId, destinations.name, destinations.image,"
+					+ " destinations.genreId, destinations.name, destinations.desImg,"
 					+ " destinations.evaluation, destinations.addedDate,"
-					+ " owners.img as ownerImg"
+					+ " owners.ownerImg as ownerImg"
 					+ " FROM destinations"
 					+ " JOIN owners"
 					+ " ON destinations.ownerId = owners.ownerId";
@@ -53,9 +53,9 @@ public class DestinationDaoImpl implements DestinationDao {
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT"
 					+ " destinations.ownerId, destinations.destinationId,"
-					+ " destinations.genreId, destinations.name, destinations.image,"
+					+ " destinations.genreId, destinations.name, destinations.desImg,"
 					+ " destinations.evaluation, destinations.addedDate,"
-					+ " owners.img as ownerImg"
+					+ " owners.ownerImg as ownerImg"
 					+ " FROM destinations"
 					+ " JOIN owners"
 					+ " ON destinations.ownerId = owners.ownerId"
@@ -80,9 +80,9 @@ public class DestinationDaoImpl implements DestinationDao {
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT"
 					+ " destinations.ownerId, destinations.destinationId,"
-					+ " destinations.genreId, destinations.name, destinations.image,"
+					+ " destinations.genreId, destinations.name, destinations.desImg,"
 					+ " destinations.evaluation, destinations.addedDate,"
-					+ " owners.img as ownerImg"
+					+ " owners.ownerImg as ownerImg"
 					+ " FROM destinations"
 					+ " JOIN owners"
 					+ " ON destinations.ownerId = owners.ownerId"
@@ -103,7 +103,7 @@ public class DestinationDaoImpl implements DestinationDao {
 	@Override
 	public void insert(Destination destination) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "INSERT INTO destinations" + " (ownerId,genreId,name,image,evaluation,addedDate)"
+			String sql = "INSERT INTO destinations" + " (ownerId,genreId,name,desImg,evaluation,addedDate)"
 					+ " VALUES(?,?,?,?,?,NOW())";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destination.getOwnerId(), Types.INTEGER);
@@ -121,7 +121,7 @@ public class DestinationDaoImpl implements DestinationDao {
 	@Override
 	public void update(Destination destination) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE destinations SET genreId = ?, name = ?, image = ?, evaluation = ?, addedDate = NOW()"
+			String sql = "UPDATE destinations SET genreId = ?, name = ?, desImg = ?, evaluation = ?, addedDate = NOW()"
 					+ " WHERE destinationId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, destination.getGenreId(), Types.INTEGER);

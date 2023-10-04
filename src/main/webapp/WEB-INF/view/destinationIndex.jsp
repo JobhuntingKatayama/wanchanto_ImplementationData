@@ -67,9 +67,9 @@
 					</c:choose>"></span><span
 						class="score">${destination.evaluation}</span></td>
 					<td><c:choose>
-							<c:when test="${destination.imgData != null}">
+							<c:when test="${destination.ownerImgData != null}">
 								<img id="ownerThumbnail"
-									src='data:image/jpeg;base64,<c:out value="${destination.imgData}" />'>
+									src='data:image/jpeg;base64,<c:out value="${destination.ownerImgData}" />'>
 							</c:when>
 							<c:otherwise>
 								<img id="ownerThumbnail" src="img/thumbnail.jpg">

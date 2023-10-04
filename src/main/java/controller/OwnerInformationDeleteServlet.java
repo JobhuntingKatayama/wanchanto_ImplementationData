@@ -55,8 +55,7 @@ public class OwnerInformationDeleteServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		//削除する会員のIDの取得
-		String strId = request.getParameter("ownerId");
-		Integer ownerId = Integer.parseInt(strId);
+		Integer ownerId =Integer.parseInt(request.getParameter("ownerId"));
 
 		// 削除メソッドの引数用にOwnerオブジェクトを作成
 		Owner owner = new Owner();

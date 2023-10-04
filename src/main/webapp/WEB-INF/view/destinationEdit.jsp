@@ -32,9 +32,12 @@
 			value="${destinationId }">
 
 		<div class="mb-4">
-			
-				<p class="fw-bold">お出掛け先のジャンル<span class="required">*</span></p>
-				<p>現在登録されているジャンルは「
+
+			<p class="fw-bold">
+				お出掛け先のジャンル<span class="required">*</span>
+			</p>
+			<p>
+				現在登録されているジャンルは「
 				<c:choose>
 					<c:when test="${genreId == 1}">
 					公園
@@ -65,43 +68,60 @@
 		</div>
 
 		<div class="mb-4">
-			
-				<p class="fw-bold">お出掛け先の名称<span class="required">*</span></p>
+
+			<p class="fw-bold">
+				お出掛け先の名称<span class="required">*</span>
+			</p>
 			<input class="form-control" aria-describedby="basic-addon1" required
 				type="text" name="name" value="${name }">
 		</div>
 
 		<div class="mb-4">
-			<p class="fw-bold">評価<span class="required">*</span></p>
+					<p class="fw-bold">
+				お出掛け先イメージ
+			</p>
+			<img style="height: 100px;"
+				src='data:image/jpeg;base64,<c:out value="${desImgData}" />'>
+		</div>
+		
+		<div class="mb-4">
+			<p class="fw-bold">
+				評価<span class="required">*</span>
+			</p>
 			<p>現在の評価は「${evaluation }」です。</p>
 			<div class="form-check">
 				<input type="radio" id="flexRadioDefault1" required
 					name="evaluation" value="1" class="form-check-input"
-					<c:if test="${evaluation == 1 }">checked</c:if> /> <label id="evaluation" 
-					for="flexRadioDefault1" class="form-check-label oneStar">1</label><br>
-				<input type="radio" id="flexRadioDefault2" name="evaluation"
-					value="2" class="form-check-input"
-					<c:if test="${evaluation == 2 }">checked</c:if> /> <label id="evaluation" 
-					for="flexRadioDefault2" class="form-check-label twoStars">2</label><br>
-				<input class="form-check-input" id="flexRadioDefault3" type="radio"
+					<c:if test="${evaluation == 1 }">checked</c:if> /> <label
+					id="evaluation" for="flexRadioDefault1"
+					class="form-check-label oneStar">1</label><br> <input
+					type="radio" id="flexRadioDefault2" name="evaluation" value="2"
+					class="form-check-input"
+					<c:if test="${evaluation == 2 }">checked</c:if> /> <label
+					id="evaluation" for="flexRadioDefault2"
+					class="form-check-label twoStars">2</label><br> <input
+					class="form-check-input" id="flexRadioDefault3" type="radio"
 					name="evaluation" value="3"
-					<c:if test="${evaluation == 3 }">checked</c:if> /> <label id="evaluation" 
-					class="form-check-label threeStars" for="flexRadioDefault3">3</label> <br>
-				<input class="form-check-input" id="flexRadioDefault4" type="radio"
+					<c:if test="${evaluation == 3 }">checked</c:if> /> <label
+					id="evaluation" class="form-check-label threeStars"
+					for="flexRadioDefault3">3</label> <br> <input
+					class="form-check-input" id="flexRadioDefault4" type="radio"
 					name="evaluation" value="4"
-					<c:if test="${evaluation == 4 }">checked</c:if> /> <label id="evaluation" 
-					class="form-check-label fourStars" for="flexRadioDefault4">4</label> <br>
-				<input class="form-check-input" id="flexRadioDefault5" type="radio"
+					<c:if test="${evaluation == 4 }">checked</c:if> /> <label
+					id="evaluation" class="form-check-label fourStars"
+					for="flexRadioDefault4">4</label> <br> <input
+					class="form-check-input" id="flexRadioDefault5" type="radio"
 					name="evaluation" value="5"
-					<c:if test="${evaluation == 5 }">checked</c:if> /> <label id="evaluation" 
-					class="form-check-label fiveStars" for="flexRadioDefault5">5</label><br>
+					<c:if test="${evaluation == 5 }">checked</c:if> /> <label
+					id="evaluation" class="form-check-label fiveStars"
+					for="flexRadioDefault5">5</label><br>
 			</div>
 		</div>
 
 
 
 
- 		<div class="mb-4">
+		<div class="mb-4">
 			<p class="fw-bold">画像の追加・削除</p>
 
 			<p>現在登録されている画像</p>
@@ -122,21 +142,24 @@
 							<tr>
 
 								<td><input type="hidden" name="imgId"
-									value="<c:out value="${detailImage.imgId }" />">
-								<img style="height: 100px;" class="mb-3"
+									value="<c:out value="${detailImage.imgId }" />"> <img
+									style="height: 100px;" class="mb-3"
 									src='data:image/jpeg;base64,<c:out value="${detailImage.imgData}" />'></td>
-<%-- 								<td><c:out value="${detailImage.fileName }" /></td>
- --%>								<td><c:choose>
-						<c:when test="${detailImage.imgCategory ==0 }">特に指定なし</c:when>
-						<c:when test="${detailImage.imgCategory ==1 }">内観</c:when>
-						<c:when test="${detailImage.imgCategory ==2 }">外観</c:when>
-						<c:when test="${detailImage.imgCategory ==3 }">情報</c:when>
-						<c:when test="${detailImage.imgCategory ==4 }">料理</c:when>
-						<c:when test="${detailImage.imgCategory ==5 }">注意事項</c:when>
-						</c:choose></td>
+								<%-- 								<td><c:out value="${detailImage.fileName }" /></td>
+ --%>
+								<td><c:choose>
+										<c:when test="${detailImage.imgCategory ==0 }">特に指定なし</c:when>
+										<c:when test="${detailImage.imgCategory ==1 }">内観</c:when>
+										<c:when test="${detailImage.imgCategory ==2 }">外観</c:when>
+										<c:when test="${detailImage.imgCategory ==3 }">情報</c:when>
+										<c:when test="${detailImage.imgCategory ==4 }">料理</c:when>
+										<c:when test="${detailImage.imgCategory ==5 }">注意事項</c:when>
+									</c:choose></td>
 								<td><c:out value="${detailImage.comment }" /></td>
-								<td><a target="_blank" href="updateDetailImage?imgId=<c:out value="${detailImage.imgId }"/>">更新</a>
-								<td><a href="deleteDetailImage?imgId=<c:out value="${detailImage.imgId }"/>">削除</a>
+								<td><a target="_blank"
+									href="updateDetailImage?imgId=<c:out value="${detailImage.imgId }"/>">更新</a>
+								<td><a
+									href="deleteDetailImage?imgId=<c:out value="${detailImage.imgId }"/>">削除</a>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -150,10 +173,12 @@
 			</table>
 
 			<p>画像の追加はこちらから</p>
-			<p><input type="file" name="upfile"></p>
+			<p>
+				<input type="file" name="actualImg">
+			</p>
 			<div class="mb-3">
-			<p>画像の種類：</p>
-			<select class="form-select" name="imgCategory">
+				<p>画像の種類：</p>
+				<select class="form-select" name="imgCategory">
 					<option value="0" label="画像の種類をお選びください" selected>
 					<option value="0" label="特に指定なし">
 					<option value="1" label="内観">
@@ -164,7 +189,7 @@
 				</select>
 			</div>
 			<p>コメント：</p>
-				<textarea name="comment" rows="4" style="width:100%;"></textarea>
+			<textarea name="comment" rows="4" style="width: 100%;"></textarea>
 		</div>
 
 
@@ -184,6 +209,6 @@
 
 	</div>
 	</div>
-	
+
 </body>
 </html>

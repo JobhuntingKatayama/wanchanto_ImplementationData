@@ -50,7 +50,7 @@ public class DestinationEditCompleteServlet extends HttpServlet {
 		Integer ownerId = (Integer) session.getAttribute("ownerId");
 		Integer genreId = (Integer) session.getAttribute("genreId");
 		String name = (String) session.getAttribute("name");
-		byte[] image = (byte[]) session.getAttribute("image");
+		byte[] desImg= (byte[]) session.getAttribute("desImg");
 		Integer evaluation = (Integer) session.getAttribute("evaluation");
 
 
@@ -60,7 +60,7 @@ public class DestinationEditCompleteServlet extends HttpServlet {
 		destination.setGenreId(genreId);
 		destination.setDestinationId(destinationId);
 		destination.setName(name);
-		destination.setDesImg(image);
+		destination.setDesImg(desImg);
 		destination.setEvaluation(evaluation);
 
 		if (session.getAttribute("imgCategory") != null ) {
@@ -76,7 +76,7 @@ public class DestinationEditCompleteServlet extends HttpServlet {
 			detailImage.setDestinationId(destinationId);
 			detailImage.setImgCategory(imgCategory);
 			detailImage.setFileName(fileName);
-			detailImage.setImg(bytes);
+			detailImage.setActualImg(bytes);
 			detailImage.setComment(comment);
 			
 			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();

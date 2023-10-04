@@ -18,7 +18,7 @@
 </head>
 <body>
 	<jsp:include page="include/ownerMypageContainer.jsp" />
-  <jsp:include page="include/ownerEntrance.jsp"/>
+	<jsp:include page="include/ownerEntrance.jsp" />
 
 	<h1>愛犬家登録情報の更新</h1>
 	<p class="small right">
@@ -47,19 +47,24 @@
 		<div class="mb-3">
 			<p class="fw-bold">サムネイル用画像</p>
 			<c:choose>
-				<c:when test="${imgData != null }">
+				<c:when test="${ownerImgData != null }">
 					<p>現在登録されている画像：</p>
-					<p><img id="ownerThumbnail" 
-						src='data:image/jpeg;base64,<c:out value="${imgData}" />'>
+					<p>
+						<img id="ownerThumbnail"
+							src='data:image/jpeg;base64,<c:out value="${ownerImgData}" />'>
 					</p>
 				</c:when>
 				<c:otherwise>
-					<p><img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg"></p>
+					<p>
+						<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
+					</p>
 				</c:otherwise>
 			</c:choose>
-								<p>画像の変更：</p>
-			
-			<p><input type="file" name="upfile" value="画像をアップロードする"></p>
+			<p>画像の変更：</p>
+
+			<p>
+				<input type="file" name="ownerImg" value="画像をアップロードする">
+			</p>
 		</div>
 
 		<div class="d-flex justify-content-between pt-3">
@@ -73,7 +78,7 @@
 		</div>
 
 	</form>
-</div>
-</div>
+	</div>
+	</div>
 </body>
 </html>

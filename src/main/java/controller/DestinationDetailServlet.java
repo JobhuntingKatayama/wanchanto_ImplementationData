@@ -47,8 +47,7 @@ public class DestinationDetailServlet extends HttpServlet {
 			request.setAttribute("ownerId", destination.getOwnerId());
 			request.setAttribute("genreId", destination.getGenreId());
 			request.setAttribute("name", destination.getName());
-			request.setAttribute("evaluation", destination.getEvaluation());
-			
+			request.setAttribute("evaluation", destination.getEvaluation());		
 			request.setAttribute("detailImageList", detailImageList);
 					
 			//愛犬家情報の取得
@@ -61,29 +60,12 @@ public class DestinationDetailServlet extends HttpServlet {
 			request.setAttribute("ownerId", ownerId);
 			
 			//愛犬家サムネイル画像の取得とリクエストスコープへの格納
-			String imgData = owner.getImgData();
-			request.setAttribute("imgData", imgData);
-			if (imgData == null) {
-				request.setAttribute("imgData", null);
+			String ownerImgData = owner.getOwnerImgData();
+			request.setAttribute("ownerImgData", ownerImgData);
+			if (ownerImgData == null) {
+				request.setAttribute("ownerImgData", null);
 			}
-			
-//			//データベース接続
-//			InitialContext ctx = new InitialContext();
-//			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/wanchanto");
-//			Connection con = ds.getConnection();
-
-			
-//			//ownerIdからのサムネイル取得
-//			byte[] byteImg = null;			
-//			String sql = "SELECT img FROM owners WHERE ownerId = ?;";
-//			PreparedStatement stmt = con.prepareStatement(sql);
-//			stmt.setObject(1, ownerId);
-//			ResultSet rs = stmt.executeQuery();
-//			if (rs.next() == true) {
-//				byteImg = rs.getBytes("img");
-//			}
-
-			
+						
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}

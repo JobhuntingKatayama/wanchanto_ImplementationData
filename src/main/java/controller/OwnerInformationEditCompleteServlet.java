@@ -21,40 +21,41 @@ import domain.Owner;
 @WebServlet("/ownerInformationEditComplete")
 public class OwnerInformationEditCompleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//getは受信せず
-		
+		// getは受信せず
+
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		//Editページからポストされた情報をセッションスコープから取得してキャスト
-		HttpSession session = request.getSession();
-		Integer ownerId =(Integer)session.getAttribute("ownerId");
-		String loginId =(String) session.getAttribute("loginId");
-		String loginPassword =(String) session.getAttribute("loginPassword");
-		byte[] img =(byte[]) session.getAttribute("img");
-		String imgData =(String) session.getAttribute("imgData");
-		String thumbnail =(String) session.getAttribute("thumbnail");
 
-		//パスワードをハッシュ化
+		// Editページからポストされた情報をセッションスコープから取得してキャスト
+		HttpSession session = request.getSession();
+		Integer ownerId = (Integer) session.getAttribute("ownerId");
+		String loginId = (String) session.getAttribute("loginId");
+		String loginPassword = (String) session.getAttribute("loginPassword");
+		String thumbnail = (String) session.getAttribute("thumbnail");
+		byte[] ownerImg = (byte[]) session.getAttribute("ownerImg");
+		String ownerImgData = (String) session.getAttribute("ownerImgData");
+
+		// パスワードをハッシュ化
 		String hashedPassword = BCrypt.hashpw(loginPassword, BCrypt.gensalt());
-		
+
 		// 入力に不備がなければ、データの更新
 		Owner owner = new Owner();
 		owner.setOwnerId(ownerId);
 		owner.setLoginId(loginId);
 		owner.setLoginPassword(hashedPassword);
-		owner.setImg(img);
-		owner.setImgData(imgData);
+		owner.setOwnerImg(ownerImg);
+		owner.setOwnerImgData(ownerImgData);
 		owner.setThumbnail(thumbnail);
-
 
 		try {
 			// データの更新
@@ -63,7 +64,7 @@ public class OwnerInformationEditCompleteServlet extends HttpServlet {
 
 			// 更新完了ページの表示
 			request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditComplete.jsp").forward(request, response);
-			
+
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}

@@ -9,23 +9,23 @@ public class DetailImage {
 	private Integer imgId;
 	private Integer imgCategory;
 	private String fileName;
-	private byte[] img;
+	private byte[] actualImg;
 	private String comment;
 
-	private String imgData;
+	private String actualImgData;
 	private Date registrationDate;
 
 	public DetailImage() {
 
 	}
 
-	public DetailImage(Integer destinationId, Integer imgId, Integer imgCategory, String fileName, byte[] img,
+	public DetailImage(Integer destinationId, Integer imgId, Integer imgCategory, String fileName, byte[] actualImg,
 			String comment, Date registrationDate) {
 		this.destinationId = destinationId;
 		this.imgId = imgId;
 		this.imgCategory = imgCategory;
 		this.fileName = fileName;
-		this.img = img;
+		this.actualImg = actualImg;
 		this.comment = comment;
 		this.registrationDate = registrationDate;
 	}
@@ -62,23 +62,23 @@ public class DetailImage {
 		this.fileName = fileName;
 	}
 
-	public byte[] getImg() {
-		return img;
+	public byte[] getActualImg() {
+		return actualImg;
 	}
 
-	public void setImg(byte[] img) {
-		this.img = img;
+	public void setActualImg(byte[] actualImg) {
+		this.actualImg = actualImg;
 	}
 
 	public String getImgData() {
-		if (img != null) {
-			this.imgData = Base64.getEncoder().encodeToString(img);
+		if (actualImg != null) {
+			this.actualImgData = Base64.getEncoder().encodeToString(actualImg);
 		}
-		return imgData;
+		return actualImgData;
 	}
 
-	public void setImgData(String imgData) {
-		this.imgData = imgData;
+	public void setImgData(String actualImgData) {
+		this.actualImgData = actualImgData;
 	}
 
 	public String getComment() {

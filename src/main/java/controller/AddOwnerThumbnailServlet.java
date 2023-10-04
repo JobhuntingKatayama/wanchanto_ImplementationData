@@ -35,19 +35,17 @@ public class AddOwnerThumbnailServlet extends HttpServlet {
 			// 編集するownerIDをパラメーターから取得してセッションスコープへ格納
 			Integer ownerId = Integer.parseInt(request.getParameter("ownerId"));
 
-			HttpSession session = request.getSession();
-
 			// 編集する愛犬家データを取得してownerに格納
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			Owner owner = ownerDao.findByOwnerId(ownerId);
 			request.setAttribute("owner", owner);
 
 			//愛犬家サムネイルをキャストしてリクエストへ格納
-			byte[] img = owner.getImg();
-			String imgData = owner.getImgData();
+			byte[] ownerImg = owner.getOwnerImg();
+			String ownerImgData = owner.getOwnerImgData();
 			String thumbnail = owner.getThumbnail();
-			request.setAttribute("img", img);
-			request.setAttribute("imgData", imgData);
+			request.setAttribute("ownerImg", ownerImg);
+			request.setAttribute("ownerImgData", ownerImgData);
 			request.setAttribute("thumbnail", thumbnail);
 
 		} catch (Exception e) {
@@ -76,10 +74,7 @@ public class AddOwnerThumbnailServlet extends HttpServlet {
 			// 確認用に画像をエンコード
 			imgData = Base64.getEncoder().encodeToString(bytes);
 		}
-//		HttpSession session = request.getSession();
-//		session.setAttribute("img", bytes);// 画像ファイルをセッションへ格納
-//		session.setAttribute("imgData", imgData);// 画像ファイルをエンコードした情報をセッションへ格納
-//		session.setAttribute("thumbnail", thumbnail);// 画像ファイル名をセッションへ格納
+
 		HttpSession session = request.getSession();
 		Integer ownerId =(Integer)session.getAttribute("ownerId");
 		String loginId =(String) session.getAttribute("loginId");
@@ -88,8 +83,8 @@ public class AddOwnerThumbnailServlet extends HttpServlet {
 		Owner owner = new Owner();
 		owner.setOwnerId(ownerId);
 		owner.setLoginId(loginId);
-		owner.setImg(bytes);
-		owner.setImgData(imgData);
+		owner.setOwnerImg(bytes);
+		owner.setOwnerImgData(imgData);
 		owner.setThumbnail(thumbnail);
 
 		try {

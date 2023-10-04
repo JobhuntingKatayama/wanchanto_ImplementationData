@@ -116,10 +116,10 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public void insert(Owner owner) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "INSERT INTO owners (thumbnail, img, loginId, loginPassword, registrationDate) VALUES (?,?,?,?,NOW())";
+			String sql = "INSERT INTO owners (thumbnail, ownerImg, loginId, loginPassword, registrationDate) VALUES (?,?,?,?,NOW())";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,owner.getThumbnail());
-			stmt.setBytes(2, owner.getImg());
+			stmt.setBytes(2, owner.getOwnerImg());
 			stmt.setString(3, owner.getLoginId());
 			stmt.setString(4, owner.getLoginPassword());
 			stmt.executeUpdate();
@@ -132,10 +132,10 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public void update(Owner owner) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE owners SET thumbnail =?, img = ?, loginId = ?, loginPassword = ? WHERE ownerId = ?";
+			String sql = "UPDATE owners SET thumbnail =?, ownerImg = ?, loginId = ?, loginPassword = ? WHERE ownerId = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1,owner.getThumbnail());
-			stmt.setBytes(2, owner.getImg());
+			stmt.setBytes(2, owner.getOwnerImg());
 			stmt.setString(3, owner.getLoginId());
 			stmt.setString(4, owner.getLoginPassword());
 			stmt.setObject(5, owner.getOwnerId(), Types.INTEGER);
@@ -164,13 +164,13 @@ public class OwnerDaoImpl implements OwnerDao {
 	private Owner mapToOwner(ResultSet rs) throws Exception {
 		Integer ownerId = (Integer) rs.getObject("ownerId");
 		String thumbnail = rs.getString("thumbnail");
-		byte[] img = rs.getBytes("img");
+		byte[] ownerImg = rs.getBytes("ownerImg");
 		String loginId = rs.getString("loginId");
 		String loginPassword = rs.getString("loginPassword");
 		Integer statusId = (Integer) rs.getObject("statusId");
 		Date registrationDate = rs.getTimestamp("registrationDate");
 
-		return new Owner(ownerId, thumbnail, img, loginId, loginPassword, statusId, registrationDate);
+		return new Owner(ownerId, thumbnail, ownerImg, loginId, loginPassword, statusId, registrationDate);
 
 	}
 }

@@ -35,7 +35,7 @@ public class OwnerInformationEditConfirmServlet extends HttpServlet {
 		session.getAttribute("ownerId");
 		session.getAttribute("loginId");
 		session.getAttribute("loginPassword");
-		session.getAttribute("imgData");
+		session.getAttribute("ownerImgData");
 		session.getAttribute("thumbnail");
 		
 		request.getRequestDispatcher("/WEB-INF/view/ownerInformationEditConfirm.jsp").forward(request, response);

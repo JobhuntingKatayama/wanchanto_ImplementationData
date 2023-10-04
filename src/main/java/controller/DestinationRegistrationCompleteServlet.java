@@ -50,7 +50,7 @@ public class DestinationRegistrationCompleteServlet extends HttpServlet {
 		destination.setOwnerId(ownerId);
 		destination.setGenreId(genreId);
 		destination.setName(name);
-		destination.setImage(desImgBytes);
+		destination.setDesImg(desImgBytes);
 		destination.setEvaluation(evaluation);
 
 

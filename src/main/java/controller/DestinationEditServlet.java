@@ -52,7 +52,7 @@ public class DestinationEditServlet extends HttpServlet {
 			request.setAttribute("genreId", destination.getGenreId());
 			request.setAttribute("name", destination.getName());
 			request.setAttribute("evaluation", destination.getEvaluation());
-			request.setAttribute("imgData", destination.getDesImgData());
+			request.setAttribute("desImgData", destination.getDesImgData());
 
 			
 			// お出掛け先のイメージ画像のテーブルを取得してリストをリクエストへの格納
@@ -94,34 +94,17 @@ public class DestinationEditServlet extends HttpServlet {
 
 //		// お出掛け先名前
 //		// 編集されたパラメータを取得し取得しセッションに格納
-		String strName = request.getParameter("name");
-		session.setAttribute("name", strName);
+		String name = (String)request.getParameter("name");
+		session.setAttribute("name", name);
 		
-		// サムネイル画像を取得しセッションへ格納
-		Part tmnPart = request.getPart("thumbnail");
-		byte[] tmnBytes = null;
-		String tmnData = null;
-		if (tmnPart != null && tmnPart.getSize() > 0) {
-			FileInputStream fis;
-			if (tmnPart.getSize() > 0) {
-				fis = (FileInputStream) tmnPart.getInputStream();
-				tmnBytes = fis.readAllBytes();
-				// 確認用に画像をエンコード
-				tmnData = Base64.getEncoder().encodeToString(tmnBytes);
-			}
-			session.setAttribute("thnumbnail", tmnData);
-			session.setAttribute("image", tmnBytes);
-			
-		}
 //		// 評価の変更を取得しセッションに格納
 		Integer intEvaluation = Integer.parseInt(request.getParameter("evaluation"));
 		session.setAttribute("evaluation", intEvaluation);
 
 		
 		// 画像の登録有無の確認
-		Part filePart = request.getPart("upfile");
+		Part filePart = request.getPart("actualImg");
 		if (filePart != null && filePart.getSize() > 0) {
-//		if (request.getParameter("imgCategory") != null && !request.getParameter("imgCategory").isEmpty()) {
 
 			// 画像カテゴリーを取得しセッションに格納
 			String strImgCategory = (String) request.getParameter("imgCategory");
@@ -133,32 +116,25 @@ public class DestinationEditServlet extends HttpServlet {
 			session.setAttribute("comment", comment);
 
 			// 画像の取得しpartへ代入、ファイル名はセッションへ格納
-			Part part = request.getPart("upfile");
+			Part part = request.getPart("actualImg");
 			String fileName = part.getSubmittedFileName();
 			session.setAttribute("fileName", fileName);
 
 			// partオブジェクトをbyte[ ]に変換
 			FileInputStream fis;
-			byte[] bytes = null;
-			String strBytes = null;
+			byte[] actualImgBytes = null;
+			String actualImgData = null;
 			if (part.getSize() > 0) {
 				fis = (FileInputStream) part.getInputStream();
-				bytes = fis.readAllBytes();
+				actualImgBytes = fis.readAllBytes();
 				// 確認用に画像をエンコード
-				strBytes = Base64.getEncoder().encodeToString(bytes);
+				actualImgData = Base64.getEncoder().encodeToString(actualImgBytes);
 			}
 			// 画像のエンコードされたものをセッションへ格納
-			session.setAttribute("bytes", bytes);
-			session.setAttribute("strBytes", strBytes);
+			session.setAttribute("actualImgBytes", actualImgBytes);
+			session.setAttribute("actualImgData", actualImgData);
 
 		} 
-//			else {
-//			session.removeAttribute("imgCategory");
-//			session.removeAttribute("comment");
-//			session.removeAttribute("fileName");
-//			session.removeAttribute("strBytes");
-//		}
-
 		// 上記に不備がある場合はdestinationEditを再表示
 		if (isError == true) {
 			request.getRequestDispatcher("/WEB-INF/view/destinationEdit.jsp").forward(request, response);

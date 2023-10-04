@@ -85,7 +85,8 @@ public class AddDetailImageServlet extends HttpServlet {
 		detailImage.setDestinationId(destinationId);
 		detailImage.setImgCategory(imgCategory);
 		detailImage.setFileName(fileName);
-		detailImage.setImg(bytes);
+		detailImage.setActualImg(bytes);
+		detailImage.setActualImgData(strBytes);
 		detailImage.setComment(comment);
 
 		try {

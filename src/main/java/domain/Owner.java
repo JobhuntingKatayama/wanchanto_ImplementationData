@@ -9,8 +9,8 @@ public class Owner {
 	private String loginPassword;
 	private String thumbnail;
 
-	private byte[] img;
-	private String imgData;
+	private byte[] ownerImg;
+	private String ownerImgData;
 
 	private Integer statusId;
 	private Date registrationDate;
@@ -19,10 +19,10 @@ public class Owner {
 
 	}
 
-	public Owner(Integer ownerId, String thumbnail, byte[] img, String loginId, String loginPassword, Integer statusId, Date registrationDate) {
+	public Owner(Integer ownerId, String thumbnail, byte[] ownerImg, String loginId, String loginPassword, Integer statusId, Date registrationDate) {
 		this.ownerId = ownerId;
 		this.thumbnail = thumbnail;
-		this.img = img;
+		this.ownerImg = ownerImg;
 		this.loginId = loginId;
 		this.loginPassword = loginPassword;
 		this.statusId = statusId;
@@ -61,23 +61,23 @@ public class Owner {
 		this.thumbnail = thumbnail;
 	}
 
-	public byte[] getImg() {
-		return img;
+	public byte[] getOwnerImg() {
+		return ownerImg;
 	}
 
-	public void setImg(byte[] img) {
-		this.img = img;
+	public void setOwnerImg(byte[] ownerImg) {
+		this.ownerImg = ownerImg;
 	}
 
-	public String getImgData() {
-		if (img != null) {
-			this.imgData = Base64.getEncoder().encodeToString(img);
+	public String getOwnerImgData() {
+		if (ownerImg != null) {
+			this.ownerImgData = Base64.getEncoder().encodeToString(ownerImg);
 		}
-		return imgData;
+		return ownerImgData;
 	}
 
-	public void setImgData(String imgData) {
-		this.imgData = imgData;
+	public void setOwnerImgData(String ownerImgData) {
+		this.ownerImgData = ownerImgData;
 	}
 
 	public Integer getStatusId() {
@@ -95,23 +95,5 @@ public class Owner {
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-
-//	// InputStream → byte[ ]
-//	public void setImgFromInputStream(InputStream is) {
-//		try {
-//			ByteArrayOutputStream bout = new ByteArrayOutputStream();
-//			byte[] buffer = new byte[1024];
-//			while (true) {
-//				int len = is.read(buffer);
-//				if (len < 0) {
-//					break;
-//				}
-//				bout.write(buffer, 0, len);
-//			}
-//			this.img = bout.toByteArray();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
 	
 }

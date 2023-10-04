@@ -1,8 +1,6 @@
 package controller;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -47,8 +45,8 @@ public class OwnerInformationEditServlet extends HttpServlet {
 			// それぞれの愛犬家データをキャスト
 			String loginId = owner.getLoginId();
 			String loginPassword = owner.getLoginPassword();
-			byte[] img = owner.getImg();
-			String imgData = owner.getImgData();
+			byte[] ownerImg = owner.getOwnerImg();
+			String ownerImgData = owner.getOwnerImgData();
 			String thumbnail = owner.getThumbnail();
 
 			// ownerIdとサムネイル画像の情報をセッションスコープへ格納
@@ -57,8 +55,8 @@ public class OwnerInformationEditServlet extends HttpServlet {
 			// 編集する愛犬家をリクエストスコープへ格納
 			request.setAttribute("loginId", loginId);
 			request.setAttribute("loginPassword", loginPassword);
-			request.setAttribute("img", img);
-			request.setAttribute("imgData", imgData);
+			request.setAttribute("ownerImg", ownerImg);
+			request.setAttribute("ownerImgData", ownerImgData);
 			request.setAttribute("thumbnail", thumbnail);
 
 			// 編集ページへフォワード
@@ -88,8 +86,8 @@ public class OwnerInformationEditServlet extends HttpServlet {
 			OwnerDao ownerDao = DaoFactory.createOwnerDao();
 			Owner owner = ownerDao.findByOwnerId(ownerId);
 			// 愛犬家サムネイル画像をリクエストへ格納
-			request.setAttribute("img", owner.getImg());
-			request.setAttribute("imgData", owner.getImgData());
+			request.setAttribute("ownerImg", owner.getOwnerImg());
+			request.setAttribute("ownerImgData", owner.getOwnerImgData());
 			request.setAttribute("thumbnail", owner.getThumbnail());
 
 		} catch (Exception e) {
@@ -108,27 +106,31 @@ public class OwnerInformationEditServlet extends HttpServlet {
 
 		// 画像が更新・アップロードされたらそのデータをセッションへ格納
 
-		Part part = null;
-		String thumbnail = (String) request.getAttribute("thunbnail");
-		if ((Object) request.getPart("upfile") != null) {
-			part = request.getPart("upfile");
-			thumbnail = part.getSubmittedFileName();
-			request.setAttribute("thumbnail", thumbnail);
-		}
-		// partオブジェクトをbyte[ ]に変換
-		FileInputStream fis;
-		byte[] bytes = (byte[]) request.getAttribute("img");
-		String imgData = null;
-		if (part.getSize() > 0) {
-			fis = (FileInputStream) part.getInputStream();
-			bytes = fis.readAllBytes();
-			// 確認用に画像をエンコード
-			imgData = Base64.getEncoder().encodeToString(bytes);
-		}
+		String ownerImg = (String) request.getAttribute("ownerImg");
+		Part part = request.getPart(ownerImg);
+		String thumbnail = part.getSubmittedFileName();
 
-		session.setAttribute("img", bytes);// 画像ファイルをセッションへ格納
-		session.setAttribute("imgData", imgData);// 画像ファイルをエンコードした情報をセッションへ格納
-		session.setAttribute("thumbnail", thumbnail);// 画像ファイル名をセッションへ格納
+//		Part part = request.getPart("ownerImg");
+//		String thumbnail = (String) request.getAttribute("thunbnail");
+//		if ((Object) request.getPart("ownerImg") != null) {
+//			part = request.getPart("ownerImg");
+//			thumbnail = part.getSubmittedFileName();
+//			request.setAttribute("thumbnail", thumbnail);
+//		}
+//		// partオブジェクトをbyte[ ]に変換
+//		FileInputStream fis;
+//		byte[] ownerImgBytes = (byte[]) request.getAttribute("ownerImg");
+//		String ownerImgData = null;
+//		if (part.getSize() > 0) {
+//			fis = (FileInputStream) part.getInputStream();
+//			ownerImgBytes = fis.readAllBytes();
+//			// 確認用に画像をエンコード
+//			ownerImgData = Base64.getEncoder().encodeToString(ownerImgBytes);
+//		}
+//
+//		session.setAttribute("ownerImg", ownerImgBytes);// 画像ファイルをセッションへ格納
+//		session.setAttribute("ownerImgData", ownerImgData);// 画像ファイルをエンコードした情報をセッションへ格納
+//		session.setAttribute("thumbnail", thumbnail);// 画像ファイル名をセッションへ格納
 
 		// 入力不備がある場合は、フォームを再表示し、処理を中断
 		if (isError == true) {

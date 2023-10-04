@@ -80,14 +80,14 @@ public class DetailImageDaoImpl implements DetailImageDao {
 	public void insert(DetailImage detailImage) throws Exception {
 		try (Connection con = ds.getConnection()) {
 			String sql = "INSERT INTO detailimages"
-					+ " (destinationId,imgId,imgCategory,fileName,img,comment,registrationDate)"
+					+ " (destinationId,imgId,imgCategory,fileName,actualImg,comment,registrationDate)"
 					+ " VALUES (?,?,?,?,?,?,NOW())";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, detailImage.getDestinationId());
 			stmt.setObject(2, detailImage.getImgId());
 			stmt.setObject(3, detailImage.getImgCategory());
 			stmt.setString(4, detailImage.getFileName());
-			stmt.setBytes(5, detailImage.getImg());
+			stmt.setBytes(5, detailImage.getActualImg());
 			stmt.setString(6, detailImage.getComment());
 			stmt.executeUpdate();
 		} catch (Exception e) {
@@ -98,9 +98,9 @@ public class DetailImageDaoImpl implements DetailImageDao {
 	@Override
 	public void update(DetailImage detailImage) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE detailimages SET img=?,fileName=?, imgCategory=?, comment=?,registrationDate=NOW() WHERE imgId=?;";
+			String sql = "UPDATE detailimages SET actualImg=?,fileName=?, imgCategory=?, comment=?,registrationDate=NOW() WHERE imgId=?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setBytes(1, detailImage.getImg());
+			stmt.setBytes(1, detailImage.getActualImg());
 			stmt.setString(2, detailImage.getFileName());
 			stmt.setObject(3,detailImage.getImgCategory(), Types.INTEGER);
 			stmt.setString(4, detailImage.getComment());
@@ -132,11 +132,11 @@ public class DetailImageDaoImpl implements DetailImageDao {
 		Integer imgId = (Integer) rs.getObject("imgId");
 		Integer imgCategory = (Integer) rs.getObject("imgCategory");
 		String fileName = rs.getString("fileName");
-		byte[] img = rs.getBytes("img");
+		byte[] actualImg = rs.getBytes("actualImg");
 		String comment = rs.getString("comment");
 		Date registrationDate = rs.getTimestamp("registrationDate");
 
-		return new DetailImage(destinationId, imgId, imgCategory, fileName, img, comment, registrationDate);
+		return new DetailImage(destinationId, imgId, imgCategory, fileName, actualImg, comment, registrationDate);
 	}
 
 }

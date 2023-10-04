@@ -42,9 +42,9 @@
 		<div class="mb-3">
 			<p class="fw-bold">サムネイル</p>
 			<c:choose>
-				<c:when test="${imgData != null}">
+				<c:when test="${ownerImgData != null}">
 					<img class="mb-3" id="ownerThumbnail"
-						src='data:image/jpeg;base64,<c:out value="${imgData}" />'>
+						src='data:image/jpeg;base64,<c:out value="${ownerImgData}" />'>
 				</c:when>
 				<c:otherwise>
 					<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">

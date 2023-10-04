@@ -41,7 +41,7 @@ public class UpdateDetailImageServlet extends HttpServlet {
 			DetailImage detailImage = detailImageDao.findByImgId(imgId);
 
 			// 画像情報をリクエストへ格納
-			request.setAttribute("img", detailImage.getImg());
+			request.setAttribute("img", detailImage.getActualImg());
 			request.setAttribute("fileName", detailImage.getFileName());
 			request.setAttribute("imgCategory", detailImage.getImgCategory());
 			request.setAttribute("comment", detailImage.getComment());
@@ -75,7 +75,7 @@ public class UpdateDetailImageServlet extends HttpServlet {
 			DetailImage detailImage = detailImageDao.findByImgId(imgId);
 
 			// 画像情報をリクエストへ格納
-			request.setAttribute("img", detailImage.getImg());
+			request.setAttribute("img", detailImage.getActualImg());
 			request.setAttribute("fileName", detailImage.getFileName());
 
 		} catch (Exception e) {
@@ -127,7 +127,7 @@ public class UpdateDetailImageServlet extends HttpServlet {
 		// 入力に不備がなければデータの更新
 		DetailImage detailImage = new DetailImage();
 		detailImage.setImgId(imgId);
-		detailImage.setImg(bytes);
+		detailImage.setActualImg(bytes);
 		detailImage.setFileName(fileName);
 		detailImage.setImgCategory(imgCategory);
 		detailImage.setComment(comment);
