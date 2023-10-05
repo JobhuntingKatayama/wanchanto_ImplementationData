@@ -39,25 +39,27 @@ public class DestinationEditServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// getから編集するお出掛け先IDの取得しセッションへ格納
-		Integer intDestinationId = Integer.parseInt(request.getParameter("destinationId"));
-		session.setAttribute("destinationId", intDestinationId);
+		Integer destinationId = Integer.parseInt(request.getParameter("destinationId"));
+		session.setAttribute("destinationId", destinationId);
 
 		try {
 			// 編集するお出掛け先データの取得
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
-			Destination destination = destinationDao.findByDestinationId(intDestinationId);
+			Destination destination = destinationDao.findByDestinationId(destinationId);
 
 			// お出掛け先データの情報をリクエストに格納
 			request.setAttribute("destinationId", destination.getDestinationId());
 			request.setAttribute("genreId", destination.getGenreId());
 			request.setAttribute("name", destination.getName());
 			request.setAttribute("evaluation", destination.getEvaluation());
-			request.setAttribute("desImgData", destination.getDesImgData());
-
 			
-			// お出掛け先のイメージ画像のテーブルを取得してリストをリクエストへの格納
+			//イメージはセッションへ格納
+			session.setAttribute("desImg", destination.getDesImg());
+			session.setAttribute("desImgData", destination.getDesImgData());
+
+			// お出掛け先のイメージ画像のテーブルを取得してリストをセッションへの格納
 			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
-			List<DetailImage> detailImageList = detailImageDao.findByDestinationId(intDestinationId);
+			List<DetailImage> detailImageList = detailImageDao.findByDestinationId(destinationId);
 			request.setAttribute("detailImageList", detailImageList);
 
 			// 画像削除のためimgIdを取得してリクエストに格納
@@ -83,58 +85,48 @@ public class DestinationEditServlet extends HttpServlet {
 		// バリデーション用のフラグ
 		boolean isError = false;
 
-		// destinationIdを取得してセッションに格納
+		// 各入力情報を取得してセッションに格納
 		Integer intDestinationId = Integer.parseInt(request.getParameter("destinationId"));
-		session.setAttribute("destinationId", intDestinationId);
-
-		// お出掛け先ジャンル
-		// 編集されたパラメータを取得しセッションに格納
 		Integer intGenreId = Integer.parseInt(request.getParameter("genreId"));
-		session.setAttribute("genreId", intGenreId);
-
-//		// お出掛け先名前
-//		// 編集されたパラメータを取得し取得しセッションに格納
-		String name = (String)request.getParameter("name");
-		session.setAttribute("name", name);
-		
-//		// 評価の変更を取得しセッションに格納
+		String name = (String) request.getParameter("name");
 		Integer intEvaluation = Integer.parseInt(request.getParameter("evaluation"));
+		
+		session.setAttribute("destinationId", intDestinationId);
+		session.setAttribute("genreId", intGenreId);
+		session.setAttribute("name", name);
 		session.setAttribute("evaluation", intEvaluation);
 
 		
 		// 画像の登録有無の確認
-		Part filePart = request.getPart("actualImg");
-		if (filePart != null && filePart.getSize() > 0) {
+		if (request.getPart("newActualImg").getSize() > 0) {
+
+			FileInputStream fis;
+			byte[] newActualImgBytes = null;
+			String newActualImgData = null;
 
 			// 画像カテゴリーを取得しセッションに格納
-			String strImgCategory = (String) request.getParameter("imgCategory");
-			Integer imgCategory = Integer.parseInt(strImgCategory);
-			session.setAttribute("imgCategory", imgCategory);
+			Integer newImgCategory = Integer.parseInt(request.getParameter("newImgCategory"));
 
 			// 画像コメントを取得しセッションに格納
-			String comment = request.getParameter("comment");
-			session.setAttribute("comment", comment);
+			String newImgComment = request.getParameter("newImgComment");
 
-			// 画像の取得しpartへ代入、ファイル名はセッションへ格納
-			Part part = request.getPart("actualImg");
-			String fileName = part.getSubmittedFileName();
-			session.setAttribute("fileName", fileName);
+			// 画像を取得しpartへ代入
+			Part part = request.getPart("newActualImg");
 
 			// partオブジェクトをbyte[ ]に変換
-			FileInputStream fis;
-			byte[] actualImgBytes = null;
-			String actualImgData = null;
-			if (part.getSize() > 0) {
-				fis = (FileInputStream) part.getInputStream();
-				actualImgBytes = fis.readAllBytes();
-				// 確認用に画像をエンコード
-				actualImgData = Base64.getEncoder().encodeToString(actualImgBytes);
-			}
-			// 画像のエンコードされたものをセッションへ格納
-			session.setAttribute("actualImgBytes", actualImgBytes);
-			session.setAttribute("actualImgData", actualImgData);
+			fis = (FileInputStream) part.getInputStream();
+			newActualImgBytes = fis.readAllBytes();
 
-		} 
+			// 確認用に画像をエンコード
+			newActualImgData = Base64.getEncoder().encodeToString(newActualImgBytes);
+
+			// 追加された画像の情報をセッションへ格納
+			session.setAttribute("newImgCategory", newImgCategory);
+			session.setAttribute("newImgComment", newImgComment);
+			session.setAttribute("newActualImgBytes", newActualImgBytes);
+			session.setAttribute("newActualImgData", newActualImgData);
+
+		}
 		// 上記に不備がある場合はdestinationEditを再表示
 		if (isError == true) {
 			request.getRequestDispatcher("/WEB-INF/view/destinationEdit.jsp").forward(request, response);

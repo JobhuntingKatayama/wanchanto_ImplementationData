@@ -53,9 +53,9 @@
 <div class="mb-4">
 		<p class="fw-bold">お出掛け先のイメージ</p>
 		<c:choose>
-			<c:when test="${imageData != null}">
+			<c:when test="${desImgData != null}">
 				<img class="mb-3" style="width:100%;"
-					src='data:image/jpeg;base64,<c:out value="${imageData}" />'>
+					src='data:image/jpeg;base64,<c:out value="${desImgData}" />'>
 			</c:when>
 			<c:otherwise>
 				<p>イメージ画像のご登録はありません。</p>

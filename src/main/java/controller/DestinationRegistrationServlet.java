@@ -50,27 +50,23 @@ public class DestinationRegistrationServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		// 画像の取得
-		Part part = request.getPart("upfile");
+		// 画像の登録があればnullを画像のファイル情報へ置き換え
 		byte[] desImgBytes = null;
 		String desImgData = null;
-		String desImgName = null;
-		if (part != null && part.getSize() > 0) {
-			desImgName = part.getSubmittedFileName();
-			session.setAttribute("desImgName", desImgName);
+		
+		if (request.getPart("desImg").getSize()>0) {
+			Part part = request.getPart("desImg");
 
 			// partオブジェクトをbyte[ ]に変換
 			FileInputStream fis;
-			if (part.getSize() > 0) {
-				fis = (FileInputStream) part.getInputStream();
-				desImgBytes = fis.readAllBytes();
+			fis = (FileInputStream) part.getInputStream();
+			desImgBytes = fis.readAllBytes();
 		
-				// 確認用に画像をエンコード
-				desImgData = Base64.getEncoder().encodeToString(desImgBytes);
-				session.setAttribute("desImgData", desImgData);
-			}
-		}
-
+			// 確認用に画像をエンコード
+			desImgData = Base64.getEncoder().encodeToString(desImgBytes);
+			session.setAttribute("desImgData", desImgData);
+			} 
+		
 		// 取得した情報をセッションに格納
 		session.setAttribute("genreId", genreId);
 		session.setAttribute("name", name);

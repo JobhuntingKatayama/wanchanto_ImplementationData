@@ -31,6 +31,7 @@
 	<table id="myTable" class="table table-striped display text-center">
 		<thead>
 			<tr>
+				<th class="text-center">イメージ</th>
 				<th class="text-center">名称</th>
 				<th class="text-center">ジャンル</th>
 				<th class="text-center">評価</th>
@@ -42,7 +43,19 @@
 			<c:forEach items="${destinationList }" var="destination">
 				<tr>
 					<td><a 
-						href="destinationDetail?destinationId=${destination.destinationId }">${destination.name }</a></td>
+						href="destinationDetail?destinationId=${destination.destinationId }">
+						<c:choose>
+						<c:when test="${destination.desImgData != null}">
+						<img class="desImgThumbnail" src='data:image/jpeg;base64,<c:out value="${destination.desImgData}" />'></a>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+						</c:choose>
+					</td>
+					<td><a 
+						href="destinationDetail?destinationId=${destination.destinationId }">${destination.name }</a>
+					</td>
+
 					<td><c:choose>
 							<c:when test="${destination.genreId == 1}">
 公園

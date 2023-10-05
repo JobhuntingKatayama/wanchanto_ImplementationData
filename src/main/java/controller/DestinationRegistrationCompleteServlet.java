@@ -56,7 +56,7 @@ public class DestinationRegistrationCompleteServlet extends HttpServlet {
 
 
 		try {
-			// データの更新
+			// データの追加
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			destinationDao.insert(destination);
 

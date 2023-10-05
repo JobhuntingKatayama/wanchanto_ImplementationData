@@ -42,9 +42,9 @@
 	<div id="destinationImgSlider">
 		<ul class="slider">
 			<c:choose>
-			<c:when test="${imageData != null }">
+			<c:when test="${desImgData != null }">
 				<li><img
-					src='data:image/jpeg;base64,<c:out value="${imageData}" />'></li>
+					src='data:image/jpeg;base64,<c:out value="${desImgData}" />'></li>
 			</c:when>
 			<c:otherwise>
 			<c:choose>
@@ -54,12 +54,12 @@
 				<c:otherwise>
 					<c:forEach items="${detailImageList}" var="detailImage">
 						<li><c:choose>
-								<c:when test="${empty detailImage.imgData}">
+								<c:when test="${empty detailImage.actualImgData}">
 									<img src="img/noimage.jpg">
 								</c:when>
 								<c:otherwise>
 									<img
-										src='data:image/jpeg;base64,<c:out value="${detailImage.imgData}" />'>
+										src='data:image/jpeg;base64,<c:out value="${detailImage.actualImgData}" />'>
 								</c:otherwise>
 							</c:choose></li>
 					</c:forEach>
@@ -88,12 +88,12 @@
 	<h3>この情報を共有した愛犬家さん</h3>
 	<p>${ownerId}さん</p>
 	<c:choose>
-		<c:when test="${imgData == null}">
+		<c:when test="${ownerImgData == null}">
 			<img class="mb-3" id="ownerThumbnail" src="img/thumbnail.jpg">
 		</c:when>
 		<c:otherwise>
 			<img class="mb-3" id="ownerThumbnail"
-				src='data:image/jpeg;base64,<c:out value="${imgData}" />'>
+				src='data:image/jpeg;base64,<c:out value="${ownerImgData}" />'>
 		</c:otherwise>
 	</c:choose>
 	<div class="d-flex justify-content-end mb-3">

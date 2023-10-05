@@ -63,21 +63,18 @@ public class DestinationEditCompleteServlet extends HttpServlet {
 		destination.setDesImg(desImg);
 		destination.setEvaluation(evaluation);
 
-		if (session.getAttribute("imgCategory") != null ) {
-			
-			// 画像情報をセッションから取得
-			Integer imgCategory = (Integer) session.getAttribute("imgCategory");
-			String comment = (String) session.getAttribute("comment");
-			String fileName = (String) session.getAttribute("fileName");
-			byte[] bytes = (byte[]) session.getAttribute("bytes");
+		// 画像情報をセッションから取得
+		if (session.getAttribute("newActualImgBytes") != null) {			
+			byte[] newActualImgBytes = (byte[]) session.getAttribute("newActualImgBytes");
+			Integer newImgCategory = (Integer) session.getAttribute("newImgCategory");
+			String newImgComment = (String) session.getAttribute("newImgComment");
 			
 			// お出掛け先画像（detailimages）
 			DetailImage detailImage = new DetailImage();
 			detailImage.setDestinationId(destinationId);
-			detailImage.setImgCategory(imgCategory);
-			detailImage.setFileName(fileName);
-			detailImage.setActualImg(bytes);
-			detailImage.setComment(comment);
+			detailImage.setImgCategory(newImgCategory);
+			detailImage.setActualImg(newActualImgBytes);
+			detailImage.setComment(newImgComment);
 			
 			DetailImageDao detailImageDao = DaoFactory.createDetailImageDao();
 			try {
@@ -92,6 +89,16 @@ public class DestinationEditCompleteServlet extends HttpServlet {
 			DestinationDao destinationDao = DaoFactory.createDestinationDao();
 			destinationDao.update(destination);
 
+			//セッションの削除
+			session.removeAttribute("destinationId");
+			session.removeAttribute("genreId");
+			session.removeAttribute("name");
+			session.removeAttribute("desImg");
+			session.removeAttribute("evaluation");
+			session.removeAttribute("newActualImgBytes");
+			session.removeAttribute("newActualImgData");
+			session.removeAttribute("newImgCategory");
+			session.removeAttribute("newImgComment");
 
 			// 更新完了ページの表示
 			request.getRequestDispatcher("/WEB-INF/view/destinationEditComplete.jsp").forward(request, response);

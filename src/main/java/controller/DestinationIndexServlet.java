@@ -40,6 +40,7 @@ public class DestinationIndexServlet extends HttpServlet {
 
 			// JSP へフォワード
 			request.getRequestDispatcher("/WEB-INF/view/destinationIndex.jsp").forward(request, response);
+		
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}

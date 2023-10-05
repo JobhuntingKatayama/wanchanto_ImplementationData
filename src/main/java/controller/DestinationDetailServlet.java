@@ -44,6 +44,7 @@ public class DestinationDetailServlet extends HttpServlet {
 			List<DetailImage>detailImageList = detailImageDao.findByDestinationId(destinationId);
 
 			// データの情報をリクエストに格納
+			request.setAttribute("desImgData", destination.getDesImgData());
 			request.setAttribute("ownerId", destination.getOwnerId());
 			request.setAttribute("genreId", destination.getGenreId());
 			request.setAttribute("name", destination.getName());

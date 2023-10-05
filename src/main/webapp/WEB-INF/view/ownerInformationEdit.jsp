@@ -63,7 +63,7 @@
 			<p>画像の変更：</p>
 
 			<p>
-				<input type="file" name="ownerImg" value="画像をアップロードする">
+				<input type="file" name="newOwnerImg" value="画像をアップロードする">
 			</p>
 		</div>
 

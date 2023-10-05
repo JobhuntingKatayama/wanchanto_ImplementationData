@@ -70,14 +70,14 @@ public class DetailImage {
 		this.actualImg = actualImg;
 	}
 
-	public String getImgData() {
+	public String getActualImgData() {
 		if (actualImg != null) {
 			this.actualImgData = Base64.getEncoder().encodeToString(actualImg);
 		}
 		return actualImgData;
 	}
 
-	public void setImgData(String actualImgData) {
+	public void setActualImgData(String actualImgData) {
 		this.actualImgData = actualImgData;
 	}
 

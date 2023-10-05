@@ -54,6 +54,14 @@
 				class="d-inline-flex focus-ring py-2 px-2 text-decoration-none border rounded-2">${name}</p>
 			</div>
 		
+				<div class="mb-3">
+					<p class="fw-bold">
+				お出掛け先イメージ
+			</p>
+			<img style="height: 100px;"
+				src='data:image/jpeg;base64,<c:out value="${desImgData}" />'>
+		</div>
+		
 								<div class="mb-3">
 			
 			<p class="fw-bold">お出掛け先の評価</p>
@@ -70,7 +78,7 @@
 
 								<div class="mb-4">
 
-			<c:if test="${fileName != null }">
+			<c:if test="${newActualImgData != null }">
 				<p class="fw-bold">追加する画像</p>
 				<table class="table table-striped border">
 					<tr>
@@ -81,19 +89,18 @@
 					</tr>
 					<tr>
 						<td><img style="height: 100px;" class="mb-3"
-							src='data:image/jpeg;base64,<c:out value="${strBytes}" />'></td>
-						<!-- <td><c:out value="${fileName }" /></td> -->
+							src='data:image/jpeg;base64,<c:out value="${newActualImgData}" />'></td>
 						<td>
 						<c:choose>
-						<c:when test="${imgCategory ==0 }">特に指定なし</c:when>
-						<c:when test="${imgCategory ==1 }">内観</c:when>
-						<c:when test="${imgCategory ==2 }">外観</c:when>
-						<c:when test="${imgCategory ==3 }">情報</c:when>
-						<c:when test="${imgCategory ==4 }">料理</c:when>
-						<c:when test="${imgCategory ==5 }">注意事項</c:when>
+						<c:when test="${newImgCategory ==0 }">特に指定なし</c:when>
+						<c:when test="${newImgCategory ==1 }">内観</c:when>
+						<c:when test="${newImgCategory ==2 }">外観</c:when>
+						<c:when test="${newImgCategory ==3 }">情報</c:when>
+						<c:when test="${newImgCategory ==4 }">料理</c:when>
+						<c:when test="${newImgCategory ==5 }">注意事項</c:when>
 						</c:choose>
 						</td>
-						<td><c:out value="${comment }" /></td>
+						<td><c:out value="${newImgComment}" /></td>
 					</tr>
 				</table>
 			</c:if>

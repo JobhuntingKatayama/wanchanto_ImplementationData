@@ -3,6 +3,10 @@
 table#myTable tr td {
 	vertical-align: middle;
 }
+img.desImgThumbnail{
+	height:40px;
+	width:auto;
+}
 img#ownerThumbnail {
 	width:40px;
 	height:40px;

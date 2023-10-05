@@ -50,7 +50,7 @@
 			<p class="fw-bold">
 				お出掛け先のイメージ画像
 			</p>
-			<input type="file" name="upfile">
+			<input type="file" name="desImg">
 		</div>
 
 		<div class="mb-3">

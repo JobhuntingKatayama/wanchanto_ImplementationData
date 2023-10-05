@@ -39,7 +39,6 @@ public class DestinationRegistrationConfirmServlet extends HttpServlet {
 
 		if ("desImgBytes" != null) {
 		session.getAttribute("desImgData");
-		session.getAttribute("desImgName");
 		}
 		request.getRequestDispatcher("/WEB-INF/view/destinationRegistrationComplete.jsp").forward(request, response);
 	}

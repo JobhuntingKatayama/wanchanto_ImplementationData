@@ -77,13 +77,11 @@
 		</div>
 
 		<div class="mb-4">
-					<p class="fw-bold">
-				お出掛け先イメージ
-			</p>
+			<p class="fw-bold">お出掛け先イメージ</p>
 			<img style="height: 100px;"
 				src='data:image/jpeg;base64,<c:out value="${desImgData}" />'>
 		</div>
-		
+
 		<div class="mb-4">
 			<p class="fw-bold">
 				評価<span class="required">*</span>
@@ -142,11 +140,9 @@
 							<tr>
 
 								<td><input type="hidden" name="imgId"
-									value="<c:out value="${detailImage.imgId }" />"> <img
-									style="height: 100px;" class="mb-3"
-									src='data:image/jpeg;base64,<c:out value="${detailImage.imgData}" />'></td>
-								<%-- 								<td><c:out value="${detailImage.fileName }" /></td>
- --%>
+									value="<c:out value="${detailImage.imgId }" />">
+									<img style="height: 100px;"
+									src='data:image/jpeg;base64,<c:out value="${detailImage.actualImgData}" />'></td>
 								<td><c:choose>
 										<c:when test="${detailImage.imgCategory ==0 }">特に指定なし</c:when>
 										<c:when test="${detailImage.imgCategory ==1 }">内観</c:when>
@@ -174,11 +170,11 @@
 
 			<p>画像の追加はこちらから</p>
 			<p>
-				<input type="file" name="actualImg">
+				<input type="file" name="newActualImg">
 			</p>
 			<div class="mb-3">
 				<p>画像の種類：</p>
-				<select class="form-select" name="imgCategory">
+				<select class="form-select" name="newImgCategory">
 					<option value="0" label="画像の種類をお選びください" selected>
 					<option value="0" label="特に指定なし">
 					<option value="1" label="内観">
@@ -189,7 +185,7 @@
 				</select>
 			</div>
 			<p>コメント：</p>
-			<textarea name="comment" rows="4" style="width: 100%;"></textarea>
+			<textarea name="newImgComment" rows="4" style="width: 100%;"></textarea>
 		</div>
 
 

@@ -26,9 +26,9 @@ public class DestinationEditConfirmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		Integer destinationId = (Integer) session.getAttribute("destinatinId");
-		session.setAttribute("destinationId", destinationId);
+//		HttpSession session = request.getSession();
+//		Integer destinationId = (Integer) session.getAttribute("destinatinId");
+//		session.setAttribute("destinationId", destinationId);
 
 	}
 
@@ -45,18 +45,19 @@ public class DestinationEditConfirmServlet extends HttpServlet {
 		session.getAttribute("genreId");
 		session.getAttribute("name");
 		session.getAttribute("evaluation");
-		session.getAttribute("thnumbnail");
-		session.getAttribute("image");
-		if (session.getAttribute("bytes") != null) {
-			session.getAttribute("imgCategory");
-			session.getAttribute("comment");
-			session.getAttribute("fileName");
-			session.getAttribute("strBytes");
+		session.getAttribute("desImg");
+		session.getAttribute("desImgData");
+		if (session.getAttribute("newActualImgBytes") != null) {
+			session.getAttribute("newActualImgBytes");
+			session.getAttribute("newActualImgData");
+			session.getAttribute("newImgCategory");
+			session.getAttribute("newImgComment");
 		} else {
-			session.removeAttribute("imgCategory");
-			session.removeAttribute("comment");
-			session.removeAttribute("fileName");
-			session.removeAttribute("strBytes");
+			//画像の新規追加がない場合はセッションを削除
+			session.removeAttribute("newActualImgBytes");
+			session.removeAttribute("newImgCategory");
+			session.removeAttribute("newImgComment");
+			session.removeAttribute("newActualImgData");
 		}
 
 		request.getRequestDispatcher("/WEB-INF/view/destinationEditConfirm.jsp").forward(request, response);
